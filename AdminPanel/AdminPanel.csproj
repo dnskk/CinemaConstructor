@@ -3,9 +3,9 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <PreserveCompilationContext>true</PreserveCompilationContext>
-    <AssemblyName>AdminLTE</AssemblyName>
+    <AssemblyName>AdminPanel</AssemblyName>
     <OutputType>Exe</OutputType>
-    <PackageId>AdminLTE</PackageId>
+    <PackageId>AdminPanel</PackageId>
     <UserSecretsId>aspnet-AdminLTE-c9131f1e-93fb-4772-8c8b-1d4c77bf4354</UserSecretsId>
   </PropertyGroup>
 
