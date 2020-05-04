@@ -1,6 +1,5 @@
 ﻿using AdminPanel.Models;
 using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Collections.Generic;
 
 namespace AdminPanel.ViewComponents

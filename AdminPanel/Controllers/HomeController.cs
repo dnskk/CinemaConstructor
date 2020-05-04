@@ -1,12 +1,10 @@
 ﻿using AdminPanel.Common.Attributes;
 using AdminPanel.Models;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Reflection;
 
 namespace AdminPanel.Controllers
 {

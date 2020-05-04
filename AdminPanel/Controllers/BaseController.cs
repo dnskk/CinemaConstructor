@@ -1,11 +1,7 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using AdminPanel.Models;
-using System.Runtime.CompilerServices;
 
 namespace AdminPanel.Controllers
 {

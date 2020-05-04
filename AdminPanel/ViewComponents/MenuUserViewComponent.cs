@@ -1,6 +1,4 @@
-﻿using AdminPanel.Models;
-using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
+﻿using Microsoft.AspNetCore.Mvc;
 
 namespace AdminPanel.ViewComponents
 {

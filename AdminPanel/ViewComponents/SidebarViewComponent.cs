@@ -3,8 +3,6 @@ using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using AdminPanel.Common;
 using AdminPanel.Models;
-using System.Security.Claims;
-using AdminPanel.Common.Extensions;
 using System;
 
 namespace AdminPanel.ViewComponents

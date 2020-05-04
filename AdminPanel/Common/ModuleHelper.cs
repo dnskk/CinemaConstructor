@@ -1,6 +1,5 @@
 ﻿using AdminPanel.Models;
 using System;
-using System.Collections.Generic;
 
 namespace AdminPanel.Common
 {
