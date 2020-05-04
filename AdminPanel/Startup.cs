@@ -1,6 +1,6 @@
-﻿using AdminLTE.Data;
-using AdminLTE.Models;
-using AdminLTE.Services;
+﻿using AdminPanel.Data;
+using AdminPanel.Models;
+using AdminPanel.Services;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
@@ -15,7 +15,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
-namespace AdminLTE
+namespace AdminPanel
 {
     public class Startup
     {

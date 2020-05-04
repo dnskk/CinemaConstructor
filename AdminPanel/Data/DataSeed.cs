@@ -13,11 +13,11 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using AdminLTE.Models;
-using AdminLTE.Common;
+using AdminPanel.Models;
+using AdminPanel.Common;
 
 
-namespace AdminLTE.Data
+namespace AdminPanel.Data
 {
     public static class DataSeed
     {

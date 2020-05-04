@@ -1,4 +1,4 @@
-﻿namespace AdminLTE.Common
+﻿namespace AdminPanel.Common
 {
     public static class CustomClaimTypes
     {

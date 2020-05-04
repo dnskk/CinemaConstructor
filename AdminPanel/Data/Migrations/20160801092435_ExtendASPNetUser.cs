@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace AdminLTE.Data.Migrations
+namespace AdminPanel.Data.Migrations
 {
     public partial class ExtendASPNetUser : Migration
     {

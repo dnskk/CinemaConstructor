@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace AdminLTE.Models.RoleViewModels
+namespace AdminPanel.Models.RoleViewModels
 {
     public class EditRoleVm
     {

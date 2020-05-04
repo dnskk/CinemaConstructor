@@ -1,8 +1,8 @@
-﻿using AdminLTE.Models;
+﻿using AdminPanel.Models;
 using System;
 using System.Collections.Generic;
 
-namespace AdminLTE.Common
+namespace AdminPanel.Common
 {
     /// <summary>
     /// This is where you customize the navigation sidebar

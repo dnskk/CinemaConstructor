@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Microsoft.AspNetCore.Identity;
 
-namespace AdminLTE.Models.ManageViewModels
+namespace AdminPanel.Models.ManageViewModels
 {
     public class IndexViewModel
     {

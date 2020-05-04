@@ -6,7 +6,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace AdminLTE.Services
+namespace AdminPanel.Services
 {
     public class RequestLoggingMiddleware
     {

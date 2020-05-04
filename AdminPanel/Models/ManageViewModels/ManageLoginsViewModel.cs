@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
 
-namespace AdminLTE.Models.ManageViewModels
+namespace AdminPanel.Models.ManageViewModels
 {
     public class ManageLoginsViewModel
     {

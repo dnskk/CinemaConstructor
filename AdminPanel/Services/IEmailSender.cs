@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace AdminLTE.Services
+namespace AdminPanel.Services
 {
     public interface IEmailSender
     {

@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System;
 
-namespace AdminLTE.ViewComponents
+namespace AdminPanel.ViewComponents
 {
     public class PageHeaderViewComponent : ViewComponent
     {

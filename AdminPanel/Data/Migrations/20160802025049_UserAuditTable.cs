@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Metadata;
 
-namespace AdminLTE.Data.Migrations
+namespace AdminPanel.Data.Migrations
 {
     public partial class UserAuditTable : Migration
     {

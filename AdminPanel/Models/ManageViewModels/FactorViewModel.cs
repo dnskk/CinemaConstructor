@@ -1,4 +1,4 @@
-﻿namespace AdminLTE.Models.ManageViewModels
+﻿namespace AdminPanel.Models.ManageViewModels
 {
     public class FactorViewModel
     {

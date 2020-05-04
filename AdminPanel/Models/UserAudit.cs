@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace AdminLTE.Models
+namespace AdminPanel.Models
 {
     public class UserAudit
     {

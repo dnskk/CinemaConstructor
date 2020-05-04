@@ -1,9 +1,9 @@
-﻿using AdminLTE.Models;
+﻿using AdminPanel.Models;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 
-namespace AdminLTE.ViewComponents
+namespace AdminPanel.ViewComponents
 {
     public class PageAlertViewComponent : ViewComponent
     {

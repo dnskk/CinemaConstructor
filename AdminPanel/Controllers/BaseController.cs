@@ -4,10 +4,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using AdminLTE.Models;
+using AdminPanel.Models;
 using System.Runtime.CompilerServices;
 
-namespace AdminLTE.Controllers
+namespace AdminPanel.Controllers
 {
     public class BaseController : Controller
     {

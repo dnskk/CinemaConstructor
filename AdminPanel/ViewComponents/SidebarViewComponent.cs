@@ -1,13 +1,13 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
-using AdminLTE.Common;
-using AdminLTE.Models;
+using AdminPanel.Common;
+using AdminPanel.Models;
 using System.Security.Claims;
-using AdminLTE.Common.Extensions;
+using AdminPanel.Common.Extensions;
 using System;
 
-namespace AdminLTE.ViewComponents
+namespace AdminPanel.ViewComponents
 {
     public class SidebarViewComponent : ViewComponent
     {

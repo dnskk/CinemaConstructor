@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace AdminLTE.Models.SuperAdminViewModels
+namespace AdminPanel.Models.SuperAdminViewModels
 {
     public class CreateVm
     {

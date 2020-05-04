@@ -1,5 +1,5 @@
-﻿using AdminLTE.Common.Attributes;
-using AdminLTE.Models;
+﻿using AdminPanel.Common.Attributes;
+using AdminPanel.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -8,7 +8,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 
-namespace AdminLTE.Controllers
+namespace AdminPanel.Controllers
 {
     public class HomeController : BaseController
     {

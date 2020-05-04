@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace AdminLTE.Models.AccountViewModels
+namespace AdminPanel.Models.AccountViewModels
 {
     public class LoginViewModel
     {

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace AdminLTE.Models
+namespace AdminPanel.Models
 {
     public class SidebarMenu
     {

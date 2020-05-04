@@ -3,7 +3,7 @@ using System;
 using System.Diagnostics;
 using System.IO;
 
-namespace AdminLTE.ViewComponents
+namespace AdminPanel.ViewComponents
 {
     public class ControlSidebarViewComponent : ViewComponent
     {

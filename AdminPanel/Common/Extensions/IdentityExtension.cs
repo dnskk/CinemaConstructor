@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using System.Security.Claims;
 
-namespace AdminLTE.Common.Extensions
+namespace AdminPanel.Common.Extensions
 {
     public static class IdentityExtension
     {

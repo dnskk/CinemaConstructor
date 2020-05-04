@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
-namespace AdminLTE.Models.AccountViewModels
+namespace AdminPanel.Models.AccountViewModels
 {
     public class SendCodeViewModel
     {

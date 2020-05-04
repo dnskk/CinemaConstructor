@@ -6,7 +6,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 
-namespace AdminLTE.Common.Attributes
+namespace AdminPanel.Common.Attributes
 {
     [AttributeUsage(AttributeTargets.Method)]
     public class HelpDefinitionAttribute : ActionFilterAttribute, IActionFilter

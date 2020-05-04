@@ -4,11 +4,11 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using AdminLTE.Models;
-using AdminLTE.Models.ManageViewModels;
-using AdminLTE.Services;
+using AdminPanel.Models;
+using AdminPanel.Models.ManageViewModels;
+using AdminPanel.Services;
 
-namespace AdminLTE.Controllers
+namespace AdminPanel.Controllers
 {
     [Authorize]
     public class ManageController : Controller

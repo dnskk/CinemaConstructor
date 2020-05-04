@@ -7,11 +7,11 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
-using AdminLTE.Models;
-using AdminLTE.Models.SuperAdminViewModels;
-using AdminLTE.Data;
+using AdminPanel.Models;
+using AdminPanel.Models.SuperAdminViewModels;
+using AdminPanel.Data;
 
-namespace AdminLTE.Controllers
+namespace AdminPanel.Controllers
 {
     [Authorize(Roles = "SuperAdmins")]
     public class UserLogsController : Controller

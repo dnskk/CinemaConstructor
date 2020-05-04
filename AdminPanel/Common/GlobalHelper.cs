@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace AdminLTE.Common
+namespace AdminPanel.Common
 {
     public static class GlobalHelper
     {

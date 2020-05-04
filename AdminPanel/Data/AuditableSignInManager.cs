@@ -1,4 +1,4 @@
-﻿using AdminLTE.Models;
+﻿using AdminPanel.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
@@ -7,10 +7,10 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using System;
 using System.Threading.Tasks;
-using AdminLTE.Common;
-using AdminLTE.Common.Extensions;
+using AdminPanel.Common;
+using AdminPanel.Common.Extensions;
 
-namespace AdminLTE.Data
+namespace AdminPanel.Data
 {
     public class AuditableSignInManager<TUser> : SignInManager<TUser> where TUser : class
     {

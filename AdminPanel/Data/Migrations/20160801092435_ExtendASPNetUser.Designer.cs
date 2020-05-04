@@ -3,9 +3,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
-using AdminLTE.Data;
+using AdminPanel.Data;
 
-namespace AdminLTE.Data.Migrations
+namespace AdminPanel.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
     [Migration("20160801092435_ExtendASPNetUser")]

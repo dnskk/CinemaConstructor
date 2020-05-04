@@ -1,10 +1,10 @@
-﻿using AdminLTE.Models;
+﻿using AdminPanel.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Security.Claims;
-using AdminLTE.Common.Extensions;
-using AdminLTE.Common;
-namespace AdminLTE.ViewComponents
+using AdminPanel.Common.Extensions;
+using AdminPanel.Common;
+namespace AdminPanel.ViewComponents
 {
     public class MenuMessageViewComponent : ViewComponent
     {

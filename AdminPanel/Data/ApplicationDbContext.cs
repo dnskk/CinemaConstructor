@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using AdminLTE.Models;
+using AdminPanel.Models;
 
-namespace AdminLTE.Data
+namespace AdminPanel.Data
 {
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {

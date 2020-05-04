@@ -7,10 +7,10 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
-using AdminLTE.Models;
-using AdminLTE.Models.RoleViewModels;
+using AdminPanel.Models;
+using AdminPanel.Models.RoleViewModels;
 
-namespace AdminLTE.Controllers
+namespace AdminPanel.Controllers
 {
     [Authorize(Roles = "SuperAdmins")]
     public class RoleController : Controller

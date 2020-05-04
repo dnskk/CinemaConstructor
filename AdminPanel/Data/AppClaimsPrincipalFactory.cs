@@ -4,10 +4,10 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
-using AdminLTE.Common;
-using AdminLTE.Models;
+using AdminPanel.Common;
+using AdminPanel.Models;
 
-namespace AdminLTE.Data
+namespace AdminPanel.Data
 {
     public class AppClaimsPrincipalFactory : UserClaimsPrincipalFactory<ApplicationUser, IdentityRole>
     {

@@ -6,13 +6,13 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Logging;
-using AdminLTE.Models;
-using AdminLTE.Models.AccountViewModels;
-using AdminLTE.Services;
-using AdminLTE.Common;
+using AdminPanel.Models;
+using AdminPanel.Models.AccountViewModels;
+using AdminPanel.Services;
+using AdminPanel.Common;
 using System;
 
-namespace AdminLTE.Controllers
+namespace AdminPanel.Controllers
 {
     [Authorize]
     public class AccountController : Controller
