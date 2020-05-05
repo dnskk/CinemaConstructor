@@ -1,5 +1,4 @@
-﻿@model RegisterViewModel
-
+﻿
 @{
     ViewData["Title"] = "Index";
     Layout = "";
@@ -11,7 +10,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Cinema Constructor | Registration</title>
+    <title>Cinema Constructor | Personal Area</title>
     <link rel="apple-touch-icon" sizes="57x57" href="img/favicon/apple-touch-icon-57x57.png">
     <link rel="apple-touch-icon" sizes="60x60" href="img/favicon/apple-touch-icon-60x60.png">
     <link rel="apple-touch-icon" sizes="72x72" href="img/favicon/apple-touch-icon-72x72.png">
@@ -52,10 +51,10 @@
             <div id="collapsingNavbarInverse" class="collapse navbar-toggleable-custom" role="tabpanel" aria-labelledby="collapsingNavbarInverse">
                 <ul class="nav navbar-nav pull-xs-right">
                     <li class="nav-item nav-item-toggable">
-                        <a class="nav-link" href="http://tympanus.net/codrops/?p=25217" target="_blank">Sign in</a>
+                        <a class="nav-link" href="http://tympanus.net/codrops/?p=25217" target="_blank">Account</a>
                     </li>
                     <li class="nav-item nav-item-toggable">
-                        <a class="nav-link" href="./index.html">Sign up</a>
+                        <a class="nav-link" href="./index.html">Log out</a>
                     </li>
                 </ul>
             </div>
@@ -65,41 +64,35 @@
     <hr class="invisible">
 
     <div class="container" align="center">
-        <div style="width: 40%">
-            <h3 class="p-y-1 text-xs-center">Register your personal account</h3>
-
-            <form id="ccSelectForm" asp-controller="Registration" asp-action="Index" asp-route-returnurl="@ViewData["ReturnUrl"]" method="post" class="form-horizontal" autocomplete="no">
-
-                <div class="form-group has-icon-left form-control-name">
-                    <label asp-for="FirstName" class="sr-only">First name</label>
-                    <input asp-for="FirstName" class="form-control form-control-lg" placeholder="First name">
-                    <span asp-validation-for="FirstName" class="text-danger"></span>
-                </div>
-                <div class="form-group has-icon-left form-control-name">
-                    <label asp-for="LastName" class="sr-only">Last name</label>
-                    <input asp-for="LastName" class="form-control form-control-lg" placeholder="Last name">
-                    <span asp-validation-for="LastName" class="text-danger"></span>
-                </div>
-                <div class="form-group has-icon-left form-control-email">
-                    <label asp-for="Email" class="sr-only">Email address</label>
-                    <input asp-for="Email" class="form-control form-control-lg" placeholder="Email" autocomplete="off">
-                    <span asp-validation-for="Email" class="text-danger"></span>
-                </div>
-                <div class="form-group has-icon-left form-control-password">
-                    <label asp-for="Password" class="sr-only">Enter a password</label>
-                    <input asp-for="Password" type="password" class="form-control form-control-lg" placeholder="Password" autocomplete="off">
-                    <span asp-validation-for="Password" class="text-danger"></span>
-                </div>
-                <div class="form-group has-icon-left form-control-password">
-                    <label asp-for="ConfirmPassword" class="sr-only">Confirm password</label>
-                    <input asp-for="ConfirmPassword" class="form-control form-control-lg" placeholder="Confirm password" autocomplete="off">
-                    <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+        <div style="width: 80%">
+            <h3 class="p-y-1 text-xs-center">Manage your cinemas or create new one</h3>
+            <div class="row p-y-2">
+                <div class="col-md-6">
+                    <div class="card pricing-box pricing-best p-x-0" style="width: 95%">
+                        <div class="card-header text-uppercase">
+                            Your cinemas
+                        </div>
+                    </div>
                 </div>
 
-                <button type="submit" class="btn btn-primary btn-block">Create an account</button>
-            </form>
+                <div class="col-md-6">
+                    <div class="card pricing-box pricing-best p-x-0" style="width: 95%">
+                        <div class="card-header text-uppercase">
+                            Create new
+                        </div>
+
+                        <div class="form-group" style="width: 95%">
+                            <label lass="sr-only"></label>
+                            <input class="form-control form-control-lg" placeholder="Cinema name">
+                            <span class="text-danger"></span>
+                        </div>
+                        <a href="#" class="btn btn-primary">Create</a>
+                    </div>
+                </div>
+            </div>
 
         </div>
+
     </div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
