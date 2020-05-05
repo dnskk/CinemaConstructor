@@ -8,6 +8,10 @@ namespace AdminPanel.Data
     {
         public DbSet<UserAudit> UserAuditEvents { get; set; }
 
+        public DbSet<CinemaCompany> CinemaCompanies { get; set; }
+
+        public DbSet<Cinema> Cinemas { get; set; }
+
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
