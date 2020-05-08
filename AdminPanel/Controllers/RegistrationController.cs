@@ -97,7 +97,7 @@ namespace AdminPanel.Controllers
             }
             else
             {
-                return RedirectToAction(nameof(HomeController.Index), "Home");
+                return RedirectToAction(nameof(PersonalAreaController.Index), "PersonalArea");
             }
         }
     }
