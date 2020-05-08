@@ -12,6 +12,8 @@ namespace AdminPanel.Data
 
         public DbSet<Cinema> Cinemas { get; set; }
 
+        public DbSet<CompanyMember> CompanyMembers { get; set; }
+
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {

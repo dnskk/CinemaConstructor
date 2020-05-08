@@ -55,7 +55,9 @@
                         <a class="nav-link" href="http://tympanus.net/codrops/?p=25217" target="_blank">Account</a>
                     </li>
                     <li class="nav-item nav-item-toggable">
-                        <a class="nav-link" href="./index.html">Log out</a>
+                        <form asp-controller="PersonalArea" asp-action="LogOff" method="post">
+                            <a class="nav-link" onclick="parentNode.submit();">Sign out</a>
+                        </form>
                     </li>
                 </ul>
             </div>
@@ -68,10 +70,22 @@
         <div style="width: 80%">
             <h3 class="p-y-1 text-xs-center">Manage your cinemas or create new one</h3>
             <div class="row p-y-2">
-                <div class="col-md-6">
-                    <div class="card pricing-box pricing-best p-x-0" style="width: 95%">
+                <div class="col-md-6" >
+                    <div class="card pricing-box pricing-best p-x-0" style="width: 95%; margin-bottom: 0; padding-bottom: 0">
                         <div class="card-header text-uppercase">
-                            Your cinemas
+                            Your companies
+                        </div>
+
+                        <div class="card" align="left" style="margin-bottom: 0">
+                            <ul class="list-group" style="margin-bottom: 0; min-width: 0">
+                                @foreach (var company in Model.Companies)
+                                {
+                                    <li class="list-group-item">
+                                        <a href="#" class="label pull-xs-right" style="color: black; margin-bottom: 0">Edit</a>
+                                        <span class="icon-status status-backlog"></span>@company.Name
+                                    </li>
+                                }
+                            </ul>
                         </div>
                     </div>
                 </div>

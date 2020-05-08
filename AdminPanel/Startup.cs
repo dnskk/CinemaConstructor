@@ -51,7 +51,9 @@ namespace AdminPanel
 
             services.AddScoped<IUserClaimsPrincipalFactory<ApplicationUser>, AppClaimsPrincipalFactory>();
             services.AddScoped<SignInManager<ApplicationUser>, AuditableSignInManager<ApplicationUser>>();
+
             services.AddScoped<CompanyRepository>();
+            services.AddScoped<CompanyMemberRepository>();
 
             var mvcBuilder = services.AddMvc(config =>
             {

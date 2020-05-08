@@ -20,7 +20,7 @@ namespace AdminPanel.Controllers
         public LoginController(SignInManager<ApplicationUser> signInManager, ILoggerFactory loggerFactory)
         {
             _signInManager = signInManager;
-            _logger = loggerFactory.CreateLogger<RegistrationController>();
+            _logger = loggerFactory.CreateLogger<LoginController>();
         }
 
         [HttpGet]

@@ -1,28 +1,47 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
+using AdminPanel.Models;
 using AdminPanel.Models.LandingViewModels;
 using AdminPanel.Repositories;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.Extensions.Logging;
 
 namespace AdminPanel.Controllers
 {
     [Authorize]
     public class PersonalAreaController : Controller
     {
+        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly CompanyRepository _companyRepository;
+        private readonly CompanyMemberRepository _companyMemberRepository;
+        private readonly ILogger _logger;
 
-        public PersonalAreaController(CompanyRepository companyRepository)
+        public PersonalAreaController(UserManager<ApplicationUser> userManager,
+            SignInManager<ApplicationUser> signInManager, CompanyRepository companyRepository,
+            CompanyMemberRepository companyMemberRepository, ILoggerFactory loggerFactory)
         {
             _companyRepository = companyRepository;
+            _userManager = userManager;
+            _companyMemberRepository = companyMemberRepository;
+            _signInManager = signInManager;
+            _logger = loggerFactory.CreateLogger<PersonalAreaController>();
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var model = new PersonalAreaViewModel
+            {
+                Companies = await GetCompanies(CancellationToken.None)
+            };
+
+            return View(model);
         }
 
         [HttpPost]
@@ -32,7 +51,9 @@ namespace AdminPanel.Controllers
 
             if (ModelState.IsValid)
             {
+                await CreateCompany(model.Name);
 
+                model.Companies = await GetCompanies(CancellationToken.None);
                 // Clear input.
                 ModelState.Clear();
                 model.Name = "";
@@ -40,6 +61,45 @@ namespace AdminPanel.Controllers
             }
 
             return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> LogOff()
+        {
+            await _signInManager.SignOutAsync();
+            _logger.LogInformation(4, "User logged out.");
+            return RedirectToAction(nameof(LandingController.Index), "Landing");
+        }
+
+        private async Task CreateCompany(string name)
+        {
+            var company = new Company
+            {
+                Name = name
+            };
+
+            company = await _companyRepository.AddAsync(company, CancellationToken.None);
+            var user = await _userManager.FindByIdAsync(_userManager.GetUserId(User)) as IdentityUser;
+
+            var companyMember = new CompanyMember
+            {
+                Company = company,
+                UserId = user.Id,
+                Role = MemberRole.Administrator
+            };
+
+            await _companyMemberRepository.AddAsync(companyMember, CancellationToken.None);
+        }
+
+        private async Task<List<Company>> GetCompanies(CancellationToken token)
+        {
+            var user = await _userManager.FindByIdAsync(_userManager.GetUserId(User)) as IdentityUser;
+
+            var companyMembers = await _companyMemberRepository.FindByUserIdAsync(user.Id, token);
+            return companyMembers
+                .Where(p => p.Role == MemberRole.Administrator)
+                .Select(p => p.Company).ToList();
         }
     }
 }
