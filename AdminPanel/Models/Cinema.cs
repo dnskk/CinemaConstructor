@@ -7,6 +7,6 @@ namespace AdminPanel.Models
         [Key]
         public int Id { get; set; }
 
-        public CinemaCompany CinemaCompany { get; set; }
+        public Company Company { get; set; }
     }
 }

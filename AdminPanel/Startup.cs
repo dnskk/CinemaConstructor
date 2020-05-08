@@ -1,5 +1,6 @@
 ﻿using AdminPanel.Data;
 using AdminPanel.Models;
+using AdminPanel.Repositories;
 using AdminPanel.Services;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
@@ -50,6 +51,7 @@ namespace AdminPanel
 
             services.AddScoped<IUserClaimsPrincipalFactory<ApplicationUser>, AppClaimsPrincipalFactory>();
             services.AddScoped<SignInManager<ApplicationUser>, AuditableSignInManager<ApplicationUser>>();
+            services.AddScoped<CompanyRepository>();
 
             var mvcBuilder = services.AddMvc(config =>
             {

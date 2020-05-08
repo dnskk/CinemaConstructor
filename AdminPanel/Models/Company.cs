@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace AdminPanel.Models
 {
-    public class CinemaCompany
+    public class Company
     {
         [Key]
         public int Id { get; set; }

@@ -1,4 +1,5 @@
-﻿
+﻿@model AdminPanel.Models.LandingViewModels.PersonalAreaViewModel
+
 @{
     ViewData["Title"] = "Index";
     Layout = "";
@@ -81,12 +82,14 @@
                             Create new
                         </div>
 
-                        <div class="form-group" style="width: 95%">
-                            <label lass="sr-only"></label>
-                            <input class="form-control form-control-lg" placeholder="Cinema name">
-                            <span class="text-danger"></span>
-                        </div>
-                        <a href="#" class="btn btn-primary">Create</a>
+                        <form id="ccSelectForm" asp-controller="PersonalArea" asp-action="Index" asp-route-returnurl="@ViewData["ReturnUrl"]" method="post" class="form-horizontal" autocomplete="no">
+                            <div class="form-group" style="width: 95%">
+                                <label asp-for="Name" lass="sr-only"></label>
+                                <input asp-for="Name" class="form-control form-control-lg" placeholder="Company name">
+                                <span asp-validation-for="Name" class="text-danger"></span>
+                            </div>
+                            <a onclick="parentNode.submit();" class="btn btn-primary">Create</a>
+                        </form>
                     </div>
                 </div>
             </div>
