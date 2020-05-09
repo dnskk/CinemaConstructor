@@ -27,24 +27,9 @@ namespace AdminPanel.Controllers
         }
 
         [HelpDefinition]
-        public IActionResult Index()
+        public async Task<IActionResult> Index(CancellationToken token)
         {
             AddBreadcrumb("Company", "/Company");
-            return View();
-        }
-
-        [HttpPost]
-        public IActionResult Index(object model)
-        {
-            AddPageAlerts(PageAlertType.Info, "you may view the summary <a href='#'>here</a>");
-            return View("Index");
-        }
-
-        [HelpDefinition]
-        public async Task<IActionResult> Info(CancellationToken token)
-        {
-            AddBreadcrumb("Company", "/Company");
-            AddBreadcrumb("Info", "/Company/Info");
 
             var user = await _userManager.FindByIdAsync(_userManager.GetUserId(User)) as IdentityUser;
             var userSession = await _userSessionRepository.FindByUserIdAsync(Guid.Parse(user.Id), token);
@@ -56,6 +41,13 @@ namespace AdminPanel.Controllers
             };
 
             return View(viewModel);
+        }
+
+        [HttpPost]
+        public IActionResult Index(object model)
+        {
+            AddPageAlerts(PageAlertType.Info, "you may view the summary <a href='#'>here</a>");
+            return View("Index");
         }
 
         [HelpDefinition("helpdefault")]

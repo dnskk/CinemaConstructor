@@ -55,7 +55,7 @@ namespace AdminPanel.Common
                         Type = SidebarMenuType.Link,
                         Name = name,
                         IconClassName = "fa fa-link",
-                        URLPath = "/Company/Info",
+                        URLPath = "/Company",
                         LinkCounter = counter,
                     };
                 case Module.Login:
