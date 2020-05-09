@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using AdminPanel.Data;
@@ -29,7 +30,7 @@ namespace AdminPanel.Repositories
 
         public async Task<Company> AddAsync(Company company, CancellationToken token)
         {
-            company.Id = 0;
+            company.Id = Guid.NewGuid();
 
             _context.Companies.Add(company);
             await _context.SaveChangesAsync(token);
