@@ -4,16 +4,28 @@ using Microsoft.AspNetCore.Mvc;
 using AdminPanel.Common;
 using AdminPanel.Models;
 using System;
+using System.Threading;
+using System.Threading.Tasks;
+using AdminPanel.Repositories;
+using Microsoft.AspNetCore.Identity;
 
 namespace AdminPanel.ViewComponents
 {
     public class SidebarViewComponent : ViewComponent
     {
-        public SidebarViewComponent()
+        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly CompanyRepository _companyRepository;
+        private readonly UserSessionRepository _userSessionRepository;
+
+        public SidebarViewComponent(UserManager<ApplicationUser> userManager, CompanyRepository companyRepository,
+            UserSessionRepository userSessionRepository)
         {
+            _userManager = userManager;
+            _companyRepository = companyRepository;
+            _userSessionRepository = userSessionRepository;
         }
 
-        public IViewComponentResult Invoke(string filter)
+        public async Task<IViewComponentResult> InvokeAsync()
         {
             //you can do the access rights checking here by using session, user, and/or filter parameter
             var sidebars = new List<SidebarMenu>();
@@ -21,9 +33,13 @@ namespace AdminPanel.ViewComponents
             //if (((ClaimsPrincipal)User).GetUserProperty("AccessProfile").Contains("VES_008, Payroll"))
             //{
             //}
+            
+            var user = await _userManager.FindByIdAsync(_userManager.GetUserId(UserClaimsPrincipal)) as IdentityUser;
+            var userSession = await _userSessionRepository.FindByUserIdAsync(Guid.Parse(user.Id), CancellationToken.None);
+            var company = await _companyRepository.FindByIdAsync(userSession.CurrentCompanyId, CancellationToken.None);
 
             sidebars.Add(ModuleHelper.AddHeader("MAIN NAVIGATION"));
-            sidebars.Add(ModuleHelper.AddModule(ModuleHelper.Module.Home));
+            sidebars.Add(ModuleHelper.AddModule(ModuleHelper.Module.Info, null, company.Name));
             sidebars.Add(ModuleHelper.AddModule(ModuleHelper.Module.Error, Tuple.Create(0, 0, 1)));
             sidebars.Add(ModuleHelper.AddModule(ModuleHelper.Module.About, Tuple.Create(0, 1, 0)));
             sidebars.Add(ModuleHelper.AddModule(ModuleHelper.Module.Contact, Tuple.Create(1, 0, 0)));

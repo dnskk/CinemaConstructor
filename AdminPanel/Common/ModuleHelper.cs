@@ -10,7 +10,7 @@ namespace AdminPanel.Common
     {
         public enum Module
         {
-            Home,
+            Info,
             About,
             Contact,
             Error,
@@ -42,20 +42,20 @@ namespace AdminPanel.Common
             };
         }
 
-        public static SidebarMenu AddModule(Module module, Tuple<int, int, int> counter = null)
+        public static SidebarMenu AddModule(Module module, Tuple<int, int, int> counter = null, string name = null)
         {
             if (counter == null)
                 counter = Tuple.Create(0, 0, 0);
 
             switch (module)
             {
-                case Module.Home:
+                case Module.Info:
                     return new SidebarMenu
                     {
                         Type = SidebarMenuType.Link,
-                        Name = "Home",
+                        Name = name,
                         IconClassName = "fa fa-link",
-                        URLPath = "/",
+                        URLPath = "/Info",
                         LinkCounter = counter,
                     };
                 case Module.Login:

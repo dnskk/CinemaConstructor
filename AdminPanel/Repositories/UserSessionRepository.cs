@@ -37,7 +37,7 @@ namespace AdminPanel.Repositories
             }
             else
             {
-                _context.UserSessions.Update(userSession);
+                currentUserSession.CurrentCompanyId = userSession.CurrentCompanyId;
             }
 
             await _context.SaveChangesAsync(token);
