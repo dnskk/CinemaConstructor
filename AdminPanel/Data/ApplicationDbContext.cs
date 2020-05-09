@@ -14,6 +14,8 @@ namespace AdminPanel.Data
 
         public DbSet<CompanyMember> CompanyMembers { get; set; }
 
+        public DbSet<UserSession> UserSessions { get; set; }
+
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {

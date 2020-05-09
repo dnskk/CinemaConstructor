@@ -54,6 +54,7 @@ namespace AdminPanel
 
             services.AddScoped<CompanyRepository>();
             services.AddScoped<CompanyMemberRepository>();
+            services.AddScoped<UserSessionRepository>();
 
             var mvcBuilder = services.AddMvc(config =>
             {

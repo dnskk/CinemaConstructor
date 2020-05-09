@@ -21,15 +21,18 @@ namespace AdminPanel.Controllers
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly CompanyRepository _companyRepository;
         private readonly CompanyMemberRepository _companyMemberRepository;
+        private readonly UserSessionRepository _userSessionRepository;
         private readonly ILogger _logger;
 
         public PersonalAreaController(UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager, CompanyRepository companyRepository,
-            CompanyMemberRepository companyMemberRepository, ILoggerFactory loggerFactory)
+            CompanyMemberRepository companyMemberRepository, UserSessionRepository userSessionRepository,
+            ILoggerFactory loggerFactory)
         {
             _companyRepository = companyRepository;
             _userManager = userManager;
             _companyMemberRepository = companyMemberRepository;
+            _userSessionRepository = userSessionRepository;
             _signInManager = signInManager;
             _logger = loggerFactory.CreateLogger<PersonalAreaController>();
         }
@@ -61,6 +64,28 @@ namespace AdminPanel.Controllers
             }
 
             return View();
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> SelectCompany(PersonalAreaViewModel model)
+        {
+            if (!Request.Query.ContainsKey("companyId"))
+            {
+                return await Index();
+            }
+
+            Request.Query.TryGetValue("companyId", out var companyId);
+
+            var user = await _userManager.FindByIdAsync(_userManager.GetUserId(User)) as IdentityUser;
+            var userSession = new UserSession
+            {
+                UserId = Guid.Parse(user.Id),
+                CurrentCompanyId = Guid.Parse(companyId)
+            };
+
+            await _userSessionRepository.UpdateAsync(userSession, CancellationToken.None);
+
+            return RedirectToAction(nameof(CompanyController.Index), "Company");
         }
 
         [HttpPost]

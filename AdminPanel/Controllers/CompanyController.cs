@@ -8,7 +8,7 @@ using System.Linq;
 
 namespace AdminPanel.Controllers
 {
-    public class HomeController : BaseController
+    public class CompanyController : BaseController
     {
         [HelpDefinition]
         public IActionResult Index()
