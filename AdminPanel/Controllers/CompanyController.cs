@@ -26,7 +26,7 @@ namespace AdminPanel.Controllers
             _userSessionRepository = userSessionRepository;
         }
 
-        [HelpDefinition]
+        [HttpGet]
         public async Task<IActionResult> Index(CancellationToken token)
         {
             AddBreadcrumb("Company", "/Company");
@@ -50,12 +50,11 @@ namespace AdminPanel.Controllers
             return View("Index");
         }
 
-        [HelpDefinition("helpdefault")]
-        public IActionResult Contact()
+        [HttpGet]
+        public async Task<IActionResult> Edit(CancellationToken token)
         {
-            AddBreadcrumb("Register", "/Account/Register");
-            AddBreadcrumb("Contact", "/Account/Contact");
-            ViewData["Message"] = "Your contact page.";
+            AddBreadcrumb("Company", "/Company");
+            AddBreadcrumb("Edit", "/Company/Edit");
 
             return View();
         }

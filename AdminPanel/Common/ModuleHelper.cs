@@ -11,8 +11,8 @@ namespace AdminPanel.Common
         public enum Module
         {
             Info,
+            Edit,
             About,
-            Contact,
             Error,
             Login,
             Register,
@@ -58,6 +58,15 @@ namespace AdminPanel.Common
                         URLPath = "/Company",
                         LinkCounter = counter,
                     };
+                case Module.Edit:
+                    return new SidebarMenu
+                    {
+                        Type = SidebarMenuType.Link,
+                        Name = "Edit",
+                        IconClassName = "fa fa-phone",
+                        URLPath = "/Company/Edit",
+                        LinkCounter = counter,
+                    };
                 case Module.Login:
                     return new SidebarMenu
                     {
@@ -83,15 +92,6 @@ namespace AdminPanel.Common
                         Name = "About",
                         IconClassName = "fa fa-users",
                         URLPath = "/Home/About",
-                        LinkCounter = counter,
-                    };
-                case Module.Contact:
-                    return new SidebarMenu
-                    {
-                        Type = SidebarMenuType.Link,
-                        Name = "Contact",
-                        IconClassName = "fa fa-phone",
-                        URLPath = "/Home/Contact",
                         LinkCounter = counter,
                     };
                 case Module.Error:

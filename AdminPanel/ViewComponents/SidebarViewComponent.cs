@@ -38,11 +38,16 @@ namespace AdminPanel.ViewComponents
             var userSession = await _userSessionRepository.FindByUserIdAsync(Guid.Parse(user.Id), CancellationToken.None);
             var company = await _companyRepository.FindByIdAsync(userSession.CurrentCompanyId, CancellationToken.None);
 
-            sidebars.Add(ModuleHelper.AddHeader("MAIN NAVIGATION"));
+            sidebars.Add(ModuleHelper.AddHeader("GENERAL"));
             sidebars.Add(ModuleHelper.AddModule(ModuleHelper.Module.Info, null, company.Name));
+            sidebars.Add(ModuleHelper.AddModule(ModuleHelper.Module.Edit));
+
+            sidebars.Add(ModuleHelper.AddHeader("CINEMAS"));
             sidebars.Add(ModuleHelper.AddModule(ModuleHelper.Module.Error, Tuple.Create(0, 0, 1)));
             sidebars.Add(ModuleHelper.AddModule(ModuleHelper.Module.About, Tuple.Create(0, 1, 0)));
-            sidebars.Add(ModuleHelper.AddModule(ModuleHelper.Module.Contact, Tuple.Create(1, 0, 0)));
+
+            sidebars.Add(ModuleHelper.AddHeader("FILMS"));
+            sidebars.Add(ModuleHelper.AddModule(ModuleHelper.Module.About, Tuple.Create(1, 0, 0)));
             sidebars.Add(ModuleHelper.AddTree("Account"));
             sidebars.Last().TreeChild = new List<SidebarMenu>()
             {
