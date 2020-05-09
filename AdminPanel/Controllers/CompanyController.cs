@@ -31,10 +31,7 @@ namespace AdminPanel.Controllers
         {
             AddBreadcrumb("Company", "/Company");
 
-            var user = await _userManager.FindByIdAsync(_userManager.GetUserId(User)) as IdentityUser;
-            var userSession = await _userSessionRepository.FindByUserIdAsync(Guid.Parse(user.Id), token);
-            var company = await _companyRepository.FindByIdAsync(userSession.CurrentCompanyId, token);
-
+            var company = await GetCompany(token);
             var viewModel = new InfoViewModel
             {
                 Company = company
@@ -56,12 +53,48 @@ namespace AdminPanel.Controllers
             AddBreadcrumb("Company", "/Company");
             AddBreadcrumb("Edit", "/Company/Edit");
 
-            return View();
+            var company = await GetCompany(token);
+            var viewModel = new EditViewModel
+            {
+                Phone = company.Phone,
+                Email = company.Email,
+                InstagramLink = company.InstagramLink,
+                FacebookLink = company.FacebookLink
+            };
+
+            return View(viewModel);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(EditViewModel model, CancellationToken token, string returnUrl = null)
+        {
+            ViewData["ReturnUrl"] = returnUrl;
+            if (ModelState.IsValid)
+            {
+                var company = await GetCompany(token);
+                company.Phone = model.Phone;
+                company.Email = model.Email;
+                company.InstagramLink = model.InstagramLink;
+                company.FacebookLink = model.FacebookLink;
+                
+                await _companyRepository.UpdateAsync(company, token);
+
+                return RedirectToAction(nameof(Index), "Company");
+            }
+
+            return View(model);
         }
 
         public IActionResult Error()
         {
             return View();
+        }
+
+        private async Task<Company> GetCompany(CancellationToken token)
+        {
+            var user = await _userManager.FindByIdAsync(_userManager.GetUserId(User)) as IdentityUser;
+            var userSession = await _userSessionRepository.FindByUserIdAsync(Guid.Parse(user.Id), token);
+            return await _companyRepository.FindByIdAsync(userSession.CurrentCompanyId, token);
         }
 
         #region Get data method.
