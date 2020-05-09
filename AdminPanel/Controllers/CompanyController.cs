@@ -5,15 +5,31 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
+using AdminPanel.Models.CompanyViewModels;
+using AdminPanel.Repositories;
+using Microsoft.AspNetCore.Identity;
 
 namespace AdminPanel.Controllers
 {
     public class CompanyController : BaseController
     {
+        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly CompanyRepository _companyRepository;
+        private readonly UserSessionRepository _userSessionRepository;
+
+        public CompanyController(UserManager<ApplicationUser> userManager, CompanyRepository companyRepository, UserSessionRepository userSessionRepository)
+        {
+            _userManager = userManager;
+            _companyRepository = companyRepository;
+            _userSessionRepository = userSessionRepository;
+        }
+
         [HelpDefinition]
         public IActionResult Index()
         {
-            AddPageHeader("Dashboard", "");
+            AddBreadcrumb("Company", "/Company");
             return View();
         }
 
@@ -25,12 +41,21 @@ namespace AdminPanel.Controllers
         }
 
         [HelpDefinition]
-        public IActionResult About()
+        public async Task<IActionResult> Info(CancellationToken token)
         {
-            ViewData["Message"] = "Your application description page.";
-            AddBreadcrumb("About", "/Account/About");
+            AddBreadcrumb("Company", "/Company");
+            AddBreadcrumb("Info", "/Company/Info");
 
-            return View();
+            var user = await _userManager.FindByIdAsync(_userManager.GetUserId(User)) as IdentityUser;
+            var userSession = await _userSessionRepository.FindByUserIdAsync(Guid.Parse(user.Id), token);
+            var company = await _companyRepository.FindByIdAsync(userSession.CurrentCompanyId, token);
+
+            var viewModel = new InfoViewModel
+            {
+                Company = company
+            };
+
+            return View(viewModel);
         }
 
         [HelpDefinition("helpdefault")]
