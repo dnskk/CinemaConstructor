@@ -33,18 +33,24 @@ namespace AdminPanel.ViewComponents
             //if (((ClaimsPrincipal)User).GetUserProperty("AccessProfile").Contains("VES_008, Payroll"))
             //{
             //}
-            
+
             var user = await _userManager.FindByIdAsync(_userManager.GetUserId(UserClaimsPrincipal)) as IdentityUser;
             var userSession = await _userSessionRepository.FindByUserIdAsync(Guid.Parse(user.Id), CancellationToken.None);
             var company = await _companyRepository.FindByIdAsync(userSession.CurrentCompanyId, CancellationToken.None);
 
-            sidebars.Add(ModuleHelper.AddHeader("GENERAL"));
-            sidebars.Add(ModuleHelper.AddModule(ModuleHelper.Module.Info, null, company.Name));
-            sidebars.Add(ModuleHelper.AddModule(ModuleHelper.Module.Edit));
+            sidebars.Add(ModuleHelper.AddTree(company.Name));
+            sidebars.Last().TreeChild = new List<SidebarMenu>()
+            {
+                ModuleHelper.AddModule(ModuleHelper.Module.Info),
+                ModuleHelper.AddModule(ModuleHelper.Module.Edit)
+            };
 
-            sidebars.Add(ModuleHelper.AddHeader("CINEMAS"));
-            sidebars.Add(ModuleHelper.AddModule(ModuleHelper.Module.Error, Tuple.Create(0, 0, 1)));
-            sidebars.Add(ModuleHelper.AddModule(ModuleHelper.Module.About, Tuple.Create(0, 1, 0)));
+            sidebars.Add(ModuleHelper.AddTree("Cinemas"));
+            sidebars.Last().TreeChild = new List<SidebarMenu>()
+            {
+                ModuleHelper.AddModule(ModuleHelper.Module.CinemasManagement),
+                ModuleHelper.AddModule(ModuleHelper.Module.CinemaCreate)
+            };
 
             sidebars.Add(ModuleHelper.AddHeader("FILMS"));
             sidebars.Add(ModuleHelper.AddModule(ModuleHelper.Module.About, Tuple.Create(1, 0, 0)));

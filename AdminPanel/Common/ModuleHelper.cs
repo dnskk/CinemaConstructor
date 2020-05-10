@@ -12,8 +12,9 @@ namespace AdminPanel.Common
         {
             Info,
             Edit,
+            CinemasManagement,
+            CinemaCreate,
             About,
-            Error,
             Login,
             Register,
             SuperAdmin,
@@ -53,7 +54,7 @@ namespace AdminPanel.Common
                     return new SidebarMenu
                     {
                         Type = SidebarMenuType.Link,
-                        Name = name,
+                        Name = "Info",
                         IconClassName = "fa fa-link",
                         URLPath = "/Company",
                         LinkCounter = counter,
@@ -65,6 +66,24 @@ namespace AdminPanel.Common
                         Name = "Edit",
                         IconClassName = "fa fa-phone",
                         URLPath = "/Company/Edit",
+                        LinkCounter = counter,
+                    };
+                case Module.CinemasManagement:
+                    return new SidebarMenu
+                    {
+                        Type = SidebarMenuType.Link,
+                        Name = "Manage",
+                        IconClassName = "fa fa-exclamation-triangle",
+                        URLPath = "/Cinema/All",
+                        LinkCounter = counter,
+                    };
+                case Module.CinemaCreate:
+                    return new SidebarMenu
+                    {
+                        Type = SidebarMenuType.Link,
+                        Name = "Create",
+                        IconClassName = "fa fa-exclamation-triangle",
+                        URLPath = "/Cinema/Create",
                         LinkCounter = counter,
                     };
                 case Module.Login:
@@ -92,15 +111,6 @@ namespace AdminPanel.Common
                         Name = "About",
                         IconClassName = "fa fa-users",
                         URLPath = "/Home/About",
-                        LinkCounter = counter,
-                    };
-                case Module.Error:
-                    return new SidebarMenu
-                    {
-                        Type = SidebarMenuType.Link,
-                        Name = "Error",
-                        IconClassName = "fa fa-exclamation-triangle",
-                        URLPath = "/Home/Error",
                         LinkCounter = counter,
                     };
                 case Module.SuperAdmin:

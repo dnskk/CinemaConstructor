@@ -5,12 +5,12 @@
 }
 
 <h2>@Model.Company.Name</h2>
-<hr />
+<hr style="margin-top: 4px;" />
 
 <div class="row">
     <div class="col-md-6">
         <div class="card">
-            <div class="card-header">
+            <div class="card-header" style="padding-bottom: 0;">
                 <h3 class="card-title">
                     Info
                 </h3>
@@ -24,6 +24,18 @@
                 <h6 style="margin-bottom: 2px;">Instagram</h6>@(Model.Company.InstagramLink ?? "-")
                 <hr style="margin-bottom: 4px; margin-top: 4px;" />
                 <h6 style="margin-bottom: 2px;">Facebook</h6>@(Model.Company.FacebookLink ?? "-")
+            </div>
+            <!-- /.card-body -->
+        </div>
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">
+                    Info
+                </h3>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body">
+                Zaluppi
             </div>
             <!-- /.card-body -->
         </div>
