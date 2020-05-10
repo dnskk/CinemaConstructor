@@ -11,7 +11,8 @@ namespace AdminPanel.Common
         public enum Module
         {
             Info,
-            Edit,
+            EditInfo,
+            EditDesign,
             CinemasManagement,
             CinemaCreate,
             About,
@@ -59,13 +60,22 @@ namespace AdminPanel.Common
                         URLPath = "/Company",
                         LinkCounter = counter,
                     };
-                case Module.Edit:
+                case Module.EditInfo:
                     return new SidebarMenu
                     {
                         Type = SidebarMenuType.Link,
-                        Name = "Edit",
+                        Name = "Info editing",
                         IconClassName = "fa fa-phone",
                         URLPath = "/Company/Edit",
+                        LinkCounter = counter,
+                    };
+                case Module.EditDesign:
+                    return new SidebarMenu
+                    {
+                        Type = SidebarMenuType.Link,
+                        Name = "Design editing",
+                        IconClassName = "fa fa-phone",
+                        URLPath = "/Company/Design",
                         LinkCounter = counter,
                     };
                 case Module.CinemasManagement:

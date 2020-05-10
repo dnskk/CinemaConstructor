@@ -51,7 +51,7 @@ namespace AdminPanel.Controllers
         public async Task<IActionResult> Edit(CancellationToken token)
         {
             AddBreadcrumb("Company", "/Company");
-            AddBreadcrumb("Edit", "/Company/Edit");
+            AddBreadcrumb("Info", "/Company/Edit");
 
             var company = await GetCompany(token);
             var viewModel = new EditViewModel
@@ -79,6 +79,31 @@ namespace AdminPanel.Controllers
                 
                 await _companyRepository.UpdateAsync(company, token);
 
+                return RedirectToAction(nameof(Index), "Company");
+            }
+
+            return View(model);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Design(CancellationToken token)
+        {
+            AddBreadcrumb("Company", "/Company");
+            AddBreadcrumb("Design", "/Company/Design");
+
+            var viewModel = new DesignViewModel()
+            {
+            };
+
+            return View(viewModel);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Design(DesignViewModel model, CancellationToken token, string returnUrl = null)
+        {
+            ViewData["ReturnUrl"] = returnUrl;
+            if (ModelState.IsValid)
+            {
                 return RedirectToAction(nameof(Index), "Company");
             }
 

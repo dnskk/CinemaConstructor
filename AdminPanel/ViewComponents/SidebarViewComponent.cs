@@ -42,7 +42,8 @@ namespace AdminPanel.ViewComponents
             sidebars.Last().TreeChild = new List<SidebarMenu>()
             {
                 ModuleHelper.AddModule(ModuleHelper.Module.Info),
-                ModuleHelper.AddModule(ModuleHelper.Module.Edit)
+                ModuleHelper.AddModule(ModuleHelper.Module.EditInfo),
+                ModuleHelper.AddModule(ModuleHelper.Module.EditDesign)
             };
 
             sidebars.Add(ModuleHelper.AddTree("Cinemas"));
