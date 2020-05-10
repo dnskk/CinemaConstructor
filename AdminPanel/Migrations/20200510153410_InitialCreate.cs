@@ -57,7 +57,11 @@ namespace AdminPanel.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
-                    Name = table.Column<string>(nullable: true)
+                    Name = table.Column<string>(nullable: true),
+                    Phone = table.Column<string>(nullable: true),
+                    Email = table.Column<string>(nullable: true),
+                    InstagramLink = table.Column<string>(nullable: true),
+                    FacebookLink = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -78,6 +82,18 @@ namespace AdminPanel.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_UserAuditEvents", x => x.UserAuditId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "UserSessions",
+                columns: table => new
+                {
+                    UserId = table.Column<Guid>(nullable: false),
+                    CurrentCompanyId = table.Column<Guid>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UserSessions", x => x.UserId);
                 });
 
             migrationBuilder.CreateTable(
@@ -190,8 +206,10 @@ namespace AdminPanel.Migrations
                 name: "Cinemas",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Id = table.Column<Guid>(nullable: false),
+                    Name = table.Column<string>(nullable: true),
+                    Address = table.Column<string>(nullable: true),
+                    Phone = table.Column<string>(nullable: true),
                     CompanyId = table.Column<Guid>(nullable: true)
                 },
                 constraints: table =>
@@ -300,6 +318,9 @@ namespace AdminPanel.Migrations
 
             migrationBuilder.DropTable(
                 name: "UserAuditEvents");
+
+            migrationBuilder.DropTable(
+                name: "UserSessions");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

@@ -53,6 +53,7 @@ namespace AdminPanel
             services.AddScoped<SignInManager<ApplicationUser>, AuditableSignInManager<ApplicationUser>>();
 
             services.AddScoped<CompanyRepository>();
+            services.AddScoped<CinemaRepository>();
             services.AddScoped<CompanyMemberRepository>();
             services.AddScoped<UserSessionRepository>();
 

@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AdminPanel.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200509123704_InitialCreate")]
+    [Migration("20200510153410_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -106,13 +106,21 @@ namespace AdminPanel.Migrations
 
             modelBuilder.Entity("AdminPanel.Models.Cinema", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Address")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<Guid?>("CompanyId")
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Phone")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -127,7 +135,19 @@ namespace AdminPanel.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FacebookLink")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("InstagramLink")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Phone")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -181,6 +201,20 @@ namespace AdminPanel.Migrations
                     b.HasKey("UserAuditId");
 
                     b.ToTable("UserAuditEvents");
+                });
+
+            modelBuilder.Entity("AdminPanel.Models.UserSession", b =>
+                {
+                    b.Property<Guid>("UserId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("CurrentCompanyId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("UserId");
+
+                    b.ToTable("UserSessions");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>

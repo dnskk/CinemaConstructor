@@ -1,11 +1,12 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace AdminPanel.Models
 {
     public class Cinema
     {
         [Key]
-        public int Id { get; set; }
+        public Guid Id { get; set; }
 
         public string Name { get; set; }
 
