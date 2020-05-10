@@ -31,9 +31,12 @@ namespace AdminPanel.Controllers
         {
             AddBreadcrumb("Cinemas", "/Cinema/All");
 
-            var viewModel = new CinemaAllViewModel()
+            var cinemas = await GetCinemas(token);
+
+
+            var viewModel = new CinemaAllViewModel
             {
-                Cinemas = await GetCinemas(token)
+                Cinemas = cinemas.OrderBy(p => p.Name).ToList()
             };
 
             return View(viewModel);
