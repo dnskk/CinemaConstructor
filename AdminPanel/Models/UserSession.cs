@@ -9,5 +9,7 @@ namespace AdminPanel.Models
         public Guid UserId { get; set; }
 
         public Guid CurrentCompanyId { get; set; }
+
+        public Guid CurrentCinemaId { get; set; }
     }
 }

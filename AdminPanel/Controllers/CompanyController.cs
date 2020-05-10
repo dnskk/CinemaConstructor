@@ -67,7 +67,10 @@ namespace AdminPanel.Controllers
         [HttpPost]
         public async Task<IActionResult> Edit(EditViewModel model, CancellationToken token, string returnUrl = null)
         {
+            AddBreadcrumb("Company", "/Company");
+            AddBreadcrumb("Info", "/Company/Edit");
             ViewData["ReturnUrl"] = returnUrl;
+
             if (ModelState.IsValid)
             {
                 var company = await GetCompany(token);
@@ -100,7 +103,10 @@ namespace AdminPanel.Controllers
         [HttpPost]
         public async Task<IActionResult> Design(DesignViewModel model, CancellationToken token, string returnUrl = null)
         {
+            AddBreadcrumb("Company", "/Company");
+            AddBreadcrumb("Design", "/Company/Design");
             ViewData["ReturnUrl"] = returnUrl;
+
             if (ModelState.IsValid)
             {
                 return RedirectToAction(nameof(Index), "Company");

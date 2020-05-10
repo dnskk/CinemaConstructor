@@ -1,13 +1,13 @@
-﻿@model AdminPanel.Models.CinemaViewModels.CinemaCreateViewModel
+﻿@model AdminPanel.Models.CinemaViewModels.CinemaEditViewModel
 
 @{
-    ViewData["Title"] = "New cinema";
+    ViewData["Title"] = "Cinema editing";
 }
 
 <h2>@ViewData["Title"]</h2>
 <hr />
 
-<form id="ccSelectForm" asp-controller="Cinema" asp-action="Create" asp-route-returnurl="@ViewData["ReturnUrl"]" method="post" class="form-horizontal">
+<form id="ccSelectForm" asp-controller="Cinema" asp-action="Edit" asp-route-returnurl="@ViewData["ReturnUrl"]" method="post" class="form-horizontal">
     <div class="form-group">
         <label asp-for="Name" class="col-md-2 control-label"></label>
         <div class="col-md-10">

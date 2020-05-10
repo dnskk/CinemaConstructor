@@ -38,6 +38,7 @@ namespace AdminPanel.Repositories
             else
             {
                 currentUserSession.CurrentCompanyId = userSession.CurrentCompanyId;
+                currentUserSession.CurrentCinemaId = userSession.CurrentCinemaId;
             }
 
             await _context.SaveChangesAsync(token);

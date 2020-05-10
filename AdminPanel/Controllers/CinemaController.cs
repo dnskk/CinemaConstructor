@@ -53,11 +53,11 @@ namespace AdminPanel.Controllers
             return View(viewModel);
         }
 
-
         [HttpPost]
         public async Task<IActionResult> Create(CinemaCreateViewModel model, CancellationToken token, string returnUrl = null)
         {
             ViewData["ReturnUrl"] = returnUrl;
+
             if (ModelState.IsValid)
             {
                 var company = await GetCompany(token);
@@ -70,6 +70,69 @@ namespace AdminPanel.Controllers
                 };
 
                 await _cinemaRepository.AddAsync(cinema, token);
+
+                return RedirectToAction(nameof(All), "Cinema");
+            }
+
+            return View(model);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> SelectCinema(CancellationToken token)
+        {
+            if (!Request.Query.ContainsKey("cinemaId"))
+            {
+                return await All(token);
+            }
+
+            Request.Query.TryGetValue("cinemaId", out var cinemaId);
+
+            var user = await _userManager.FindByIdAsync(_userManager.GetUserId(User)) as IdentityUser;
+            var userSession = await _userSessionRepository.FindByUserIdAsync(Guid.Parse(user.Id), token);
+            userSession.CurrentCinemaId = Guid.Parse(cinemaId);
+            await _userSessionRepository.UpdateAsync(userSession, CancellationToken.None);
+
+            return RedirectToAction(nameof(Edit), "Cinema");
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Edit(CancellationToken token)
+        {
+            AddBreadcrumb("Cinemas", "/Cinema/All");
+            AddBreadcrumb("Edit", "/Cinema/Edit");
+
+            var user = await _userManager.FindByIdAsync(_userManager.GetUserId(User)) as IdentityUser;
+            var userSession = await _userSessionRepository.FindByUserIdAsync(Guid.Parse(user.Id), token);
+
+            var cinema = await _cinemaRepository.FindByIdAsync(userSession.CurrentCinemaId, token);
+            var viewModel = new CinemaEditViewModel
+            {
+                Name = cinema.Name,
+                Address = cinema.Address,
+                Phone = cinema.Phone
+            };
+
+            return View(viewModel);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(CinemaEditViewModel model, CancellationToken token, string returnUrl = null)
+        {
+            AddBreadcrumb("Cinemas", "/Cinema/All");
+            AddBreadcrumb("Edit", "/Cinema/Edit");
+            ViewData["ReturnUrl"] = returnUrl;
+
+            if (ModelState.IsValid)
+            {
+                var user = await _userManager.FindByIdAsync(_userManager.GetUserId(User)) as IdentityUser;
+                var userSession = await _userSessionRepository.FindByUserIdAsync(Guid.Parse(user.Id), token);
+
+                var cinema = await _cinemaRepository.FindByIdAsync(userSession.CurrentCinemaId, token);
+                cinema.Name = model.Name;
+                cinema.Address = model.Address;
+                cinema.Phone = model.Phone;
+
+                await _cinemaRepository.UpdateAsync(cinema, token);
 
                 return RedirectToAction(nameof(All), "Cinema");
             }
