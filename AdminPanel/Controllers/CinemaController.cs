@@ -35,5 +35,19 @@ namespace AdminPanel.Controllers
 
             return View(viewModel);
         }
+
+
+        [HttpPost]
+        public async Task<IActionResult> Create(CinemaCreateViewModel model, CancellationToken token, string returnUrl = null)
+        {
+            ViewData["ReturnUrl"] = returnUrl;
+            if (ModelState.IsValid)
+            {
+
+                return RedirectToAction(nameof(All), "Cinema");
+            }
+
+            return View(model);
+        }
     }
 }
