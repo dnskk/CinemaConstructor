@@ -14,9 +14,9 @@
         border: 1px solid #fff;
     }
 
-    table td.highlighted {
-        background-color: #999;
-    }
+        table td.highlighted {
+            background-color: #999;
+        }
 </style>
 
 <div class="card">
@@ -90,12 +90,20 @@
                         </div>
                     </div>
                     <div class="col-sm-6">
-                        <div class="col-md-offset-2 col-md-10" style="margin-top: 31px;">
-                            <button class="btn btn-primary" onclick="updateTable()">Update</button>
+                        <div class="row" style="width: 90%">
+                            <div class="col-md-3" style="margin-top: 31px; width: 80%">
+                                <button class="btn btn-primary" onclick="updateTable()">Update</button>
+                            </div>
+                            <div class="col-md-3" style="margin-top: 31px; width: 80%">
+                                <button class="btn btn-primary" onclick="tableSelectAll()">Select all</button>
+                            </div>
+                            <div class="col-md-3" style="margin-top: 31px; width: 80%">
+                                <button class="btn btn-primary" onclick="tableDeselectAll()">Deselect all</button>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <hr />
+                <hr style="margin-top: 4px;" />
                 <div id="divTable" style="height: 400px">
                 </div>
                 <hr />
@@ -120,63 +128,7 @@
 </div>
 
 <script>
-    function pad(n, width) {
-        n = n + '';
-        return n.length >= width ? n : new Array(width - n.length + 1).join('0') + n;
-    }
-
-    function addHighlighting() {
-        $(function () {
-            var isMouseDown = false,
-                isHighlighted;
-            $("#hallTable td")
-                .mousedown(function () {
-                    isMouseDown = true;
-                    $(this).toggleClass("highlighted");
-                    isHighlighted = $(this).hasClass("highlighted");
-                    return false; // prevent text selection
-                })
-                .mouseover(function () {
-                    if (isMouseDown) {
-                        $(this).toggleClass("highlighted", isHighlighted);
-                    }
-                })
-                .bind("selectstart",
-                    function () {
-                        return false;
-                    });
-
-            $(document)
-                .mouseup(function () {
-                    isMouseDown = false;
-                });
-        });
-    }
-
-    function updateTable() {
-        var row = document.getElementById('rows').value;
-        var columns = document.getElementById('columns').value;
-
-        var divTable = document.getElementById('divTable');
-
-        var table = document.createElement('table');
-        table.id = 'hallTable';
-        table.style.width = '100%';
-        table.style.height = '100%';
-        for (var i = 0; i < row; i++) {
-            var tr = document.createElement('tr');
-            for (var j = 0; j < columns; j++) {
-                var td = document.createElement('td');
-                //td.appendChild(document.createTextNode(pad(i + 1, 2) + "-" + pad(j + 1, 2)));
-                tr.appendChild(td);
-            }
-
-            table.appendChild(tr);
-        }
-
-        divTable.innerHTML = '';
-        divTable.appendChild(table);
-        addHighlighting();
-    }
+    row = document.getElementById('rows').value;
+    columns = document.getElementById('columns').value;
     updateTable();
 </script>
