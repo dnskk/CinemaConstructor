@@ -6,6 +6,18 @@
 
 <h2>@ViewData["Title"]</h2>
 <hr />
+<style>
+    table td {
+        text-align: center;
+        vertical-align: middle;
+        background-color: #ccc;
+        border: 1px solid #fff;
+    }
+
+    table td.highlighted {
+        background-color: #999;
+    }
+</style>
 
 <div class="card">
     <div class="card-header d-flex p-0">
@@ -18,7 +30,6 @@
         <div class="tab-content">
             <div class="tab-pane @(Model.ActiveTab == 1 ? "active" : "")" id="tab_1">
                 <form asp-controller="Hall" asp-action="CreateFirstStep" asp-route-returnurl="@ViewData["ReturnUrl"]" method="post" class="form-horizontal">
-                    @Html.HiddenFor(p => p.Cinemas)
                     <div class="form-group">
                         <label asp-for="Name" class="col-md-2 control-label"></label>
                         <div class="col-md-10">
@@ -28,20 +39,26 @@
                     </div>
                     <div class="form-group">
                         <label asp-for="SelectedCinema" class="col-md-2 control-label"></label>
-                        <select asp-for="SelectedCinema" class="form-control">
-                            @foreach (var cinema in Model.Cinemas)
-                            {
-                                <option value="@cinema.Id">@cinema.Name</option>
-                            }
-                        </select>
+                        <div class="col-md-10">
+                            <select asp-for="SelectedCinema" class="form-control">
+                                @foreach (var cinema in Model.Cinemas)
+                                {
+                                    <option value="@cinema.Id">@cinema.Name</option>
+                                }
+                            </select>
+                        </div>
                     </div>
                     <div class="form-check">
-                        <input asp-for="Is3D" type="checkbox" class="form-check-input">
-                        <label asp-for="Is3D" class="form-check-label">3D</label>
+                        <div class="col-md-10">
+                            <input asp-for="Is3D" type="checkbox" class="form-check-input">
+                            <label asp-for="Is3D" class="form-check-label">3D</label>
+                        </div>
                     </div>
                     <div class="form-check">
-                        <input asp-for="IsIMAX" type="checkbox" class="form-check-input">
-                        <label asp-for="IsIMAX" class="form-check-label">IMAX</label>
+                        <div class="col-md-10">
+                            <input asp-for="IsIMAX" type="checkbox" class="form-check-input">
+                            <label asp-for="IsIMAX" class="form-check-label">IMAX</label>
+                        </div>
                     </div>
                     <hr />
                     <div class="form-group">
@@ -49,17 +66,117 @@
                             <button type="submit" class="btn btn-primary">Next</button>
                         </div>
                     </div>
+                    @for (int i = 0; i < Model.Cinemas.Count; i++)
+                    {
+                        @Html.HiddenFor(model => Model.Cinemas[i].Id)
+                        @Html.HiddenFor(model => Model.Cinemas[i].Name)
+                    }
                 </form>
             </div>
             <div class="tab-pane @(Model.ActiveTab == 2 ? "active" : "")" id="tab_2">
-                The European languages are members of the same family. Their separate existence is a myth.
-                For science, music, sport, etc, Europe uses the same vocabulary. The languages only differ
-                in their grammar, their pronunciation and their most common words. Everyone realizes why a
-                new common language would be desirable: one could refuse to pay expensive translators. To
-                achieve this, it would be necessary to have uniform grammar, pronunciation and more common
-                words. If several languages coalesce, the grammar of the resulting language is more simple
-                and regular than that of the individual languages.
+                <div class="row">
+                    <div class="row col-sm-6" style="width: 300px">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>Rows</label>
+                                <input id="rows" type="text" class="form-control" value="10">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>Columns</label>
+                                <input id="columns" type="text" class="form-control" value="20">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="col-md-offset-2 col-md-10" style="margin-top: 31px;">
+                            <button class="btn btn-primary" onclick="updateTable()">Update</button>
+                        </div>
+                    </div>
+                </div>
+                <hr />
+                <div id="divTable" style="height: 400px">
+                </div>
+                <hr />
+                <form asp-controller="Hall" asp-action="CreateSecondStep" asp-route-returnurl="@ViewData["ReturnUrl"]" method="post" class="form-horizontal">
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <button type="submit" class="btn btn-primary">Create</button>
+                        </div>
+                    </div>
+                    @Html.HiddenFor(p => p.Name)
+                    @Html.HiddenFor(p => p.Is3D)
+                    @Html.HiddenFor(p => p.IsIMAX)
+                    @for (int i = 0; i < Model.Cinemas.Count; i++)
+                    {
+                        @Html.HiddenFor(model => Model.Cinemas[i].Id)
+                        @Html.HiddenFor(model => Model.Cinemas[i].Name)
+                    }
+                </form>
             </div>
         </div>
     </div>
 </div>
+
+<script>
+    function pad(n, width) {
+        n = n + '';
+        return n.length >= width ? n : new Array(width - n.length + 1).join('0') + n;
+    }
+
+    function addHighlighting() {
+        $(function () {
+            var isMouseDown = false,
+                isHighlighted;
+            $("#hallTable td")
+                .mousedown(function () {
+                    isMouseDown = true;
+                    $(this).toggleClass("highlighted");
+                    isHighlighted = $(this).hasClass("highlighted");
+                    return false; // prevent text selection
+                })
+                .mouseover(function () {
+                    if (isMouseDown) {
+                        $(this).toggleClass("highlighted", isHighlighted);
+                    }
+                })
+                .bind("selectstart",
+                    function () {
+                        return false;
+                    });
+
+            $(document)
+                .mouseup(function () {
+                    isMouseDown = false;
+                });
+        });
+    }
+
+    function updateTable() {
+        var row = document.getElementById('rows').value;
+        var columns = document.getElementById('columns').value;
+
+        var divTable = document.getElementById('divTable');
+
+        var table = document.createElement('table');
+        table.id = 'hallTable';
+        table.style.width = '100%';
+        table.style.height = '100%';
+        for (var i = 0; i < row; i++) {
+            var tr = document.createElement('tr');
+            for (var j = 0; j < columns; j++) {
+                var td = document.createElement('td');
+                //td.appendChild(document.createTextNode(pad(i + 1, 2) + "-" + pad(j + 1, 2)));
+                tr.appendChild(td);
+            }
+
+            table.appendChild(tr);
+        }
+
+        divTable.innerHTML = '';
+        divTable.appendChild(table);
+        addHighlighting();
+    }
+    updateTable();
+</script>

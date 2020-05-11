@@ -53,7 +53,6 @@ namespace AdminPanel.Controllers
             return View(viewModel);
         }
 
-
         [HttpPost]
         public async Task<IActionResult> CreateFirstStep(HallCreateViewModel model, CancellationToken token, string returnUrl = null)
         {
@@ -61,14 +60,28 @@ namespace AdminPanel.Controllers
             AddBreadcrumb("Create", "/Hall/Create");
 
             model.ActiveTab = 1;
-
             if (ModelState.IsValid)
             {
                 model.ActiveTab = 2;
                 return View("Create", model);
             }
 
-            model.Cinemas = await GetCinemas(token);
+            return View("Create", model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CreateSecondStep(HallCreateViewModel model, CancellationToken token, string returnUrl = null)
+        {
+            AddBreadcrumb("Halls", "/Hall/All");
+            AddBreadcrumb("Create", "/Hall/Create");
+
+            model.ActiveTab = 2;
+
+            if (ModelState.IsValid)
+            {
+                return View("Create", model);
+            }
+
             return View("Create", model);
         }
 

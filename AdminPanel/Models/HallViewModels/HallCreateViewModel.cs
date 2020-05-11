@@ -17,6 +17,10 @@ namespace AdminPanel.Models.HallViewModels
 
         public int ActiveTab { get; set; } = 1;
 
+        public int Rows { get; set; } = 10;
+
+        public int Columns { get; set; } = 20;
+
         public List<Cinema> Cinemas { get; set; }
     }
 }
