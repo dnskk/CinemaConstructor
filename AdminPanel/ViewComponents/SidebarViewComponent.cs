@@ -53,6 +53,13 @@ namespace AdminPanel.ViewComponents
                 ModuleHelper.AddModule(ModuleHelper.Module.CinemaCreate)
             };
 
+            sidebars.Add(ModuleHelper.AddTree("Halls"));
+            sidebars.Last().TreeChild = new List<SidebarMenu>()
+            {
+                ModuleHelper.AddModule(ModuleHelper.Module.HallsManagement),
+                ModuleHelper.AddModule(ModuleHelper.Module.HallCreate)
+            };
+
             sidebars.Add(ModuleHelper.AddHeader("FILMS"));
             sidebars.Add(ModuleHelper.AddModule(ModuleHelper.Module.About, Tuple.Create(1, 0, 0)));
             sidebars.Add(ModuleHelper.AddTree("Account"));

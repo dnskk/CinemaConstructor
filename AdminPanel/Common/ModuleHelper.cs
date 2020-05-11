@@ -15,6 +15,8 @@ namespace AdminPanel.Common
             EditDesign,
             CinemasManagement,
             CinemaCreate,
+            HallsManagement,
+            HallCreate,
             About,
             Login,
             Register,
@@ -94,6 +96,24 @@ namespace AdminPanel.Common
                         Name = "Create",
                         IconClassName = "fa fa-exclamation-triangle",
                         URLPath = "/Cinema/Create",
+                        LinkCounter = counter,
+                    };
+                case Module.HallsManagement:
+                    return new SidebarMenu
+                    {
+                        Type = SidebarMenuType.Link,
+                        Name = "Manage",
+                        IconClassName = "fa fa-exclamation-triangle",
+                        URLPath = "/Hall/All",
+                        LinkCounter = counter,
+                    };
+                case Module.HallCreate:
+                    return new SidebarMenu
+                    {
+                        Type = SidebarMenuType.Link,
+                        Name = "Create",
+                        IconClassName = "fa fa-exclamation-triangle",
+                        URLPath = "/Hall/Create",
                         LinkCounter = counter,
                     };
                 case Module.Login:
