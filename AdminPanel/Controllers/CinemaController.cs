@@ -32,8 +32,6 @@ namespace AdminPanel.Controllers
             AddBreadcrumb("Cinemas", "/Cinema/All");
 
             var cinemas = await GetCinemas(token);
-
-
             var viewModel = new CinemaAllViewModel
             {
                 Cinemas = cinemas.OrderBy(p => p.Name).ToList()
@@ -56,6 +54,8 @@ namespace AdminPanel.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(CinemaCreateViewModel model, CancellationToken token, string returnUrl = null)
         {
+            AddBreadcrumb("Cinemas", "/Cinema/All");
+            AddBreadcrumb("Create", "/Cinema/Create");
             ViewData["ReturnUrl"] = returnUrl;
 
             if (ModelState.IsValid)

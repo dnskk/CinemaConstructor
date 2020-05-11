@@ -10,22 +10,48 @@
 <div class="card">
     <div class="card-header d-flex p-0">
         <ul class="nav nav-pills p-2">
-            <li class="nav-item"><a class="nav-link active" href="#tab_1" data-toggle="tab">First step</a></li>
-            <li class="nav-item"><a class="nav-link" href="#tab_2" data-toggle="tab">Second step</a></li>
+            <li class="nav-item"><a class="nav-link @(Model.ActiveTab == 1 ? "active" : "")">First step</a></li>
+            <li class="nav-item"><a class="nav-link @(Model.ActiveTab == 2 ? "active" : "")">Second step</a></li>
         </ul>
     </div>
     <div class="card-body">
         <div class="tab-content">
-            <div class="tab-pane active" id="tab_1">
-                A wonderful serenity has taken possession of my entire soul,
-                like these sweet mornings of spring which I enjoy with my whole heart.
-                I am alone, and feel the charm of existence in this spot,
-                which was created for the bliss of souls like mine. I am so happy,
-                my dear friend, so absorbed in the exquisite sense of mere tranquil existence,
-                that I neglect my talents. I should be incapable of drawing a single stroke
-                at the present moment; and yet I feel that I never was a greater artist than now.
+            <div class="tab-pane @(Model.ActiveTab == 1 ? "active" : "")" id="tab_1">
+                <form asp-controller="Hall" asp-action="CreateFirstStep" asp-route-returnurl="@ViewData["ReturnUrl"]" method="post" class="form-horizontal">
+                    @Html.HiddenFor(p => p.Cinemas)
+                    <div class="form-group">
+                        <label asp-for="Name" class="col-md-2 control-label"></label>
+                        <div class="col-md-10">
+                            <input asp-for="Name" class="form-control" />
+                            <span asp-validation-for="Name" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="SelectedCinema" class="col-md-2 control-label"></label>
+                        <select asp-for="SelectedCinema" class="form-control">
+                            @foreach (var cinema in Model.Cinemas)
+                            {
+                                <option value="@cinema.Id">@cinema.Name</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="form-check">
+                        <input asp-for="Is3D" type="checkbox" class="form-check-input">
+                        <label asp-for="Is3D" class="form-check-label">3D</label>
+                    </div>
+                    <div class="form-check">
+                        <input asp-for="IsIMAX" type="checkbox" class="form-check-input">
+                        <label asp-for="IsIMAX" class="form-check-label">IMAX</label>
+                    </div>
+                    <hr />
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <button type="submit" class="btn btn-primary">Next</button>
+                        </div>
+                    </div>
+                </form>
             </div>
-            <div class="tab-pane" id="tab_2">
+            <div class="tab-pane @(Model.ActiveTab == 2 ? "active" : "")" id="tab_2">
                 The European languages are members of the same family. Their separate existence is a myth.
                 For science, music, sport, etc, Europe uses the same vocabulary. The languages only differ
                 in their grammar, their pronunciation and their most common words. Everyone realizes why a
