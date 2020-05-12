@@ -15,13 +15,17 @@ namespace AdminPanel.Controllers
     public class HallController : BaseController
     {
         private readonly UserManager<ApplicationUser> _userManager;
+        private readonly HallRepository _hallRepository;
         private readonly CinemaRepository _cinemaRepository;
         private readonly CompanyRepository _companyRepository;
         private readonly UserSessionRepository _userSessionRepository;
 
-        public HallController(UserManager<ApplicationUser> userManager, CinemaRepository cinemaRepository, CompanyRepository companyRepository, UserSessionRepository userSessionRepository)
+        public HallController(UserManager<ApplicationUser> userManager, HallRepository hallRepository,
+            CinemaRepository cinemaRepository, CompanyRepository companyRepository,
+            UserSessionRepository userSessionRepository)
         {
             _userManager = userManager;
+            _hallRepository = hallRepository;
             _cinemaRepository = cinemaRepository;
             _companyRepository = companyRepository;
             _userSessionRepository = userSessionRepository;
@@ -77,10 +81,24 @@ namespace AdminPanel.Controllers
             AddBreadcrumb("Create", "/Hall/Create");
 
             model.ActiveTab = 2;
-            var array = JsonConvert.DeserializeObject<bool[,]>(model.HallTableJson);
             if (ModelState.IsValid)
             {
-                return View("Create", model);
+                var array = JsonConvert.DeserializeObject<bool[,]>(model.HallTableJson);
+
+                var hall = new Hall
+                {
+                    Name = model.Name,
+                    Rows = array.GetLength(0),
+                    Columns = array.GetLength(1),
+                    Is3D = model.Is3D,
+                    IsImax = model.IsIMAX,
+                    HallTableJson = model.HallTableJson,
+                    Cinema = await _cinemaRepository.FindByIdAsync(Guid.Parse(model.SelectedCinema), token)
+                };
+
+                await _hallRepository.AddAsync(hall, token);
+
+                return RedirectToAction(nameof(All), "Hall");
             }
 
             return View("Create", model);

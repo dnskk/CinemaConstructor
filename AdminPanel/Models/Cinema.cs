@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace AdminPanel.Models
@@ -15,5 +16,7 @@ namespace AdminPanel.Models
         public string Phone { get; set; }
 
         public Company Company { get; set; }
+
+        public List<Hall> Halls { get; set; }
     }
 }
