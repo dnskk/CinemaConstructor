@@ -30,9 +30,27 @@ namespace AdminPanel.Controllers
             AddBreadcrumb("Films", "/Film/All");
             AddBreadcrumb("Create", "/Film/Create");
 
-            var viewModel = new FilmCreateViewModel();
+            var viewModel = new FilmCreateViewModel
+            {
+                ReleaseDate = DateTime.Now.ToString("MM\\/dd\\/yyyy")
+            };
 
             return View(viewModel);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Create(FilmCreateViewModel model, CancellationToken token, string returnUrl = null)
+        {
+            AddBreadcrumb("Films", "/Film/All");
+            AddBreadcrumb("Create", "/Film/Create");
+            ViewData["ReturnUrl"] = returnUrl;
+
+            if (ModelState.IsValid)
+            {
+                return RedirectToAction(nameof(All), "Film");
+            }
+
+            return View(model);
         }
     }
 }
