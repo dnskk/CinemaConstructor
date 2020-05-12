@@ -1,16 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using AdminPanel.Models;
 using AdminPanel.Models.CinemaViewModels;
 using AdminPanel.Models.FilmViewModels;
+using AdminPanel.Repositories;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AdminPanel.Controllers
 {
     public class FilmController : BaseController
     {
+        private readonly FilmRepository _filmRepository;
+
+        public FilmController(FilmRepository filmRepository)
+        {
+            _filmRepository = filmRepository;
+        }
 
         [HttpGet]
         public async Task<IActionResult> All(CancellationToken token)
@@ -47,6 +56,17 @@ namespace AdminPanel.Controllers
 
             if (ModelState.IsValid)
             {
+                var film = new Film
+                {
+                    Title = model.Title,
+                    Description = model.Description,
+                    Genre = model.Genre,
+                    ReleaseDate = DateTime.ParseExact(model.ReleaseDate, "MM\\/dd\\/yyyy", CultureInfo.InvariantCulture),
+                    TrailerUrl = model.TrailerUrl
+                };
+
+                await _filmRepository.AddAsync(film, token);
+
                 return RedirectToAction(nameof(All), "Film");
             }
 
