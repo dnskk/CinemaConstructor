@@ -13,6 +13,7 @@ namespace AdminPanel.Models.HallViewModels
 
         public bool IsIMAX { get; set; }
 
+        [Display(Name = "Cinema")]
         public string SelectedCinema { get; set; }
 
         public int ActiveTab { get; set; } = 1;

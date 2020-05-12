@@ -36,6 +36,14 @@ namespace AdminPanel.Repositories
                 .ToListAsync(token);
         }
 
+        public async Task<IEnumerable<Hall>> FindByCompanyIdAsync(Guid companyId, CancellationToken token)
+        {
+            return await _context.Halls
+                .Where(p => p.Cinema.Company.Id == companyId)
+                .Include(p => p.Cinema)
+                .ToListAsync(token);
+        }
+
         public async Task<Hall> AddAsync(Hall hall, CancellationToken token)
         {
             hall.Id = Guid.NewGuid();

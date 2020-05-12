@@ -18,6 +18,8 @@ namespace AdminPanel.Models
 
         public bool IsImax { get; set; }
 
+        public int Seats { get; set; }
+
         public string HallTableJson { get; set; }
 
         public Cinema Cinema { get; set; }

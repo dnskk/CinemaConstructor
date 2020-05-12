@@ -8,6 +8,7 @@ using AdminPanel.Models.HallViewModels;
 using AdminPanel.Repositories;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Server.Kestrel.Core.Features;
 using Newtonsoft.Json;
 
 namespace AdminPanel.Controllers
@@ -36,8 +37,13 @@ namespace AdminPanel.Controllers
         {
             AddBreadcrumb("Halls", "/Hall/All");
 
+            var company = await GetCompany(token);
+            var halls = await _hallRepository.FindByCompanyIdAsync(company.Id, token);
+            var groupedHalls = halls.GroupBy(p => p.Cinema.Name).OrderBy(p => p.Key);
+
             var viewModel = new HallAllViewModel
             {
+                GroupedHalls = groupedHalls.ToList()
             };
 
             return View(viewModel);
@@ -85,6 +91,7 @@ namespace AdminPanel.Controllers
             {
                 var array = JsonConvert.DeserializeObject<bool[,]>(model.HallTableJson);
 
+                var seats = array.Cast<bool>().Count(seat => seat);
                 var hall = new Hall
                 {
                     Name = model.Name,
@@ -92,6 +99,7 @@ namespace AdminPanel.Controllers
                     Columns = array.GetLength(1),
                     Is3D = model.Is3D,
                     IsImax = model.IsIMAX,
+                    Seats = seats,
                     HallTableJson = model.HallTableJson,
                     Cinema = await _cinemaRepository.FindByIdAsync(Guid.Parse(model.SelectedCinema), token)
                 };
