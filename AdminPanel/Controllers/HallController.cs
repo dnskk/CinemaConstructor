@@ -8,6 +8,7 @@ using AdminPanel.Models.HallViewModels;
 using AdminPanel.Repositories;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 
 namespace AdminPanel.Controllers
 {
@@ -76,7 +77,7 @@ namespace AdminPanel.Controllers
             AddBreadcrumb("Create", "/Hall/Create");
 
             model.ActiveTab = 2;
-
+            var array = JsonConvert.DeserializeObject<bool[,]>(model.HallTableJson);
             if (ModelState.IsValid)
             {
                 return View("Create", model);

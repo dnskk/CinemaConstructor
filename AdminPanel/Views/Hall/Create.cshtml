@@ -108,11 +108,6 @@
                 </div>
                 <hr />
                 <form asp-controller="Hall" asp-action="CreateSecondStep" asp-route-returnurl="@ViewData["ReturnUrl"]" method="post" class="form-horizontal">
-                    <div class="form-group">
-                        <div class="col-md-offset-2 col-md-10">
-                            <button type="submit" class="btn btn-primary">Create</button>
-                        </div>
-                    </div>
                     @Html.HiddenFor(p => p.Name)
                     @Html.HiddenFor(p => p.Is3D)
                     @Html.HiddenFor(p => p.IsIMAX)
@@ -121,6 +116,12 @@
                         @Html.HiddenFor(model => Model.Cinemas[i].Id)
                         @Html.HiddenFor(model => Model.Cinemas[i].Name)
                     }
+                    <input id="tableJson" asp-for="HallTableJson" class="form-control" type="hidden" />
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <button class="btn btn-primary" onclick="submitSecondStep()">Create</button>
+                        </div>
+                    </div>
                 </form>
             </div>
         </div>
@@ -131,4 +132,9 @@
     row = document.getElementById('rows').value;
     columns = document.getElementById('columns').value;
     updateTable();
+
+    function submitSecondStep() {
+        document.getElementById('tableJson').value = JSON.stringify(hallTableToArray());
+        parentNode.submit();
+    }
 </script>

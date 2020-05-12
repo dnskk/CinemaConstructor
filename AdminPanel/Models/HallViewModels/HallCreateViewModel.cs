@@ -21,6 +21,8 @@ namespace AdminPanel.Models.HallViewModels
 
         public int Columns { get; set; } = 20;
 
+        public string HallTableJson { get; set; }
+
         public List<Cinema> Cinemas { get; set; }
     }
 }

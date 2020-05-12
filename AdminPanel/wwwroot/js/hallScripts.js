@@ -60,7 +60,6 @@ function updateTable() {
 
 function tableSelectAll() {
     for (var i = 0; i < row; i++) {
-        var tr = document.createElement("tr");
         for (var j = 0; j < columns; j++) {
             var td = document.getElementById(i + "_" + j);
             td.classList.add("highlighted");
@@ -70,10 +69,24 @@ function tableSelectAll() {
 
 function tableDeselectAll() {
     for (var i = 0; i < row; i++) {
-        var tr = document.createElement("tr");
         for (var j = 0; j < columns; j++) {
             var td = document.getElementById(i + "_" + j);
             td.classList.remove("highlighted");
         }
     }
+}
+
+function hallTableToArray() {
+    var tableArray = [];
+    for (var i = 0; i < row; i++) {
+        var trArray = [];
+        for (var j = 0; j < columns; j++) {
+            var td = document.getElementById(i + "_" + j);
+            trArray.push(td.classList.contains("highlighted"));
+        }
+
+        tableArray.push(trArray);
+    }
+
+    return tableArray;
 }
