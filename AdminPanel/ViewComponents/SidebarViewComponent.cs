@@ -39,7 +39,7 @@ namespace AdminPanel.ViewComponents
             var company = await _companyRepository.FindByIdAsync(userSession.CurrentCompanyId, CancellationToken.None);
 
             sidebars.Add(ModuleHelper.AddTree(company.Name));
-            sidebars.Last().TreeChild = new List<SidebarMenu>()
+            sidebars.Last().TreeChild = new List<SidebarMenu>
             {
                 ModuleHelper.AddModule(ModuleHelper.Module.Info),
                 ModuleHelper.AddModule(ModuleHelper.Module.EditInfo),
@@ -47,32 +47,37 @@ namespace AdminPanel.ViewComponents
             };
 
             sidebars.Add(ModuleHelper.AddTree("Cinemas"));
-            sidebars.Last().TreeChild = new List<SidebarMenu>()
+            sidebars.Last().TreeChild = new List<SidebarMenu>
             {
                 ModuleHelper.AddModule(ModuleHelper.Module.CinemasManagement),
                 ModuleHelper.AddModule(ModuleHelper.Module.CinemaCreate)
             };
 
             sidebars.Add(ModuleHelper.AddTree("Halls"));
-            sidebars.Last().TreeChild = new List<SidebarMenu>()
+            sidebars.Last().TreeChild = new List<SidebarMenu>
             {
                 ModuleHelper.AddModule(ModuleHelper.Module.HallsManagement),
                 ModuleHelper.AddModule(ModuleHelper.Module.HallCreate)
             };
 
-            sidebars.Add(ModuleHelper.AddHeader("FILMS"));
+            sidebars.Add(ModuleHelper.AddTree("Films"));
+            sidebars.Last().TreeChild = new List<SidebarMenu>
+            {
+                ModuleHelper.AddModule(ModuleHelper.Module.FilmsManagement),
+                ModuleHelper.AddModule(ModuleHelper.Module.FilmCreate)
+            };
+
             sidebars.Add(ModuleHelper.AddModule(ModuleHelper.Module.About, Tuple.Create(1, 0, 0)));
             sidebars.Add(ModuleHelper.AddTree("Account"));
-            sidebars.Last().TreeChild = new List<SidebarMenu>()
+            sidebars.Last().TreeChild = new List<SidebarMenu>
             {
-                ModuleHelper.AddModule(ModuleHelper.Module.Login),
                 ModuleHelper.AddModule(ModuleHelper.Module.Register, Tuple.Create(1, 1, 1)),
             };
 
             if (User.IsInRole("SuperAdmins"))
             {
                 sidebars.Add(ModuleHelper.AddTree("Administration"));
-                sidebars.Last().TreeChild = new List<SidebarMenu>()
+                sidebars.Last().TreeChild = new List<SidebarMenu>
                 {
                     ModuleHelper.AddModule(ModuleHelper.Module.SuperAdmin),
                     ModuleHelper.AddModule(ModuleHelper.Module.Role),

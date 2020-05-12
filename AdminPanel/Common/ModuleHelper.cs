@@ -17,8 +17,9 @@ namespace AdminPanel.Common
             CinemaCreate,
             HallsManagement,
             HallCreate,
+            FilmsManagement,
+            FilmCreate,
             About,
-            Login,
             Register,
             SuperAdmin,
             Role,
@@ -116,13 +117,22 @@ namespace AdminPanel.Common
                         URLPath = "/Hall/Create",
                         LinkCounter = counter,
                     };
-                case Module.Login:
+                case Module.FilmsManagement:
                     return new SidebarMenu
                     {
                         Type = SidebarMenuType.Link,
-                        Name = "Login",
+                        Name = "Manage",
                         IconClassName = "fa fa-sign-in",
-                        URLPath = "/Account/Login",
+                        URLPath = "/Film/All",
+                        LinkCounter = counter,
+                    };
+                case Module.FilmCreate:
+                    return new SidebarMenu
+                    {
+                        Type = SidebarMenuType.Link,
+                        Name = "Create",
+                        IconClassName = "fa fa-sign-in",
+                        URLPath = "/Film/Create",
                         LinkCounter = counter,
                     };
                 case Module.Register:
