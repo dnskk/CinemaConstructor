@@ -41,7 +41,7 @@ namespace AdminPanel.Repositories
 
         public async Task<CompanyMember> AddAsync(CompanyMember companyMember, CancellationToken token)
         {
-            companyMember.Id = Guid.NewGuid();
+            companyMember.Id = 0;
 
             _context.CompanyMembers.Add(companyMember);
             await _context.SaveChangesAsync(token);

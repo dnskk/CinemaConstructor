@@ -23,13 +23,13 @@ namespace AdminPanel.Repositories
             return await _context.Cinemas.ToListAsync(token);
         }
 
-        public async Task<Cinema> FindByIdAsync(Guid id, CancellationToken token)
+        public async Task<Cinema> FindByIdAsync(long id, CancellationToken token)
         {
             var keys = new object[] { id };
             return await _context.Cinemas.FindAsync(keys, token);
         }
 
-        public async Task<IEnumerable<Cinema>> FindByCompanyIdAsync(Guid companyId, CancellationToken token)
+        public async Task<IEnumerable<Cinema>> FindByCompanyIdAsync(long companyId, CancellationToken token)
         {
             return await _context.Cinemas
                 .Where(p => p.Company.Id == companyId)
@@ -39,7 +39,7 @@ namespace AdminPanel.Repositories
 
         public async Task<Cinema> AddAsync(Cinema cinema, CancellationToken token)
         {
-            cinema.Id = Guid.NewGuid();
+            cinema.Id = 0;
 
             _context.Cinemas.Add(cinema);
             await _context.SaveChangesAsync(token);

@@ -56,7 +56,8 @@ namespace AdminPanel.Migrations
                 name: "Companies",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(nullable: false),
+                    Id = table.Column<long>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(nullable: true),
                     Phone = table.Column<string>(nullable: true),
                     Email = table.Column<string>(nullable: true),
@@ -66,6 +67,23 @@ namespace AdminPanel.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Companies", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Films",
+                columns: table => new
+                {
+                    Id = table.Column<long>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Title = table.Column<string>(nullable: true),
+                    Description = table.Column<string>(nullable: true),
+                    ReleaseDate = table.Column<DateTime>(nullable: false),
+                    Genre = table.Column<string>(nullable: true),
+                    TrailerUrl = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Films", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -89,7 +107,8 @@ namespace AdminPanel.Migrations
                 columns: table => new
                 {
                     UserId = table.Column<Guid>(nullable: false),
-                    CurrentCompanyId = table.Column<Guid>(nullable: false)
+                    CurrentCompanyId = table.Column<long>(nullable: false),
+                    CurrentCinemaId = table.Column<long>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -206,11 +225,12 @@ namespace AdminPanel.Migrations
                 name: "Cinemas",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(nullable: false),
+                    Id = table.Column<long>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(nullable: true),
                     Address = table.Column<string>(nullable: true),
                     Phone = table.Column<string>(nullable: true),
-                    CompanyId = table.Column<Guid>(nullable: true)
+                    CompanyId = table.Column<long>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -227,9 +247,10 @@ namespace AdminPanel.Migrations
                 name: "CompanyMembers",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(nullable: false),
+                    Id = table.Column<long>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     UserId = table.Column<string>(nullable: false),
-                    CompanyId = table.Column<Guid>(nullable: false),
+                    CompanyId = table.Column<long>(nullable: false),
                     Role = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
@@ -241,6 +262,32 @@ namespace AdminPanel.Migrations
                         principalTable: "Companies",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Halls",
+                columns: table => new
+                {
+                    Id = table.Column<long>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(nullable: true),
+                    Rows = table.Column<int>(nullable: false),
+                    Columns = table.Column<int>(nullable: false),
+                    Is3D = table.Column<bool>(nullable: false),
+                    IsImax = table.Column<bool>(nullable: false),
+                    Seats = table.Column<int>(nullable: false),
+                    HallTableJson = table.Column<string>(nullable: true),
+                    CinemaId = table.Column<long>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Halls", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Halls_Cinemas_CinemaId",
+                        column: x => x.CinemaId,
+                        principalTable: "Cinemas",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(
@@ -291,6 +338,11 @@ namespace AdminPanel.Migrations
                 name: "IX_CompanyMembers_CompanyId",
                 table: "CompanyMembers",
                 column: "CompanyId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Halls_CinemaId",
+                table: "Halls",
+                column: "CinemaId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -311,10 +363,13 @@ namespace AdminPanel.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "Cinemas");
+                name: "CompanyMembers");
 
             migrationBuilder.DropTable(
-                name: "CompanyMembers");
+                name: "Films");
+
+            migrationBuilder.DropTable(
+                name: "Halls");
 
             migrationBuilder.DropTable(
                 name: "UserAuditEvents");
@@ -327,6 +382,9 @@ namespace AdminPanel.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "Cinemas");
 
             migrationBuilder.DropTable(
                 name: "Companies");

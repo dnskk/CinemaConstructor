@@ -79,7 +79,7 @@ namespace AdminPanel.Controllers
             var userSession = new UserSession
             {
                 UserId = Guid.Parse(user.Id),
-                CurrentCompanyId = Guid.Parse(companyId)
+                CurrentCompanyId = long.Parse(companyId)
             };
 
             await _userSessionRepository.UpdateAsync(userSession, CancellationToken.None);

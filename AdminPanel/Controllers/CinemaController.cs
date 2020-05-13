@@ -89,7 +89,7 @@ namespace AdminPanel.Controllers
 
             var user = await _userManager.FindByIdAsync(_userManager.GetUserId(User)) as IdentityUser;
             var userSession = await _userSessionRepository.FindByUserIdAsync(Guid.Parse(user.Id), token);
-            userSession.CurrentCinemaId = Guid.Parse(cinemaId);
+            userSession.CurrentCinemaId = long.Parse(cinemaId);
             await _userSessionRepository.UpdateAsync(userSession, CancellationToken.None);
 
             return RedirectToAction(nameof(Edit), "Cinema");

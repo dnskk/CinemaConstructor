@@ -23,20 +23,20 @@ namespace AdminPanel.Repositories
             return await _context.Halls.ToListAsync(token);
         }
 
-        public async Task<Hall> FindByIdAsync(Guid id, CancellationToken token)
+        public async Task<Hall> FindByIdAsync(long id, CancellationToken token)
         {
             var keys = new object[] { id };
             return await _context.Halls.FindAsync(keys, token);
         }
 
-        public async Task<IEnumerable<Hall>> FindByCinemaIdAsync(Guid cinemaId, CancellationToken token)
+        public async Task<IEnumerable<Hall>> FindByCinemaIdAsync(long cinemaId, CancellationToken token)
         {
             return await _context.Halls
                 .Where(p => p.Cinema.Id == cinemaId)
                 .ToListAsync(token);
         }
 
-        public async Task<IEnumerable<Hall>> FindByCompanyIdAsync(Guid companyId, CancellationToken token)
+        public async Task<IEnumerable<Hall>> FindByCompanyIdAsync(long companyId, CancellationToken token)
         {
             return await _context.Halls
                 .Where(p => p.Cinema.Company.Id == companyId)
@@ -46,7 +46,7 @@ namespace AdminPanel.Repositories
 
         public async Task<Hall> AddAsync(Hall hall, CancellationToken token)
         {
-            hall.Id = Guid.NewGuid();
+            hall.Id = 0;
 
             _context.Halls.Add(hall);
             await _context.SaveChangesAsync(token);

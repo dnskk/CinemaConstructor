@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AdminPanel.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200510153410_InitialCreate")]
+    [Migration("20200513104521_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -106,15 +106,16 @@ namespace AdminPanel.Migrations
 
             modelBuilder.Entity("AdminPanel.Models.Cinema", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("bigint")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Address")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid?>("CompanyId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<long?>("CompanyId")
+                        .HasColumnType("bigint");
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
@@ -131,9 +132,10 @@ namespace AdminPanel.Migrations
 
             modelBuilder.Entity("AdminPanel.Models.Company", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("bigint")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
@@ -157,12 +159,13 @@ namespace AdminPanel.Migrations
 
             modelBuilder.Entity("AdminPanel.Models.CompanyMember", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("bigint")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<Guid>("CompanyId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<long>("CompanyId")
+                        .HasColumnType("bigint");
 
                     b.Property<int>("Role")
                         .HasColumnType("int");
@@ -176,6 +179,71 @@ namespace AdminPanel.Migrations
                     b.HasIndex("CompanyId");
 
                     b.ToTable("CompanyMembers");
+                });
+
+            modelBuilder.Entity("AdminPanel.Models.Film", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Genre")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("ReleaseDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TrailerUrl")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Films");
+                });
+
+            modelBuilder.Entity("AdminPanel.Models.Hall", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<long?>("CinemaId")
+                        .HasColumnType("bigint");
+
+                    b.Property<int>("Columns")
+                        .HasColumnType("int");
+
+                    b.Property<string>("HallTableJson")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("Is3D")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsImax")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Rows")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Seats")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CinemaId");
+
+                    b.ToTable("Halls");
                 });
 
             modelBuilder.Entity("AdminPanel.Models.UserAudit", b =>
@@ -209,8 +277,11 @@ namespace AdminPanel.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("CurrentCompanyId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<long>("CurrentCinemaId")
+                        .HasColumnType("bigint");
+
+                    b.Property<long>("CurrentCompanyId")
+                        .HasColumnType("bigint");
 
                     b.HasKey("UserId");
 
@@ -362,6 +433,13 @@ namespace AdminPanel.Migrations
                         .HasForeignKey("CompanyId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("AdminPanel.Models.Hall", b =>
+                {
+                    b.HasOne("AdminPanel.Models.Cinema", "Cinema")
+                        .WithMany("Halls")
+                        .HasForeignKey("CinemaId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

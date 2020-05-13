@@ -7,7 +7,7 @@ namespace AdminPanel.Models
     public class Cinema
     {
         [Key]
-        public Guid Id { get; set; }
+        public long Id { get; set; }
 
         public string Name { get; set; }
 

@@ -104,15 +104,16 @@ namespace AdminPanel.Migrations
 
             modelBuilder.Entity("AdminPanel.Models.Cinema", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("bigint")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Address")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid?>("CompanyId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<long?>("CompanyId")
+                        .HasColumnType("bigint");
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
@@ -129,9 +130,10 @@ namespace AdminPanel.Migrations
 
             modelBuilder.Entity("AdminPanel.Models.Company", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("bigint")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
@@ -155,12 +157,13 @@ namespace AdminPanel.Migrations
 
             modelBuilder.Entity("AdminPanel.Models.CompanyMember", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("bigint")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<Guid>("CompanyId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<long>("CompanyId")
+                        .HasColumnType("bigint");
 
                     b.Property<int>("Role")
                         .HasColumnType("int");
@@ -178,9 +181,10 @@ namespace AdminPanel.Migrations
 
             modelBuilder.Entity("AdminPanel.Models.Film", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("bigint")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
@@ -204,12 +208,13 @@ namespace AdminPanel.Migrations
 
             modelBuilder.Entity("AdminPanel.Models.Hall", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("bigint")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<Guid?>("CinemaId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<long?>("CinemaId")
+                        .HasColumnType("bigint");
 
                     b.Property<int>("Columns")
                         .HasColumnType("int");
@@ -270,11 +275,11 @@ namespace AdminPanel.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("CurrentCinemaId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<long>("CurrentCinemaId")
+                        .HasColumnType("bigint");
 
-                    b.Property<Guid>("CurrentCompanyId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<long>("CurrentCompanyId")
+                        .HasColumnType("bigint");
 
                     b.HasKey("UserId");
 

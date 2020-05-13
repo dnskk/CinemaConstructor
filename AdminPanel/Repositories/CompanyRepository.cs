@@ -22,7 +22,7 @@ namespace AdminPanel.Repositories
             return await _context.Companies.ToListAsync(token);
         }
 
-        public async Task<Company> FindByIdAsync(Guid id, CancellationToken token)
+        public async Task<Company> FindByIdAsync(long id, CancellationToken token)
         {
             var keys = new object[] { id };
             return await _context.Companies.FindAsync(keys, token);
@@ -30,7 +30,7 @@ namespace AdminPanel.Repositories
 
         public async Task<Company> AddAsync(Company company, CancellationToken token)
         {
-            company.Id = Guid.NewGuid();
+            company.Id = 0;
 
             _context.Companies.Add(company);
             await _context.SaveChangesAsync(token);

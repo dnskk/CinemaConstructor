@@ -22,7 +22,7 @@ namespace AdminPanel.Repositories
             return await _context.Films.ToListAsync(token);
         }
 
-        public async Task<Film> FindByIdAsync(Guid id, CancellationToken token)
+        public async Task<Film> FindByIdAsync(long id, CancellationToken token)
         {
             var keys = new object[] { id };
             return await _context.Films.FindAsync(keys, token);
@@ -30,7 +30,7 @@ namespace AdminPanel.Repositories
 
         public async Task<Film> AddAsync(Film film, CancellationToken token)
         {
-            film.Id = Guid.NewGuid();
+            film.Id = 0;
 
             _context.Films.Add(film);
             await _context.SaveChangesAsync(token);

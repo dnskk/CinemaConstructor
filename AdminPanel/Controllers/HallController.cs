@@ -101,7 +101,7 @@ namespace AdminPanel.Controllers
                     IsImax = model.IsIMAX,
                     Seats = seats,
                     HallTableJson = model.HallTableJson,
-                    Cinema = await _cinemaRepository.FindByIdAsync(Guid.Parse(model.SelectedCinema), token)
+                    Cinema = await _cinemaRepository.FindByIdAsync(long.Parse(model.SelectedCinema), token)
                 };
 
                 await _hallRepository.AddAsync(hall, token);

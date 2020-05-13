@@ -8,8 +8,8 @@ namespace AdminPanel.Models
         [Key]
         public Guid UserId { get; set; }
 
-        public Guid CurrentCompanyId { get; set; }
+        public long CurrentCompanyId { get; set; }
 
-        public Guid CurrentCinemaId { get; set; }
+        public long CurrentCinemaId { get; set; }
     }
 }
