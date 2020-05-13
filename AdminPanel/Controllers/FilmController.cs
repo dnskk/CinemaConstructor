@@ -70,6 +70,7 @@ namespace AdminPanel.Controllers
                     Title = model.Title,
                     Description = model.Description,
                     Genre = model.Genre,
+                    Duration = TimeSpan.FromSeconds(long.Parse(model.Duration)),
                     ReleaseDate = DateTime.ParseExact(model.ReleaseDate, "MM\\/dd\\/yyyy", CultureInfo.InvariantCulture),
                     TrailerUrl = model.TrailerUrl,
                     Company = await GetCompany(token)
