@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace AdminPanel.Models
@@ -20,5 +19,7 @@ namespace AdminPanel.Models
         public string FacebookLink { get; set; }
 
         public List<Cinema> Cinemas { get; set; }
+
+        public List<Film> Films { get; set; }
     }
 }

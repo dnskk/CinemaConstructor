@@ -17,5 +17,7 @@ namespace AdminPanel.Models
         public string Genre { get; set; }
 
         public string TrailerUrl { get; set; }
+
+        public Company Company { get; set; }
     }
 }

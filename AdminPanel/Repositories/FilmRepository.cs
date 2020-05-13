@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
@@ -26,6 +27,13 @@ namespace AdminPanel.Repositories
         {
             var keys = new object[] { id };
             return await _context.Films.FindAsync(keys, token);
+        }
+
+        public async Task<IEnumerable<Film>> FindByCompanyIdAsync(long companyId, CancellationToken token)
+        {
+            return await _context.Films
+                .Where(p => p.Company.Id == companyId)
+                .ToListAsync(token);
         }
 
         public async Task<Film> AddAsync(Film film, CancellationToken token)
