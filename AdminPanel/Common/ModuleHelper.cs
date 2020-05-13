@@ -19,6 +19,8 @@ namespace AdminPanel.Common
             HallCreate,
             FilmsManagement,
             FilmCreate,
+            FilmSessionsManagement,
+            FilmSessionCreate,
             About,
             Register,
             SuperAdmin,
@@ -133,6 +135,24 @@ namespace AdminPanel.Common
                         Name = "Create",
                         IconClassName = "fa fa-sign-in",
                         URLPath = "/Film/Create",
+                        LinkCounter = counter,
+                    };
+                case Module.FilmSessionsManagement:
+                    return new SidebarMenu
+                    {
+                        Type = SidebarMenuType.Link,
+                        Name = "Manage",
+                        IconClassName = "fa fa-sign-in",
+                        URLPath = "/FilmSession/All",
+                        LinkCounter = counter,
+                    };
+                case Module.FilmSessionCreate:
+                    return new SidebarMenu
+                    {
+                        Type = SidebarMenuType.Link,
+                        Name = "Create",
+                        IconClassName = "fa fa-sign-in",
+                        URLPath = "/FilmSession/Create",
                         LinkCounter = counter,
                     };
                 case Module.Register:

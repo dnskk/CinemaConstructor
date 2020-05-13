@@ -67,6 +67,13 @@ namespace AdminPanel.ViewComponents
                 ModuleHelper.AddModule(ModuleHelper.Module.FilmCreate)
             };
 
+            sidebars.Add(ModuleHelper.AddTree("Film sessions"));
+            sidebars.Last().TreeChild = new List<SidebarMenu>
+            {
+                ModuleHelper.AddModule(ModuleHelper.Module.FilmSessionsManagement),
+                ModuleHelper.AddModule(ModuleHelper.Module.FilmSessionCreate)
+            };
+
             sidebars.Add(ModuleHelper.AddModule(ModuleHelper.Module.About, Tuple.Create(1, 0, 0)));
             sidebars.Add(ModuleHelper.AddTree("Account"));
             sidebars.Last().TreeChild = new List<SidebarMenu>

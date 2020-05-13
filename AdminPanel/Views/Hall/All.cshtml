@@ -1,11 +1,12 @@
 ﻿@model AdminPanel.Models.HallViewModels.HallAllViewModel
 
 @{
-    ViewData["Title"] = "Your cinema halls";
+    ViewData["Title"] = "Cinema halls";
 }
 
 <h2>@ViewData["Title"]</h2>
 <hr />
+
 @foreach (var group in Model.GroupedHalls)
 {
     var halls = group.ToList();
