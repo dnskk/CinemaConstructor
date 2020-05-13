@@ -8,7 +8,6 @@ using AdminPanel.Models.HallViewModels;
 using AdminPanel.Repositories;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Server.Kestrel.Core.Features;
 using Newtonsoft.Json;
 
 namespace AdminPanel.Controllers

@@ -16,6 +16,8 @@ namespace AdminPanel.Data
 
         public DbSet<Film> Films { get; set; }
 
+        public DbSet<FilmSession> FilmSessions { get; set; }
+
         public DbSet<CompanyMember> CompanyMembers { get; set; }
 
         public DbSet<UserSession> UserSessions { get; set; }
