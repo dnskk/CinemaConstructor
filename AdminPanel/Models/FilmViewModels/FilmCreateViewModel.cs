@@ -16,6 +16,10 @@ namespace AdminPanel.Models.FilmViewModels
         public string ReleaseDate { get; set; }
 
         [Required]
+        [Display(Name ="Duration")]
+        public string Duration { get; set; }
+
+        [Required]
         [Display(Name = "Genre")]
         public string Genre { get; set; }
 

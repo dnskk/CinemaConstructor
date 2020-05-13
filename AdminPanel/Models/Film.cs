@@ -12,6 +12,8 @@ namespace AdminPanel.Models
 
         public string Description { get; set; }
 
+        public TimeSpan Duration { get; set; }
+
         public DateTime ReleaseDate { get; set; }
 
         public string Genre { get; set; }

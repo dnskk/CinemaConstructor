@@ -30,6 +30,7 @@
                         <tr>
                             <th>ID</th>
                             <th>Title</th>
+                            <th>Duration</th>
                             <th>Release date</th>
                             <th>Genre</th>
                             <th>Trailer</th>
@@ -39,21 +40,22 @@
                     <tbody>
                         @foreach (var film in Model.Films)
                         {
-                            <tr>
-                                <td>@film.Id</td>
-                                <td>@film.Title</td>
-                                <td>@film.ReleaseDate</td>
-                                <td>@film.Genre</td>
-                                @if (string.IsNullOrEmpty(film.TrailerUrl))
-                                {
-                                    <td>-</td>
-                                }
-                                else
-                                {
-                                    <td><a href="@film.TrailerUrl" target="_blank">Link</a></td>
-                                }
-                                <td><a href="#">Edit</a></td>
-                            </tr>
+                        <tr>
+                            <td>@film.Id</td>
+                            <td>@film.Title</td>
+                            <td>@film.Duration.ToString(@"hh\:mm")</td>
+                            <td>@film.ReleaseDate.ToString("MM\\/dd\\/yyyy")</td>
+                            <td>@film.Genre</td>
+                            @if (string.IsNullOrEmpty(film.TrailerUrl))
+                            {
+                                <td>-</td>
+                            }
+                            else
+                            {
+                                <td><a href="@film.TrailerUrl" target="_blank">Link</a></td>
+                            }
+                            <td><a href="#">Edit</a></td>
+                        </tr>
                         }
                     </tbody>
                 </table>
