@@ -8,11 +8,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace AdminPanel.Repositories
 {
-    public class FilmSessionSessionRepository
+    public class FilmSessionRepository
     {
         private readonly ApplicationDbContext _context;
 
-        public FilmSessionSessionRepository(ApplicationDbContext context)
+        public FilmSessionRepository(ApplicationDbContext context)
         {
             _context = context;
         }

@@ -45,7 +45,7 @@
                     <i class="far fa-calendar-alt"></i>
                 </span>
             </div>
-            <input asp-for="ReleaseDate" type="text" class="form-control float-right" id="reservation">
+            <input asp-for="ReleaseDate" type="text" class="form-control float-right" id="releaseDate">
         </div>
     </div>
     <div class="form-group">
@@ -70,8 +70,7 @@
 <link rel="stylesheet" type="text/css" src="/css/jquery.durationpicker.min.css" />
 <script>
     $(function () {
-
-        $('#reservation').datepicker();
+        $('#releaseDate').datepicker();
     });
     $('#duration').durationPicker({
         showDays:false,

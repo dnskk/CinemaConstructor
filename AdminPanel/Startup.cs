@@ -56,7 +56,7 @@ namespace AdminPanel
             services.AddScoped<CinemaRepository>();
             services.AddScoped<HallRepository>();
             services.AddScoped<FilmRepository>();
-            services.AddScoped<FilmSessionSessionRepository>();
+            services.AddScoped<FilmSessionRepository>();
             services.AddScoped<CompanyMemberRepository>();
             services.AddScoped<UserSessionRepository>();
 
