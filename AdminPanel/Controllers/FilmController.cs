@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Globalization;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using AdminPanel.Models;
@@ -31,8 +32,11 @@ namespace AdminPanel.Controllers
         {
             AddBreadcrumb("Films", "/Film/All");
 
+            var company = await GetCompany(token);
+            var films = await _filmRepository.FindByCompanyIdAsync(company.Id, token);
             var viewModel = new FilmAllViewModel
             {
+                Films = films.ToList()
             };
 
             return View(viewModel);
