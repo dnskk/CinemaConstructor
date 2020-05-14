@@ -40,8 +40,16 @@ namespace AdminPanel.Controllers
         {
             AddBreadcrumb("Film session", "/FilmSession/All");
 
+            var company = await GetCompany(token);
+            var filmSessions = (await _filmSessionRepository.FindByCompanyIdAsync(company.Id, token)).ToList();
+
+            var upcomingSession = filmSessions.Where(p => p.EndTime >= DateTime.Now).OrderByDescending(p => p.StartTime).ToList();
+            var pastSession = filmSessions.Where(p => p.EndTime < DateTime.Now).OrderByDescending(p => p.StartTime).ToList();
+
             var viewModel = new FilmSessionAllViewModel
             {
+                UpcomingSessions = upcomingSession,
+                PastSessions = pastSession
             };
 
             return View(viewModel);
