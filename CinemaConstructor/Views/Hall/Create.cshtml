@@ -1,0 +1,141 @@
+﻿@model CinemaConstructor.Models.HallViewModels.HallCreateViewModel
+
+@{
+    ViewData["Title"] = "New hall";
+}
+
+<h2>@ViewData["Title"]</h2>
+<hr />
+<style>
+    table td {
+        text-align: center;
+        vertical-align: middle;
+        background-color: #ccc;
+        border: 1px solid #fff;
+    }
+
+        table td.highlighted {
+            background-color: #999;
+        }
+</style>
+
+<div class="card">
+    <div class="card-header d-flex p-0">
+        <ul class="nav nav-pills p-2">
+            <li class="nav-item"><a class="nav-link @(Model.ActiveTab == 1 ? "active" : "")">First step</a></li>
+            <li class="nav-item"><a class="nav-link @(Model.ActiveTab == 2 ? "active" : "")">Second step</a></li>
+        </ul>
+    </div>
+    <div class="card-body">
+        <div class="tab-content">
+            <div class="tab-pane @(Model.ActiveTab == 1 ? "active" : "")" id="tab_1">
+                <form asp-controller="Hall" asp-action="CreateFirstStep" asp-route-returnurl="@ViewData["ReturnUrl"]" method="post" class="form-horizontal">
+                    <div class="form-group">
+                        <label asp-for="Name" class="col-md-2 control-label"></label>
+                        <div class="col-md-10">
+                            <input asp-for="Name" class="form-control" />
+                            <span asp-validation-for="Name" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="SelectedCinema" class="col-md-2 control-label"></label>
+                        <div class="col-md-10">
+                            <select asp-for="SelectedCinema" class="form-control">
+                                @foreach (var cinema in Model.Cinemas)
+                                {
+                                    <option value="@cinema.Id">@cinema.Name</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-check">
+                        <div class="col-md-10">
+                            <input asp-for="Is3D" type="checkbox" class="form-check-input">
+                            <label asp-for="Is3D" class="form-check-label">3D</label>
+                        </div>
+                    </div>
+                    <div class="form-check">
+                        <div class="col-md-10">
+                            <input asp-for="IsIMAX" type="checkbox" class="form-check-input">
+                            <label asp-for="IsIMAX" class="form-check-label">IMAX</label>
+                        </div>
+                    </div>
+                    <hr />
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <button type="submit" class="btn btn-primary">Next</button>
+                        </div>
+                    </div>
+                    @for (int i = 0; i < Model.Cinemas.Count; i++)
+                    {
+                        @Html.HiddenFor(model => Model.Cinemas[i].Id)
+                        @Html.HiddenFor(model => Model.Cinemas[i].Name)
+                    }
+                </form>
+            </div>
+            <div class="tab-pane @(Model.ActiveTab == 2 ? "active" : "")" id="tab_2">
+                <div class="row">
+                    <div class="row col-sm-6" style="width: 300px">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>Rows</label>
+                                <input id="rows" type="text" class="form-control" value="10">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>Columns</label>
+                                <input id="columns" type="text" class="form-control" value="20">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="row" style="width: 90%">
+                            <div class="col-md-3" style="margin-top: 31px; width: 80%">
+                                <button class="btn btn-primary" onclick="updateTable()">Update</button>
+                            </div>
+                            <div class="col-md-3" style="margin-top: 31px; width: 80%">
+                                <button class="btn btn-primary" onclick="tableSelectAll()">Select all</button>
+                            </div>
+                            <div class="col-md-3" style="margin-top: 31px; width: 80%">
+                                <button class="btn btn-primary" onclick="tableDeselectAll()">Deselect all</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <hr style="margin-top: 4px;" />
+                <div id="divTable" style="height: 400px">
+                </div>
+                <hr />
+                <form asp-controller="Hall" asp-action="CreateSecondStep" asp-route-returnurl="@ViewData["ReturnUrl"]" method="post" class="form-horizontal">
+                    @Html.HiddenFor(p => p.Name)
+                    @Html.HiddenFor(p => p.Is3D)
+                    @Html.HiddenFor(p => p.IsIMAX)
+                    @Html.HiddenFor(p => p.SelectedCinema)
+                    @for (int i = 0; i < Model.Cinemas.Count; i++)
+                    {
+                        @Html.HiddenFor(model => Model.Cinemas[i].Id)
+                        @Html.HiddenFor(model => Model.Cinemas[i].Name)
+                    }
+                    <input id="tableJson" asp-for="HallTableJson" class="form-control" type="hidden" />
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <button class="btn btn-primary" onclick="submitSecondStep()">Create</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    row = document.getElementById('rows').value;
+    columns = document.getElementById('columns').value;
+    updateTable();
+
+    function submitSecondStep() {
+        document.getElementById('tableJson').value = JSON.stringify(hallTableToArray());
+        parentNode.submit();
+    }
+</script>

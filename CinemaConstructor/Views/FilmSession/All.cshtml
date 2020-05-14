@@ -1,0 +1,108 @@
+﻿@model CinemaConstructor.Models.FilmSessionViewModels.FilmSessionAllViewModel
+
+@{
+    ViewData["Title"] = "Film sessions";
+}
+
+<h2>@ViewData["Title"]</h2>
+<hr />
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Upcoming</h3>
+                <div class="card-tools">
+                    <div class="input-group input-group-sm" style="width: 200px;">
+                        <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
+                        <div class="input-group-append">
+                            <button type="submit" class="btn btn-default"><i class="fas fa-search"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body table-responsive p-0">
+                <table class="table text-nowrap">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Film</th>
+                            <th>Cinema</th>
+                            <th>Hall</th>
+                            <th>Start</th>
+                            <th>End</th>
+                            <th>Price, ₽</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var session in Model.UpcomingSessions)
+                        {
+                            <tr>
+                                <td>@session.Id</td>
+                                <td>@session.Film.Title</td>
+                                <td>@session.Hall.Cinema.Name</td>
+                                <td>@session.Hall.Name</td>
+                                <td>@session.StartTime.ToString("MM\\/dd\\/yyyy HH\\:mm")</td>
+                                <td>@session.EndTime.ToString("MM\\/dd\\/yyyy HH\\:mm")</td>
+                                <td>@session.Price</td>
+                                <td><a href="#">Edit</a></td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<hr style="margin-top: 0;" />
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Past</h3>
+                <div class="card-tools">
+                    <div class="input-group input-group-sm" style="width: 200px;">
+                        <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
+                        <div class="input-group-append">
+                            <button type="submit" class="btn btn-default"><i class="fas fa-search"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body table-responsive p-0">
+                <table class="table text-nowrap">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Film</th>
+                            <th>Cinema</th>
+                            <th>Hall</th>
+                            <th>Start</th>
+                            <th>End</th>
+                            <th>Price, ₽</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var session in Model.PastSessions)
+                        {
+                            <tr>
+                                <td>@session.Id</td>
+                                <td>@session.Film.Title</td>
+                                <td>@session.Hall.Cinema.Name</td>
+                                <td>@session.Hall.Name</td>
+                                <td>@session.StartTime.ToString("MM\\/dd\\/yyyy HH\\:mm")</td>
+                                <td>@session.EndTime.ToString("MM\\/dd\\/yyyy HH\\:mm")</td>
+                                <td>@session.Price</td>
+                                <td><a href="#">Edit</a></td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

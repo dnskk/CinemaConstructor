@@ -1,0 +1,62 @@
+﻿@model CinemaConstructor.Models.FilmViewModels.FilmAllViewModel
+
+@{
+    ViewData["Title"] = "All films";
+}
+
+<h2>@ViewData["Title"]</h2>
+<hr />
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">&nbsp;</h3>
+                <div class="card-tools">
+                    <div class="input-group input-group-sm" style="width: 200px;">
+                        <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
+                        <div class="input-group-append">
+                            <button type="submit" class="btn btn-default"><i class="fas fa-search"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body table-responsive p-0">
+                <table class="table text-nowrap">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Title</th>
+                            <th>Duration</th>
+                            <th>Release date</th>
+                            <th>Genre</th>
+                            <th>Trailer</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var film in Model.Films)
+                        {
+                        <tr>
+                            <td>@film.Id</td>
+                            <td>@film.Title</td>
+                            <td>@film.Duration.ToString(@"hh\:mm")</td>
+                            <td>@film.ReleaseDate.ToString("MM\\/dd\\/yyyy")</td>
+                            <td>@film.Genre</td>
+                            @if (string.IsNullOrEmpty(film.TrailerUrl))
+                            {
+                                <td>-</td>
+                            }
+                            else
+                            {
+                                <td><a href="@film.TrailerUrl" target="_blank">Link</a></td>
+                            }
+                            <td><a href="#">Edit</a></td>
+                        </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,74 @@
+﻿@model CinemaConstructor.Models.CompanyViewModels.InfoViewModel
+
+@{
+    ViewData["Title"] = "Info";
+}
+
+<h2>@Model.Company.Name</h2>
+<hr style="margin-top: 4px;" />
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">
+                    Info
+                </h3>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body">
+                <h6 style="margin-bottom: 2px;">Phone</h6>@(Model.Company.Phone ?? "-")
+                <hr style="margin-bottom: 4px; margin-top: 4px;" />
+                <h6 style="margin-bottom: 2px;">Email</h6>@(Model.Company.Email ?? "-")
+                <hr style="margin-bottom: 4px; margin-top: 4px;" />
+                <h6 style="margin-bottom: 2px;">Instagram</h6>@(Model.Company.InstagramLink ?? "-")
+                <hr style="margin-bottom: 4px; margin-top: 4px;" />
+                <h6 style="margin-bottom: 2px;">Facebook</h6>@(Model.Company.FacebookLink ?? "-")
+            </div>
+            <!-- /.card-body -->
+        </div>
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">
+                    Info
+                </h3>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body">
+                Zaluppi
+            </div>
+            <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+    </div>
+    <!-- ./col -->
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">
+                    <i class="fas fa-text-width"></i>
+                    Text Emphasis
+                </h3>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body">
+                <p class="lead">Lead to emphasize importance</p>
+
+                <p class="text-success">Text green to emphasize success</p>
+
+                <p class="text-info">Text aqua to emphasize info</p>
+
+                <p class="text-primary">Text light blue to emphasize info (2)</p>
+
+                <p class="text-danger">Text red to emphasize danger</p>
+
+                <p class="text-warning">Text yellow to emphasize warning</p>
+
+                <p class="text-muted">Text muted to emphasize general</p>
+            </div>
+            <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+    </div>
+    <!-- ./col -->
+</div>
