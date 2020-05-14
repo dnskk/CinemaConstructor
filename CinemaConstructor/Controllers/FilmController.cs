@@ -164,7 +164,7 @@ namespace CinemaConstructor.Controllers
         {
             var user = await _userManager.FindByIdAsync(_userManager.GetUserId(User)) as IdentityUser;
             var userSession = await _userSessionRepository.FindByUserIdAsync(Guid.Parse(user.Id), token);
-            return await _filmRepository.FindByIdAsync(userSession.CurrentCompanyId, token);
+            return await _filmRepository.FindByIdAsync(userSession.CurrentFilmId, token);
         }
 
         private async Task<Company> GetCompany(CancellationToken token)
