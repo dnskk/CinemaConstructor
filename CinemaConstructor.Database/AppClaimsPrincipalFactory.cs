@@ -1,11 +1,11 @@
 ﻿using System.Security.Claims;
 using System.Threading.Tasks;
 using CinemaConstructor.Common;
-using CinemaConstructor.Models;
+using CinemaConstructor.Database.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;
 
-namespace CinemaConstructor.Data
+namespace CinemaConstructor.Database
 {
     public class AppClaimsPrincipalFactory : UserClaimsPrincipalFactory<ApplicationUser, IdentityRole>
     {

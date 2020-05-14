@@ -1,9 +1,8 @@
 ﻿<link rel="stylesheet" href="~/lib/datatables/css/dataTables.bootstrap4.min.css" asp-append-version="true" />
 <script src="~/lib/datatables/js/jquery.dataTables.min.js" asp-append-version="true"></script>
 <script src="~/lib/datatables/js/dataTables.bootstrap4.min.js" asp-append-version="true"></script>
-
-@using CinemaConstructor.Models
-@model IEnumerable<CinemaConstructor.Models.ApplicationUser>
+@using CinemaConstructor.Database.Entities
+@model IEnumerable<CinemaConstructor.Database.Entities.ApplicationUser>
 @{
     ViewData["Title"] = "User Accounts";
 }

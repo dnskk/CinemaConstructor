@@ -1,4 +1,4 @@
-﻿namespace CinemaConstructor.Entities
+﻿namespace CinemaConstructor.Database.Entities
 {
     public enum MemberRole
     {

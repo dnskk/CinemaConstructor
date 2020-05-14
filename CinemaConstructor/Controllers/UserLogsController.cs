@@ -1,5 +1,5 @@
 ﻿using System.Linq;
-using CinemaConstructor.Data;
+using CinemaConstructor.Database;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 

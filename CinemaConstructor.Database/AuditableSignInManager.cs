@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Threading.Tasks;
-using CinemaConstructor.Entities;
+using CinemaConstructor.Database.Entities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
-namespace CinemaConstructor.Data
+namespace CinemaConstructor.Database
 {
     public class AuditableSignInManager<TUser> : SignInManager<TUser> where TUser : class
     {

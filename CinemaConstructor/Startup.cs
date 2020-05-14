@@ -1,6 +1,6 @@
-﻿using CinemaConstructor.Data;
-using CinemaConstructor.Models;
-using CinemaConstructor.Repositories;
+﻿using CinemaConstructor.Database;
+using CinemaConstructor.Database.Entities;
+using CinemaConstructor.Database.Repositories;
 using CinemaConstructor.Services;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;

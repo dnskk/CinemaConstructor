@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
-using CinemaConstructor.Models;
+using CinemaConstructor.Database.Entities;
 using CinemaConstructor.Models.RoleViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;

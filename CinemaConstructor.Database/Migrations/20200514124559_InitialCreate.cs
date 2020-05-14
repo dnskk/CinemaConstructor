@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace CinemaConstructor.Migrations
+namespace CinemaConstructor.Database.Migrations
 {
     public partial class InitialCreate : Migration
     {

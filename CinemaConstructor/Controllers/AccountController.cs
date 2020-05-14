@@ -3,7 +3,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using CinemaConstructor.Common;
-using CinemaConstructor.Models;
+using CinemaConstructor.Database.Entities;
 using CinemaConstructor.Models.AccountViewModels;
 using CinemaConstructor.Services;
 using Microsoft.AspNetCore.Authorization;

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace CinemaConstructor.Entities
+namespace CinemaConstructor.Database.Entities
 {
     public class Company
     {

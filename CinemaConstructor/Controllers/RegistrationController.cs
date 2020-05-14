@@ -2,7 +2,7 @@
 using System.Security.Claims;
 using System.Threading.Tasks;
 using CinemaConstructor.Common;
-using CinemaConstructor.Models;
+using CinemaConstructor.Database.Entities;
 using CinemaConstructor.Models.AccountViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;

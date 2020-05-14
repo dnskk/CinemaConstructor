@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using CinemaConstructor.Entities;
+using CinemaConstructor.Database.Entities;
 
 namespace CinemaConstructor.Models.HallViewModels
 {

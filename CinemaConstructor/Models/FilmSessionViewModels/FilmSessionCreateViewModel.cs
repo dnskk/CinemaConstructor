@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using CinemaConstructor.Entities;
+using CinemaConstructor.Database.Entities;
 
 namespace CinemaConstructor.Models.FilmSessionViewModels
 {

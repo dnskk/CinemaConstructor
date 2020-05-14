@@ -3,10 +3,9 @@ using System.Globalization;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using CinemaConstructor.Entities;
-using CinemaConstructor.Models;
+using CinemaConstructor.Database.Entities;
+using CinemaConstructor.Database.Repositories;
 using CinemaConstructor.Models.FilmViewModels;
-using CinemaConstructor.Repositories;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 

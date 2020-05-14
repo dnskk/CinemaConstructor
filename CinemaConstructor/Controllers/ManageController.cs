@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
-using CinemaConstructor.Models;
+using CinemaConstructor.Database.Entities;
 using CinemaConstructor.Models.ManageViewModels;
 using CinemaConstructor.Services;
 using Microsoft.AspNetCore.Authorization;

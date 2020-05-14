@@ -1,4 +1,4 @@
-﻿using CinemaConstructor.Entities;
+﻿using CinemaConstructor.Database.Entities;
 
 namespace CinemaConstructor.Models.CompanyViewModels
 {

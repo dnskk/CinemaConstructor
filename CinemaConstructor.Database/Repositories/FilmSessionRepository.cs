@@ -2,11 +2,10 @@
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using CinemaConstructor.Data;
-using CinemaConstructor.Entities;
+using CinemaConstructor.Database.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace CinemaConstructor.Repositories
+namespace CinemaConstructor.Database.Repositories
 {
     public class FilmSessionRepository
     {

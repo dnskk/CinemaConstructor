@@ -4,10 +4,10 @@ using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using CinemaConstructor.Entities;
+using CinemaConstructor.Database.Entities;
+using CinemaConstructor.Database.Repositories;
 using CinemaConstructor.Models;
 using CinemaConstructor.Models.CompanyViewModels;
-using CinemaConstructor.Repositories;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 

@@ -1,12 +1,20 @@
-﻿using CinemaConstructor.Entities;
-using CinemaConstructor.Models;
+﻿using CinemaConstructor.Database.Entities;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace CinemaConstructor.Data
+namespace CinemaConstructor.Database
 {
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
+        public ApplicationDbContext()
+        {
+        }
+
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
+            : base(options)
+        {
+        }
+
         public DbSet<UserAudit> UserAuditEvents { get; set; }
 
         public DbSet<Company> Companies { get; set; }
@@ -23,14 +31,17 @@ namespace CinemaConstructor.Data
 
         public DbSet<UserSession> UserSessions { get; set; }
 
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
-            : base(options)
-        {
-        }
-
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
+        }
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            if (!optionsBuilder.IsConfigured)
+            {
+                var connectionString = "Server=localhost;Database=adminLTE;Trusted_Connection=True;";
+                optionsBuilder.UseSqlServer(connectionString);
+            }
         }
     }
 }

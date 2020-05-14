@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using CinemaConstructor.Entities;
+using CinemaConstructor.Database.Entities;
 
 namespace CinemaConstructor.Models.LandingViewModels
 {

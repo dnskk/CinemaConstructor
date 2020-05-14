@@ -4,8 +4,9 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using CinemaConstructor.Common;
+using CinemaConstructor.Database.Entities;
+using CinemaConstructor.Database.Repositories;
 using CinemaConstructor.Models;
-using CinemaConstructor.Repositories;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 

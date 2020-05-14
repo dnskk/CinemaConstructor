@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using CinemaConstructor.Database.Entities;
 using Microsoft.AspNetCore.Identity;
 
 namespace CinemaConstructor.Models.RoleViewModels

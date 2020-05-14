@@ -16,15 +16,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="3.1.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.0" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.0" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer.Design" Version="1.1.6">
-      <PrivateAssets>All</PrivateAssets>
-    </PackageReference>
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.0">
-      <PrivateAssets>All</PrivateAssets>
-    </PackageReference>
     <PackageReference Include="Microsoft.Extensions.Configuration.EnvironmentVariables" Version="3.1.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="3.1.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="3.1.0" />
@@ -53,7 +44,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\CinemaConstructor.Entities\CinemaConstructor.Entities.csproj" />
+    <ProjectReference Include="..\CinemaConstructor.Database\CinemaConstructor.Database.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,6 +1,5 @@
-﻿@using CinemaConstructor.Models
-@inject SignInManager<ApplicationUser> SignInManager
-@inject UserManager<ApplicationUser> UserManager
+﻿@inject SignInManager<CinemaConstructor.Database.Entities.ApplicationUser> SignInManager
+@inject UserManager<CinemaConstructor.Database.Entities.ApplicationUser> UserManager
 
 @if (SignInManager.IsSignedIn(User))
 {

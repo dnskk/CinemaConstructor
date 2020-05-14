@@ -1,5 +1,5 @@
 ﻿using System.Threading.Tasks;
-using CinemaConstructor.Models;
+using CinemaConstructor.Database.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
