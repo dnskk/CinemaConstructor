@@ -38,6 +38,8 @@ namespace CinemaConstructor.Database.Repositories
             {
                 currentUserSession.CurrentCompanyId = userSession.CurrentCompanyId;
                 currentUserSession.CurrentCinemaId = userSession.CurrentCinemaId;
+                currentUserSession.CurrentFilmId = userSession.CurrentFilmId;
+                currentUserSession.CurrentFilmSessionId = userSession.CurrentFilmSessionId;
             }
 
             await _context.SaveChangesAsync(token);

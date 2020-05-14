@@ -4,6 +4,10 @@
     <TargetFramework>netcoreapp3.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\CinemaConstructor.Database\CinemaConstructor.Database.csproj" />
+  </ItemGroup>
+
 
 
 </Project>

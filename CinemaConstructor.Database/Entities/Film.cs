@@ -20,6 +20,8 @@ namespace CinemaConstructor.Database.Entities
 
         public string TrailerUrl { get; set; }
 
+        public bool IsActive { get; set; }
+
         public Company Company { get; set; }
     }
 }

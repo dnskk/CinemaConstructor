@@ -11,5 +11,9 @@ namespace CinemaConstructor.Database.Entities
         public long CurrentCompanyId { get; set; }
 
         public long CurrentCinemaId { get; set; }
+
+        public long CurrentFilmId { get; set; }
+
+        public long CurrentFilmSessionId { get; set; }
     }
 }

@@ -68,7 +68,7 @@ namespace CinemaConstructor.Controllers
 
             var viewModel = new FilmSessionCreateViewModel
             {
-                Films = films.ToList(),
+                Films = films.Where(p => p.IsActive).ToList(),
                 GroupedHalls = groupedHalls.ToList(),
                 CompanyId = company.Id
             };

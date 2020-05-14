@@ -1,26 +1,38 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
+﻿using System.Diagnostics;
+using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using Cinema.Models;
+using CinemaConstructor.Database.Repositories;
 
 namespace Cinema.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly CompanyRepository _companyRepository;
+        private readonly FilmRepository _filmRepository;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(CompanyRepository companyRepository, FilmRepository filmRepository)
         {
-            _logger = logger;
+            _companyRepository = companyRepository;
+            _filmRepository = filmRepository;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index(CancellationToken token)
         {
-            return View();
+            if (!Request.Query.ContainsKey("companyId"))
+            {
+                return NotFound();
+            }
+
+            Request.Query.TryGetValue("companyId", out var companyId);
+            var company = await _companyRepository.FindByIdAsync(long.Parse(companyId), token);
+            var viewModel = new HomeViewModel
+            {
+                Company = company
+            };
+
+            return View(viewModel);
         }
 
         public IActionResult Privacy()

@@ -12,6 +12,8 @@ namespace CinemaConstructor.Models.FilmViewModels
         [Display(Name = "Description")]
         public string Description { get; set; }
 
+        [Required]
+        [Display(Name = "Release date")]
         public string ReleaseDate { get; set; }
 
         [Required]
