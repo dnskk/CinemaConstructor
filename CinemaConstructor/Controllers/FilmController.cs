@@ -17,14 +17,16 @@ namespace CinemaConstructor.Controllers
         private readonly CompanyRepository _companyRepository;
         private readonly UserSessionRepository _userSessionRepository;
         private readonly FilmRepository _filmRepository;
+        private readonly BlobRepository _blobRepository;
 
         public FilmController(FilmRepository filmRepository, UserManager<ApplicationUser> userManager,
-            CompanyRepository companyRepository, UserSessionRepository userSessionRepository)
+            CompanyRepository companyRepository, UserSessionRepository userSessionRepository, BlobRepository blobRepository)
         {
             _filmRepository = filmRepository;
             _userManager = userManager;
             _companyRepository = companyRepository;
             _userSessionRepository = userSessionRepository;
+            _blobRepository = blobRepository;
         }
 
         [HttpGet]
@@ -77,7 +79,9 @@ namespace CinemaConstructor.Controllers
                     Company = await GetCompany(token)
                 };
 
-                await _filmRepository.AddAsync(film, token);
+                var addedFilm = await _filmRepository.AddAsync(film, token);
+
+                await _blobRepository.Upload(addedFilm.Id, model.PosterImage);
 
                 return RedirectToAction(nameof(All), "Film");
             }

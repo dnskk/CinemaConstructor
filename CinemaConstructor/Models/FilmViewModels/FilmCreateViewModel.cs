@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Http;
 
 namespace CinemaConstructor.Models.FilmViewModels
 {
@@ -23,6 +24,10 @@ namespace CinemaConstructor.Models.FilmViewModels
         [Required]
         [Display(Name = "Genre")]
         public string Genre { get; set; }
+
+        [Required]
+        [Display(Name = "Poster")]
+        public IFormFile PosterImage { get; set; }
 
         [Display(Name = "Trailer URI")]
         public string TrailerUrl { get; set; }

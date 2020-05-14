@@ -1,6 +1,8 @@
 ﻿using CinemaConstructor.Database;
 using CinemaConstructor.Database.Entities;
+using CinemaConstructor.Database.Options;
 using CinemaConstructor.Database.Repositories;
+using CinemaConstructor.Models;
 using CinemaConstructor.Services;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
@@ -49,6 +51,8 @@ namespace CinemaConstructor
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
 
+            services.Configure<BlobRepositoryOptions>(Configuration.GetSection(nameof(BlobRepositoryOptions)));
+
             services.AddScoped<IUserClaimsPrincipalFactory<ApplicationUser>, AppClaimsPrincipalFactory>();
             services.AddScoped<SignInManager<ApplicationUser>, AuditableSignInManager<ApplicationUser>>();
 
@@ -59,6 +63,7 @@ namespace CinemaConstructor
             services.AddScoped<FilmSessionRepository>();
             services.AddScoped<CompanyMemberRepository>();
             services.AddScoped<UserSessionRepository>();
+            services.AddScoped<BlobRepository>();
 
             var mvcBuilder = services.AddMvc(config =>
             {
