@@ -147,7 +147,12 @@ namespace CinemaConstructor.Controllers
                 film.TrailerUrl = model.TrailerUrl;
                 film.IsActive = model.IsActive;
 
-                await _filmRepository.UpdateAsync(film, token);
+                var updatedFilm = await _filmRepository.UpdateAsync(film, token);
+
+                if (model.PosterImage != null)
+                {
+                    await _blobRepository.Upload(updatedFilm.Id, model.PosterImage);
+                }
 
                 return RedirectToAction(nameof(All), "Film");
             }
