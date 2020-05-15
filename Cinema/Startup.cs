@@ -1,4 +1,5 @@
 using CinemaConstructor.Database;
+using CinemaConstructor.Database.Options;
 using CinemaConstructor.Database.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -25,6 +26,9 @@ namespace Cinema
 
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
+            services.Configure<BlobRepositoryOptions>(Configuration.GetSection(nameof(BlobRepositoryOptions)));
+            services.AddScoped<BlobRepository>();
 
             services.AddScoped<CompanyRepository>();
             services.AddScoped<CinemaRepository>();

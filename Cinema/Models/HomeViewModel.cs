@@ -10,5 +10,6 @@ namespace Cinema.Models
         public List<Film> CurrentFilms { get; set; }
 
         public List<Film> UpcomingFilms { get; set; }
+        public Dictionary<long, string> Posters { get; set; }
     }
 }

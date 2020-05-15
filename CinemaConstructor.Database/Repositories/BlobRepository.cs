@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
 using CinemaConstructor.Database.Options;
 using Microsoft.AspNetCore.Http;
@@ -13,33 +10,31 @@ namespace CinemaConstructor.Database.Repositories
 {
     public class BlobRepository
     {
-        private readonly CloudBlobClient _client;
+        private readonly CloudBlobContainer _container;
+        private readonly string _signature;
 
         public BlobRepository(IOptions<BlobRepositoryOptions> options)
         {
-            _client = CloudStorageAccount.Parse(options.Value.ConnectionString).CreateCloudBlobClient();
-        }
+            var client = CloudStorageAccount.Parse(options.Value.ConnectionString).CreateCloudBlobClient();
 
-        public string Get(long id)
-        {
-            var container = _client.GetContainerReference("posters");
-            var blob = container.GetBlockBlobReference(id.ToString());
-
+            _container = client.GetContainerReference("posters");
             var readOnly = new SharedAccessBlobPolicy
             {
                 SharedAccessExpiryTime = DateTime.UtcNow.AddHours(24),
                 Permissions = SharedAccessBlobPermissions.Read
             };
+            _signature = _container.GetSharedAccessSignature(readOnly);
+        }
 
-            var signature = container.GetSharedAccessSignature(readOnly);
-
-            return blob + signature;
+        public string Get(long id)
+        {
+            var blob = _container.GetBlockBlobReference(id.ToString());
+            return blob.Uri + _signature;
         }
 
         public async Task Upload(long id, IFormFile file)
         {
-            var container = _client.GetContainerReference("posters");
-            var blob = container.GetBlockBlobReference(id.ToString());
+            var blob = _container.GetBlockBlobReference(id.ToString());
             await blob.UploadFromStreamAsync(file.OpenReadStream());
         }
     }

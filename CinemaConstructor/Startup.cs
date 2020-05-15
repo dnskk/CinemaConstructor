@@ -52,6 +52,7 @@ namespace CinemaConstructor
                 .AddDefaultTokenProviders();
 
             services.Configure<BlobRepositoryOptions>(Configuration.GetSection(nameof(BlobRepositoryOptions)));
+            services.AddScoped<BlobRepository>();
 
             services.AddScoped<IUserClaimsPrincipalFactory<ApplicationUser>, AppClaimsPrincipalFactory>();
             services.AddScoped<SignInManager<ApplicationUser>, AuditableSignInManager<ApplicationUser>>();
@@ -63,7 +64,6 @@ namespace CinemaConstructor
             services.AddScoped<FilmSessionRepository>();
             services.AddScoped<CompanyMemberRepository>();
             services.AddScoped<UserSessionRepository>();
-            services.AddScoped<BlobRepository>();
 
             var mvcBuilder = services.AddMvc(config =>
             {
