@@ -4,8 +4,16 @@
     ViewData["Title"] = "Home Page";
 }
 
+<style>
+    .footer:before {
+        background-image: linear-gradient(90deg, #ff55a5 0%, #ff5860 100%) !important;
+    }
 
-<!-- home -->
+    separator {
+        background-image: linear-gradient(90deg, #ff55a5 0%, #ff5860 100%) !important;
+    }
+</style>
+
 <section class="home home--bg">
     <div class="container">
         <div class="row">
@@ -25,13 +33,13 @@
                     {
                         <div class="item">
                             <div class="card card--big">
-                                <a href="#">
+                                <a href="/Film?companyId=@(Model.Company.Id)&filmId=@(film.Id)">
                                     <div class="card__cover">
                                         <img src="@Model.Posters[film.Id]" alt="">
                                     </div>
                                 </a>
                                 <div class="card__content">
-                                    <h3 class="card__title"><a href="#">@film.Title</a></h3>
+                                    <h3 class="card__title"><a href="/Film?companyId=@(Model.Company.Id)&filmId=@(film.Id)">@film.Title</a></h3>
                                     <span class="card__category">
                                         <a href="#">@film.Genre</a>
                                     </span>
@@ -44,6 +52,8 @@
         </div>
     </div>
 </section>
+
+<separator></separator>
 
 <section class="section section--dark">
     <div class="container">
@@ -61,7 +71,7 @@
             <div class="col-12 col-md-6 col-lg-4">
                 <div class="how">
                     <span class="how__number">02</span>
-                    <h3 class="how__title">Buy a ticket</h3>    
+                    <h3 class="how__title">Buy a ticket</h3>
                     <p class="how__text">Choose a place and pay for your ticket online using the payment method convenient for you.</p>
                 </div>
             </div>
@@ -76,6 +86,8 @@
     </div>
 </section>
 
+<separator></separator>
+
 <section class="section section--bg" data-bg="img/section/section.jpg">
     <div class="container">
         <div class="row">
@@ -86,13 +98,13 @@
             {
                 <div class="col-6 col-sm-4 col-lg-3 col-xl-2">
                     <div class="card">
-                        <a href="#">
+                        <a href="/Film?companyId=@(Model.Company.Id)&filmId=@(film.Id)">
                             <div class="card__cover">
                                 <img src="@Model.Posters[film.Id]" alt="">
                             </div>
                         </a>
                         <div class="card__content">
-                            <h3 class="card__title"><a href="#">@film.Title</a></h3>
+                            <h3 class="card__title"><a href="/Film?companyId=@(Model.Company.Id)&filmId=@(film.Id)">@film.Title</a></h3>
                             <span class="card__category">
                                 <a href="#">@film.Genre</a>
                             </span>
@@ -107,7 +119,17 @@
     </div>
 </section>
 
-<script>
-    var headerHome = document.getElementById("headerHome");
-    headerHome.href = "/?companyId=@(Model.Company.Id)";
-</script>
+@section scripts {
+    <script>
+        document.getElementById("headerHome").href = "/?companyId=@(Model.Company.Id)";
+        document.getElementById("headerLogo").href = "/?companyId=@(Model.Company.Id)";
+
+        document.getElementById("footerPhone").href = "tel:@(Model.Company.Phone)";
+        document.getElementById("footerPhone").innerHTML = "@(Model.Company.Phone)";
+        document.getElementById("footerEmail").href = "mailto:@(Model.Company.Email)";
+        document.getElementById("footerEmail").innerHTML = "@(Model.Company.Email)";
+
+        document.getElementById("footerFacebook").href = "@(Model.Company.FacebookLink)";
+        document.getElementById("footerInstagram").href = "@(Model.Company.InstagramLink)";
+    </script>
+}
