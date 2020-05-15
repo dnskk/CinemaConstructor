@@ -38,7 +38,7 @@ namespace CinemaConstructor.Controllers
             var films = await _filmRepository.FindByCompanyIdAsync(company.Id, token);
             var viewModel = new FilmAllViewModel
             {
-                Films = films.ToList()
+                Films = films.OrderByDescending(p => p.IsActive).ThenByDescending(p => p.ReleaseDate).ToList()
             };
 
             return View(viewModel);

@@ -31,28 +31,30 @@
                             <th>Release date</th>
                             <th>Genre</th>
                             <th>Trailer</th>
+                            <th>Active</th>
                             <th></th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach (var film in Model.Films)
                         {
-                        <tr>
-                            <td>@film.Id</td>
-                            <td>@film.Title</td>
-                            <td>@film.Duration.ToString(@"hh\:mm")</td>
-                            <td>@film.ReleaseDate.ToString("MM\\/dd\\/yyyy")</td>
-                            <td>@film.Genre</td>
-                            @if (string.IsNullOrEmpty(film.TrailerUrl))
-                            {
-                                <td>-</td>
-                            }
-                            else
-                            {
-                                <td><a href="@film.TrailerUrl" target="_blank">Link</a></td>
-                            }
-                            <td><a href="/Film/SelectFilm?filmId=@film.Id" >Edit</a></td>
-                        </tr>
+                            <tr>
+                                <td>@film.Id</td>
+                                <td>@film.Title</td>
+                                <td>@film.Duration.ToString(@"hh\:mm")</td>
+                                <td>@film.ReleaseDate.ToString("MM\\/dd\\/yyyy")</td>
+                                <td>@film.Genre</td>
+                                @if (string.IsNullOrEmpty(film.TrailerUrl))
+                                {
+                                    <td>-</td>
+                                }
+                                else
+                                {
+                                    <td><a href="@film.TrailerUrl" target="_blank">Link</a></td>
+                                }
+                                <td>@(film.IsActive ? "Yes" : "No")</td>
+                                <td><a href="/Film/SelectFilm?filmId=@film.Id">Edit</a></td>
+                            </tr>
                         }
                     </tbody>
                 </table>
