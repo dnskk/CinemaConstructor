@@ -25,7 +25,7 @@ namespace CinemaConstructor.Models.FilmViewModels
         [Display(Name = "Genre")]
         public string Genre { get; set; }
 
-        [Display(Name = "Poster")]
+        [Display(Name = "Poster (270x400)")]
         public IFormFile PosterImage { get; set; }
 
         [Display(Name = "Trailer URI")]
