@@ -121,6 +121,8 @@
 
 @section scripts {
     <script>
+        document.getElementById("headerLogoSpan").innerHTML = "@(Model.Company.Name)";
+
         document.getElementById("headerHome").href = "/?companyId=@(Model.Company.Id)";
         document.getElementById("headerLogo").href = "/?companyId=@(Model.Company.Id)";
 

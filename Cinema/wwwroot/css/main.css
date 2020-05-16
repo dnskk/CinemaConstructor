@@ -238,13 +238,12 @@ ul {
   z-index: 101;
 }
 .header__logo {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 70px;
-  padding: 0 15px;
-  background-color: #28282d;
-  width: 140px;
+    display: inline-block;
+    justify-content: center;
+    align-items: center;
+    height: 70px;
+    padding: 0 15px;
+    background-color: #28282d;
 }
 .header__logo img {
   width: auto;
@@ -559,7 +558,6 @@ ul {
 }
 @media (min-width: 576px) {
   .header__logo {
-    width: 170px;
     padding: 0 20px;
   }
   .header__logo img {
@@ -572,7 +570,6 @@ ul {
   }
   .header__logo {
     height: 90px;
-    width: 240px;
     padding: 0;
   }
   .header__logo img {
@@ -1839,6 +1836,23 @@ ul {
     margin-bottom: 15px;
   }
 }
+
+/*==============================
+	Logo
+==============================*/
+.headerlogo {
+    font-size: 45px;
+    font-weight: 700;
+    display: inline-block;
+    background-image: -webkit-linear-gradient(0deg, #ff55a5 0%, #ff5860 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: #ff5860;
+    margin-right: 15px;
+    margin-left: 15px;
+    margin-top: 8px;
+}
+
 /*==============================
 	How
 ==============================*/
@@ -2890,7 +2904,6 @@ html:not([dir="rtl"]) .noUi-horizontal .noUi-handle {
   padding: 20px;
   overflow: hidden;
   max-height: 700px;
-  height: 700px;
 }
 .accordion__card {
   background-color: #2b2b31;
@@ -2990,7 +3003,6 @@ html:not([dir="rtl"]) .noUi-horizontal .noUi-handle {
 @media (min-width: 1200px) {
   .accordion {
     max-height: 700px;
-    height: 700px;
   }
 }
 /*==============================
