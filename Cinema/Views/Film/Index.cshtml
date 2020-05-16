@@ -5,14 +5,51 @@
 }
 <style>
     .footer:before {
-        background-image: linear-gradient(90deg, #ff55a5 0%, #ff5860 100%) !important;
+        background-image: linear-gradient(90deg, @Model.Company.AccentColorFirst 0%, @Model.Company.AccentColorSecond 100%) !important;
     }
-
     separator {
-        background-image: linear-gradient(90deg, #ff55a5 0%, #ff5860 100%) !important;
+        background-image: linear-gradient(90deg, @Model.Company.AccentColorFirst 0%, @Model.Company.AccentColorSecond 100%) !important;
+    }
+    .headerlogo {
+        background-image: linear-gradient(90deg, @Model.Company.AccentColorFirst 0%, @Model.Company.AccentColorSecond 100%) !important;
+    }
+    .card__cover:before {
+        background-image: linear-gradient(90deg, @Model.Company.AccentColorFirst 0%, @Model.Company.AccentColorSecond 100%) !important;
+    }
+    .how__number {
+        background-image: linear-gradient(90deg, @Model.Company.AccentColorFirst 0%, @Model.Company.AccentColorSecond 100%) !important;
+    }
+    .section__btn {
+        background-image: linear-gradient(90deg, @Model.Company.AccentColorFirst 0%, @Model.Company.AccentColorSecond 100%) !important;
+    }
+    .header__search-content button {
+        background-image: linear-gradient(90deg, @Model.Company.AccentColorFirst 0%, @Model.Company.AccentColorSecond 100%) !important;
+    }
+    .mCS-custom-bar2.mCSB_scrollTools .mCSB_dragger .mCSB_dragger_bar {
+        background-image: linear-gradient(90deg, @Model.Company.AccentColorFirst 0%, @Model.Company.AccentColorSecond 100%) !important;
+    }
+    .card__category a {
+        background-image: -webkit-linear-gradient(0deg, @Model.Company.AccentColorFirst 0%, @Model.Company.AccentColorSecond 100%) !important;
+    }
+    .card--details .card__meta a {
+        background-image: -webkit-linear-gradient(0deg, @Model.Company.AccentColorFirst 0%, @Model.Company.AccentColorSecond 100%) !important;
+    }
+    .accordion__card .card-header button:before {
+        background-image: -webkit-linear-gradient(0deg, @Model.Company.AccentColorFirst 0%, @Model.Company.AccentColorSecond 100%) !important;
+    }
+    .accordion__card .card-header button[aria-expanded="true"] span:first-child {
+        color: @Model.Company.AccentColorFirst !important;
+    }
+    .footer__list a:hover {
+        color: @Model.Company.AccentColorFirst !important;
+    }
+    .header__nav-link:hover {
+        color: @Model.Company.AccentColorFirst !important;
+    }
+    .accordion__card .card-header button:hover span:first-child {
+        color: @Model.Company.AccentColorFirst !important;
     }
 </style>
-
 
 <section class="section details">
     <div class="details__bg" data-bg="img/home/home__bg.jpg"></div>
@@ -81,13 +118,13 @@
                                         <tbody>
                                             @foreach (var session in sessions)
                                             {
-                                            <tr>
-                                                <th>@session.StartTime.ToString("MM\\/dd\\/yyyy HH\\:mm")</th>
-                                                <td>@session.Hall.Name</td>
-                                                <td>@(session.Hall.Is3D ? "Yes" : "No")</td>
-                                                <td>@(session.Hall.IsImax ? "Yes" : "No")</td>
-                                                <td>@session.Price</td>
-                                            </tr>
+                                                <tr>
+                                                    <th>@session.StartTime.ToString("MM\\/dd\\/yyyy HH\\:mm")</th>
+                                                    <td>@session.Hall.Name</td>
+                                                    <td>@(session.Hall.Is3D ? "Yes" : "No")</td>
+                                                    <td>@(session.Hall.IsImax ? "Yes" : "No")</td>
+                                                    <td>@session.Price</td>
+                                                </tr>
                                             }
                                         </tbody>
                                     </table>

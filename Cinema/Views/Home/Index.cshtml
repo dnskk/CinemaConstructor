@@ -6,11 +6,34 @@
 
 <style>
     .footer:before {
-        background-image: linear-gradient(90deg, #ff55a5 0%, #ff5860 100%) !important;
+        background-image: linear-gradient(90deg, @Model.Company.AccentColorFirst 0%, @Model.Company.AccentColorSecond 100%) !important;
     }
-
     separator {
-        background-image: linear-gradient(90deg, #ff55a5 0%, #ff5860 100%) !important;
+        background-image: linear-gradient(90deg, @Model.Company.AccentColorFirst 0%, @Model.Company.AccentColorSecond 100%) !important;
+    }
+    .headerlogo {
+        background-image: linear-gradient(90deg, @Model.Company.AccentColorFirst 0%, @Model.Company.AccentColorSecond 100%) !important;
+    }
+    .card__cover:before {
+        background-image: linear-gradient(90deg, @Model.Company.AccentColorFirst 0%, @Model.Company.AccentColorSecond 100%) !important;
+    }
+    .how__number {
+        background-image: linear-gradient(90deg, @Model.Company.AccentColorFirst 0%, @Model.Company.AccentColorSecond 100%) !important;
+    }
+    .section__btn {
+        background-image: linear-gradient(90deg, @Model.Company.AccentColorFirst 0%, @Model.Company.AccentColorSecond 100%) !important;
+    }
+    .card__category a {
+        background-image: -webkit-linear-gradient(0deg, @Model.Company.AccentColorFirst 0%, @Model.Company.AccentColorSecond 100%) !important;
+    }
+    .header__search-content button {
+        background-image: linear-gradient(90deg, @Model.Company.AccentColorFirst 0%, @Model.Company.AccentColorSecond 100%) !important;
+    }
+    .footer__list a:hover {
+        color: @Model.Company.AccentColorFirst !important;
+    }
+    .header__nav-link:hover {
+        color: @Model.Company.AccentColorFirst !important;
     }
 </style>
 
