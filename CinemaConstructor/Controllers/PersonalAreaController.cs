@@ -62,7 +62,8 @@ namespace CinemaConstructor.Controllers
                 return View(model);
             }
 
-            return View();
+            model.Companies = await GetCompanies(CancellationToken.None);
+            return View(model);
         }
 
         [HttpGet]
