@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using CinemaConstructor.Database.Entities;
 
 namespace Cinema.Models
@@ -10,6 +11,8 @@ namespace Cinema.Models
         public Film Film { get; set; }
 
         public string Poster { get; set; }
+
+        public List<IGrouping<string, FilmSession>> GroupedSessions { get; set; }
 
         public List<Film> UpcomingFilms { get; set; }
 

@@ -67,61 +67,47 @@
             </div>
             <div class="col-12" style="margin-top: 20px;">
                 <div class="accordion" id="accordion">
-                    <div class="accordion__card">
-                        <div class="card-header" id="headingOne">
-                            <button type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                <span>Season: 1</span>
-                                <span>22 Episodes from Nov, 2004 until May, 2005</span>
-                            </button>
-                        </div>
+                    @foreach (var group in Model.GroupedSessions)
+                    {
+                        var sessions = group.ToList().OrderBy(p => p.StartTime);
+                        <div class="accordion__card">
+                            <div class="card-header" id="headingOne">
+                                <button type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                    <span>@group.Key</span>
+                                    <span>Available sessions</span>
+                                </button>
+                            </div>
 
-                        <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
-                            <div class="card-body">
-                                <table class="accordion__list">
-                                    <thead>
-                                        <tr>
-                                            <th>#</th>
-                                            <th>Title</th>
-                                            <th>Air Date</th>
-                                        </tr>
-                                    </thead>
+                            <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                                <div class="card-body">
+                                    <table class="accordion__list">
+                                        <thead>
+                                            <tr>
+                                                <th>Start time</th>
+                                                <th>Hall</th>
+                                                <th>3D</th>
+                                                <th>IMAX</th>
+                                                <th>Price, ₽</th>
+                                            </tr>
+                                        </thead>
 
-                                    <tbody>
-                                        <tr>
-                                            <th>1</th>
-                                            <td>Pilot</td>
-                                            <td>Tuesday, November 16th, 2004</td>
-                                        </tr>
-                                        <tr>
-                                            <th>2</th>
-                                            <td>Paternity</td>
-                                            <td>Tuesday, November 23rd, 2004</td>
-                                        </tr>
-                                        <tr>
-                                            <th>3</th>
-                                            <td>Occam's Razor</td>
-                                            <td>Tuesday, November 30th, 2004</td>
-                                        </tr>
-                                        <tr>
-                                            <th>4</th>
-                                            <td>Maternity</td>
-                                            <td>Tuesday, December 7th, 2004</td>
-                                        </tr>
-                                        <tr>
-                                            <th>5</th>
-                                            <td>Damned If You Do</td>
-                                            <td>Tuesday, December 14th, 2004</td>
-                                        </tr>
-                                        <tr>
-                                            <th>6</th>
-                                            <td>The Socratic Method</td>
-                                            <td>Tuesday, December 21st, 2004</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                                        <tbody>
+                                            @foreach (var session in sessions)
+                                            {
+                                            <tr>
+                                                <th>@session.StartTime.ToString("MM\\/dd\\/yyyy HH\\:mm")</th>
+                                                <td>@session.Hall.Name</td>
+                                                <td>@(session.Hall.Is3D ? "Yes" : "No")</td>
+                                                <td>@(session.Hall.IsImax ? "Yes" : "No")</td>
+                                                <td>@session.Price</td>
+                                            </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    }
 
                     <div class="accordion__card">
                         <div class="card-header" id="headingTwo">

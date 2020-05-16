@@ -13,13 +13,16 @@ namespace Cinema.Controllers
     {
         private readonly CompanyRepository _companyRepository;
         private readonly FilmRepository _filmRepository;
+        private readonly FilmSessionRepository _filmSessionRepository;
         private readonly BlobRepository _blobRepository;
 
-        public FilmController(CompanyRepository companyRepository, FilmRepository filmRepository, BlobRepository blobRepository)
+        public FilmController(CompanyRepository companyRepository, FilmRepository filmRepository,
+            BlobRepository blobRepository, FilmSessionRepository filmSessionRepository)
         {
             _companyRepository = companyRepository;
             _filmRepository = filmRepository;
             _blobRepository = blobRepository;
+            _filmSessionRepository = filmSessionRepository;
         }
 
         public async Task<IActionResult> Index(CancellationToken token)
@@ -44,11 +47,17 @@ namespace Cinema.Controllers
                 posters[film.Id] = _blobRepository.Get(film.Id);
             }
 
+            var filmSessions = (await _filmSessionRepository.FindByFilmIdAsync(currentFilm.Id, token))
+                .Where(p => p.StartTime > DateTime.Now);
+
+            var groupedSessions = filmSessions.GroupBy(p => p.Hall.Cinema.Name);
+
             var viewModel = new FilmViewModel
             {
                 Company = company,
                 Film = currentFilm,
                 Poster = poster,
+                GroupedSessions = groupedSessions.ToList(),
                 UpcomingFilms = upcomingFilms,
                 Posters = posters
             };

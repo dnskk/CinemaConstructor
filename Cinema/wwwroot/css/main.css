@@ -2889,8 +2889,8 @@ html:not([dir="rtl"]) .noUi-horizontal .noUi-handle {
   background-color: #28282d;
   padding: 20px;
   overflow: hidden;
-  max-height: 303px;
-  height: 303px;
+  max-height: 700px;
+  height: 700px;
 }
 .accordion__card {
   background-color: #2b2b31;
@@ -2989,8 +2989,8 @@ html:not([dir="rtl"]) .noUi-horizontal .noUi-handle {
 }
 @media (min-width: 1200px) {
   .accordion {
-    max-height: 303px;
-    height: 303px;
+    max-height: 700px;
+    height: 700px;
   }
 }
 /*==============================

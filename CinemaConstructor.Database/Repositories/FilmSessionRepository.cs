@@ -38,6 +38,17 @@ namespace CinemaConstructor.Database.Repositories
                 .ToListAsync(token);
         }
 
+        public async Task<IEnumerable<FilmSession>> FindByFilmIdAsync(long filmId, CancellationToken token)
+        {
+            return await _context.FilmSessions
+                .Where(p => p.Film.Id == filmId)
+                .Include(p => p.Film)
+                .ThenInclude(p => p.Company)
+                .Include(p => p.Hall)
+                .ThenInclude(p => p.Cinema)
+                .ToListAsync(token);
+        }
+
         public async Task<FilmSession> AddAsync(FilmSession filmSession, CancellationToken token)
         {
             filmSession.Id = 0;
