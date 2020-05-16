@@ -94,8 +94,11 @@ namespace CinemaConstructor.Controllers
             AddBreadcrumb("Company", "/Company");
             AddBreadcrumb("Design", "/Company/Design");
 
+            var company = await GetCompany(token);
             var viewModel = new DesignViewModel()
             {
+                AccentColorFirst = company.AccentColorFirst,
+                AccentColorSecond = company.AccentColorSecond
             };
 
             return View(viewModel);
@@ -110,6 +113,11 @@ namespace CinemaConstructor.Controllers
 
             if (ModelState.IsValid)
             {
+                var company = await GetCompany(token);
+                company.AccentColorFirst = model.AccentColorFirst;
+                company.AccentColorSecond = model.AccentColorSecond;
+
+                await _companyRepository.UpdateAsync(company, token);
                 return RedirectToAction(nameof(Index), "Company");
             }
 

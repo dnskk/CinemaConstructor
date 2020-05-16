@@ -18,6 +18,10 @@ namespace CinemaConstructor.Database.Entities
 
         public string FacebookLink { get; set; }
 
+        public string AccentColorFirst { get; set; }
+
+        public string AccentColorSecond { get; set; }
+
         public List<Cinema> Cinemas { get; set; }
 
         public List<Film> Films { get; set; }

@@ -101,7 +101,9 @@ namespace CinemaConstructor.Controllers
         {
             var company = new Company
             {
-                Name = name
+                Name = name,
+                AccentColorFirst = "#ff55a5",
+                AccentColorSecond = "#ff5860"
             };
 
             company = await _companyRepository.AddAsync(company, CancellationToken.None);
