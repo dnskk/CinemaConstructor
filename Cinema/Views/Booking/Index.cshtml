@@ -47,7 +47,7 @@
                                 <tr>
                                     @for (var j = 0; j < Model.FilmSession.Hall.Columns; j++)
                                     {
-                                        <td style="width: calc(100% / @Model.FilmSession.Hall.Columns); height: calc(100% / @Model.FilmSession.Hall.Rows);">
+                                        <td align="center" style="width: calc(100% / @Model.FilmSession.Hall.Columns); height: calc(100% / @Model.FilmSession.Hall.Rows);">
                                             <div id="@(i + "_" + j)" class="place"></div>
                                         </td>
                                     }
