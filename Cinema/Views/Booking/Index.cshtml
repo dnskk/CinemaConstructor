@@ -1,0 +1,48 @@
+﻿@model BookingViewModel
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+<section class="section details">
+    <!-- details background -->
+    <div class="details__bg" data-bg="img/home/home__bg.jpg"></div>
+    <!-- end details background -->
+    <!-- details content -->
+    <div class="container">
+        <div class="row">
+            <!-- title -->
+            <div class="col-12">
+                <h1 class="details__title">I Dream in Another Language</h1>
+            </div>
+            <!-- end title -->
+            <!-- content -->
+            <div class="col-10">
+                <div class="card card--details card--series">
+                    <div class="row">
+                        <div class="col-12 col-sm-3 col-md-3 col-lg-2 col-xl-2">
+                            <div class="card__cover">
+                                <img src="img/covers/cover.jpg" alt="">
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-9 col-md-9 col-lg-10 col-xl-10">
+                            <div class="card__content">
+                                <ul style="margin-top: 0;" class="card__meta">
+                                    <li><span>Cinema:</span> @Model.FilmSession.Hall.Cinema.Name</li>
+                                    <li><span>Address:</span> @Model.FilmSession.Hall.Cinema.Address</li>
+                                    <li><span>Hall:</span> @Model.FilmSession.Hall.Name</li>
+                                    <li><span>3D:</span> @(Model.FilmSession.Hall.Is3D ? "Yes" : "No")</li>
+                                    <li><span>IMAX:</span> @(Model.FilmSession.Hall.IsImax ? "Yes" : "No")</li>
+                                    <li><span>Date:</span> @(Model.FilmSession.StartTime.ToString("MM\\/dd\\/yyyy"))</li>
+                                    <li><span>Start:</span> @(Model.FilmSession.StartTime.ToString("HH\\:mm"))</li>
+                                    <li><span>End:</span> @(Model.FilmSession.EndTime.ToString("HH\\:mm"))</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <!-- end details content -->
+</section>

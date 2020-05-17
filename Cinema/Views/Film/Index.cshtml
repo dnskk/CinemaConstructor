@@ -3,6 +3,7 @@
 @{
     ViewData["Title"] = "Home Page";
 }
+
 <style>
     .footer:before {
         background-image: linear-gradient(90deg, @Model.Company.AccentColorFirst 0%, @Model.Company.AccentColorSecond 100%) !important;
@@ -70,9 +71,7 @@
                             <div class="card__content">
 
                                 <ul class="card__meta">
-                                    <li>
-                                        <span>Genre:</span> <a href="#">@Model.Film.Genre</a>
-                                    </li>
+                                    <li><span>Genre:</span> <a href="#"> @Model.Film.Genre</a></li>
                                     <li><span>Release date:</span> @(Model.Film.ReleaseDate.ToString("MM\\/dd\\/yyyy"))</li>
                                     <li><span>Duration:</span> @Model.Film.Duration.ToString(@"hh\:mm")</li>
                                 </ul>
@@ -112,19 +111,21 @@
                                                 <th>3D</th>
                                                 <th>IMAX</th>
                                                 <th>Price, ₽</th>
+                                                <th></th>
                                             </tr>
                                         </thead>
 
                                         <tbody>
                                             @foreach (var session in sessions)
                                             {
-                                                <tr>
-                                                    <th>@session.StartTime.ToString("MM\\/dd\\/yyyy HH\\:mm")</th>
-                                                    <td>@session.Hall.Name</td>
-                                                    <td>@(session.Hall.Is3D ? "Yes" : "No")</td>
-                                                    <td>@(session.Hall.IsImax ? "Yes" : "No")</td>
-                                                    <td>@session.Price</td>
-                                                </tr>
+                                            <tr>
+                                                <th>@session.StartTime.ToString("MM\\/dd\\/yyyy HH\\:mm")</th>
+                                                <td>@session.Hall.Name</td>
+                                                <td>@(session.Hall.Is3D ? "Yes" : "No")</td>
+                                                <td>@(session.Hall.IsImax ? "Yes" : "No")</td>
+                                                <td>@session.Price</td>
+                                                <td><a href="/Booking?companyId=@(Model.Company.Id)&filmSessionId=@(session.Id)">Buy</a></td>
+                                            </tr>
                                             }
                                         </tbody>
                                     </table>

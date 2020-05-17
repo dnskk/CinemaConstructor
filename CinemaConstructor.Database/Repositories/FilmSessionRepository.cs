@@ -23,8 +23,13 @@ namespace CinemaConstructor.Database.Repositories
 
         public async Task<FilmSession> FindByIdAsync(long id, CancellationToken token)
         {
-            var keys = new object[] { id };
-            return await _context.FilmSessions.FindAsync(keys, token);
+            return await _context.FilmSessions
+                .Where(p => p.Id == id)
+                .Include(p => p.Film)
+                .ThenInclude(p => p.Company)
+                .Include(p => p.Hall)
+                .ThenInclude(p => p.Cinema)
+                .SingleAsync(token);
         }
 
         public async Task<IEnumerable<FilmSession>> FindByCompanyIdAsync(long companyId, CancellationToken token)
