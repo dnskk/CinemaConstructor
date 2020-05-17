@@ -39,6 +39,27 @@ Primary use:	FlixGo Template
 	Common styles
 ==============================*/
 
+.booking__group {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.booking__input {
+    background-color: #2b2b31;
+    border: none;
+    height: 50px;
+    position: relative;
+    color: #fff;
+    font-size: 15px;
+    width: 95%;
+    color: #fff;
+    -webkit-border-radius: 0;
+    border-radius: 0;
+    padding: 0 20px;
+    letter-spacing: 0.2px;
+    font-family: 'Open Sans', sans-serif;
+}
+
 .place {
     border-radius: 5px;
     width: 90%;
@@ -47,6 +68,10 @@ Primary use:	FlixGo Template
 
 .available {
     background: #73AD21;
+}
+
+.selected {
+    background: #ff55a5 !important;
 }
 
 .unavailable {
