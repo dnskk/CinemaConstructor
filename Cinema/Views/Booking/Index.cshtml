@@ -101,7 +101,7 @@
                                     @for (var j = 0; j < Model.FilmSession.Hall.Columns; j++)
                                     {
                                         <td align="center" style="width: calc(100% / @Model.FilmSession.Hall.Columns); height: calc(100% / @Model.FilmSession.Hall.Rows);">
-                                            <div id="@(i + "_" + j)" class="place" onclick="selectPlace('@i', '@j')"></div>
+                                            <div id="@(i + "_" + j)" class="place"></div>
                                         </td>
                                     }
                                 </tr>
@@ -182,6 +182,13 @@
             for (var j = 0; j < columns; j++) {
                 var place = document.getElementById(i + "_" + j);
                 if (hallTable[i][j]) {
+                    place.onclick = (function() {
+                        var currentI = i;
+                        var currentJ = j;
+                        return function() {
+                            selectPlace(currentI, currentJ);
+                        }
+                    })();
                     place.classList.add("available");
                 }
             }

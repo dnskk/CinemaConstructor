@@ -27,6 +27,8 @@ namespace CinemaConstructor.Database
 
         public DbSet<FilmSession> FilmSessions { get; set; }
 
+        public  DbSet<Ticket> Tickets { get; set; }
+
         public DbSet<CompanyMember> CompanyMembers { get; set; }
 
         public DbSet<UserSession> UserSessions { get; set; }
