@@ -35,6 +35,7 @@ namespace Cinema
             services.AddScoped<HallRepository>();
             services.AddScoped<FilmRepository>();
             services.AddScoped<FilmSessionRepository>();
+            services.AddScoped<TicketRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

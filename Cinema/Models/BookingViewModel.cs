@@ -10,6 +10,14 @@ namespace Cinema.Models
 
         public FilmSession FilmSession { get; set; }
 
+        public  string UnavailableSeats { get; set; }
+
         public string Poster { get; set; }
+
+        public string Email { get; set; }
+
+        public string Phone { get; set; }
+
+        public string Places { get; set; }
     }
 }

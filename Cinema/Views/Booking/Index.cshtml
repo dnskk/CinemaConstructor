@@ -109,16 +109,20 @@
                         </table>
                     </div>
                     <separator2 style="margin-top: 15px; margin-bottom: 15px;"></separator2>
-                    <form>
+                    <form id="payForm" asp-controller="Booking" asp-action="Index" method="post">
+                        @Html.HiddenFor(p => p.Company.Id)
+                        @Html.HiddenFor(p => p.Film.Id)
+                        @Html.HiddenFor(p => p.FilmSession.Id)
+                        <input id="places" asp-for="Places" class="form-control" type="hidden" />
                         <div class="row">
                             <div class="col-6">
                                 <div class="booking__group">
-                                    <input type="text" class="booking__input" placeholder="Email">
+                                    <input asp-for="Email" type="text" class="booking__input" placeholder="Email">
                                 </div>
                             </div>
                             <div class="col-6">
                                 <div class="booking__group">
-                                    <input type="text" class="booking__input" placeholder="Phone">
+                                    <input asp-for="Phone" type="text" class="booking__input" placeholder="Phone">
                                 </div>
                             </div>
                         </div>
@@ -129,7 +133,7 @@
                                 </div>
                             </div>
                             <div class="col-6">
-                                <a href="#" class="section__btn" style="width: 95%; margin-left: 0; margin-top: 0;">Pay</a>
+                                <a class="section__btn" style="width: 95%; margin-left: 0; margin-top: 0;" onclick="submitPayment();">Pay</a>
                             </div>
                         </div>
                     </form>
@@ -192,6 +196,32 @@
                     place.classList.add("available");
                 }
             }
+        }
+
+        var unavailableSeats = JSON.parse("@Model.UnavailableSeats");
+        for (var i = 0; i < unavailableSeats.length; i++) {
+            var place = document.getElementById(unavailableSeats[i][0] + "_" + unavailableSeats[i][1]);
+            place.classList.remove("available");
+            place.classList.add("unavailable");
+            place.onclick = function() {
+                return false;
+            }
+        }
+        
+        function submitPayment() {
+            var placesArray = [];
+            for (var i = 0; i < rows; i++) {
+                for (var j = 0; j < columns; j++) {
+                    var place = document.getElementById(i + "_" + j);
+                    if (place.classList.contains("selected")) {
+                        var placeArray = [i, j];
+                        placesArray.push(placeArray);
+                    }
+                }
+            }
+
+            document.getElementById('places').value = JSON.stringify(placesArray);
+            document.getElementById('payForm').submit();
         }
     </script>
 }
