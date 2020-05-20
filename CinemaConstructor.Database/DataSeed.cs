@@ -11,6 +11,10 @@ namespace CinemaConstructor.Database
 {
     public static class DataSeed
     {
+        public static string Administrators = "Administrators";
+        public static string Cashiers = "Cashiers";
+        public static string TicketControllers = "TicketControllers";
+
         public static async Task Seed(IServiceProvider serviceProvider)
         {
             IServiceScopeFactory scopeFactory = serviceProvider.GetRequiredService<IServiceScopeFactory>();
@@ -31,24 +35,21 @@ namespace CinemaConstructor.Database
                 string lastName = "Admin";
                 string email = "superadmin@admin.com";
                 string password = "Qwaszx123$";
-                string role = "SuperAdmins";
-                string role2 = "SeniorManagers";
-                string role3 = "Managers";
 
                 if (await _userManager.FindByNameAsync(email) == null)
                 {
                     // Create SuperAdmins role if it doesn't exist
-                    if (await roleManager.FindByNameAsync(role) == null)
+                    if (await roleManager.FindByNameAsync(Administrators) == null)
                     {
-                        await roleManager.CreateAsync(new IdentityRole(role));
+                        await roleManager.CreateAsync(new IdentityRole(Administrators));
                     }
-                    if (await roleManager.FindByNameAsync(role2) == null)
+                    if (await roleManager.FindByNameAsync(Cashiers) == null)
                     {
-                        await roleManager.CreateAsync(new IdentityRole(role2));
+                        await roleManager.CreateAsync(new IdentityRole(Cashiers));
                     }
-                    if (await roleManager.FindByNameAsync(role3) == null)
+                    if (await roleManager.FindByNameAsync(TicketControllers) == null)
                     {
-                        await roleManager.CreateAsync(new IdentityRole(role3));
+                        await roleManager.CreateAsync(new IdentityRole(TicketControllers));
                     }
 
                     // Create user account if it doesn't exist
@@ -77,7 +78,9 @@ namespace CinemaConstructor.Database
                         //SignInManager<ApplicationUser> _signInManager = serviceProvider.GetRequiredService<SignInManager<ApplicationUser>>();
                         //await _signInManager.SignInAsync(user, isPersistent: false);
 
-                        await _userManager.AddToRoleAsync(user, role);
+                        await _userManager.AddToRoleAsync(user, Administrators);
+                        await _userManager.AddToRoleAsync(user, Cashiers);
+                        await _userManager.AddToRoleAsync(user, TicketControllers);
                     }
                 }
             }

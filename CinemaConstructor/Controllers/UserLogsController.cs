@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CinemaConstructor.Controllers
 {
-    [Authorize(Roles = "SuperAdmins")]
+    [Authorize(Roles = "Administrators")]
     public class UserLogsController : Controller
     {
         private readonly ApplicationDbContext _context;

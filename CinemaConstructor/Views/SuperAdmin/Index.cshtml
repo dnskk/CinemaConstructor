@@ -15,7 +15,6 @@
     <thead>
         <tr>
             <th>ID</th>
-            <th>Name</th>
             <th>Email</th>
             <th></th>
         </tr>
@@ -35,7 +34,6 @@
             {
                 <tr>
                     <td>@user.Id</td>
-                    <td>@user.UserName</td>
                     <td>@user.Email</td>
                     <td>
                         <a class="btn btn-success" asp-controller="SuperAdmin" asp-action="Edit" asp-route-id="@user.Id">Edit</a>
@@ -49,7 +47,6 @@
 </table>
 
 <a class="btn btn-primary" asp-action="Create">Create</a>
-<a class="btn btn-primary" asp-controller="Home" asp-action="Index">Home</a>
 
 <script>
     $(document).ready(function () {

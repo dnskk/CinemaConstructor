@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CinemaConstructor.Controllers
 {
-    [Authorize(Roles = "SuperAdmins")]
+    [Authorize(Roles = "Administrators")]
     public class RoleController : Controller
     {
         private RoleManager<IdentityRole> roleManager;

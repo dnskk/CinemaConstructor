@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CinemaConstructor.Controllers
 {
-    [Authorize(Roles = "SuperAdmins")]
+    [Authorize(Roles = "Administrators")]
     public class SuperAdminController : Controller
     {
         private UserManager<ApplicationUser> userManager;

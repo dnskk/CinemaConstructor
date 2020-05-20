@@ -75,22 +75,14 @@ namespace CinemaConstructor.ViewComponents
                 ModuleHelper.AddModule(ModuleHelper.Module.FilmSessionCreate)
             };
 
-            sidebars.Add(ModuleHelper.AddModule(ModuleHelper.Module.About, Tuple.Create(1, 0, 0)));
-            sidebars.Add(ModuleHelper.AddTree("Account"));
-            sidebars.Last().TreeChild = new List<SidebarMenu>
+            if (User.IsInRole("Cashiers"))
             {
-                ModuleHelper.AddModule(ModuleHelper.Module.Register, Tuple.Create(1, 1, 1)),
-            };
-
-            if (User.IsInRole("SuperAdmins"))
-            {
-                sidebars.Add(ModuleHelper.AddTree("Administration"));
+                sidebars.Add(ModuleHelper.AddTree("Users"));
                 sidebars.Last().TreeChild = new List<SidebarMenu>
                 {
                     ModuleHelper.AddModule(ModuleHelper.Module.SuperAdmin),
                     ModuleHelper.AddModule(ModuleHelper.Module.Role),
                 };
-                sidebars.Add(ModuleHelper.AddModule(ModuleHelper.Module.UserLogs));
             }
 
             return View(sidebars);

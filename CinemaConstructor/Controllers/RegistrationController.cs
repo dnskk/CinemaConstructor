@@ -2,6 +2,7 @@
 using System.Security.Claims;
 using System.Threading.Tasks;
 using CinemaConstructor.Common;
+using CinemaConstructor.Database;
 using CinemaConstructor.Database.Entities;
 using CinemaConstructor.Models.AccountViewModels;
 using Microsoft.AspNetCore.Authorization;
@@ -70,12 +71,15 @@ namespace CinemaConstructor.Controllers
                     await _userManager.AddClaimAsync(user, new Claim(CustomClaimTypes.Surname, user.LastName));
                     await _userManager.AddClaimAsync(user, new Claim(CustomClaimTypes.AvatarURL, user.AvatarURL));
 
+                    await _userManager.AddToRoleAsync(user, DataSeed.Administrators);
+                    await _userManager.AddToRoleAsync(user, DataSeed.Cashiers);
+                    await _userManager.AddToRoleAsync(user, DataSeed.TicketControllers);
+
                     return RedirectToLocal(returnUrl);
                 }
                 AddErrors(result);
             }
 
-            // If we got this far, something failed, redisplay form
             return Index("");
         }
 

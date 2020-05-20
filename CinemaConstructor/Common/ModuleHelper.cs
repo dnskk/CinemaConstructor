@@ -177,7 +177,7 @@ namespace CinemaConstructor.Common
                     return new SidebarMenu
                     {
                         Type = SidebarMenuType.Link,
-                        Name = "User",
+                        Name = "Users",
                         IconClassName = "fa fa-link",
                         URLPath = "/SuperAdmin",
                         LinkCounter = counter,
