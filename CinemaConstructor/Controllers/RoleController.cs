@@ -1,35 +1,47 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using CinemaConstructor.Database.Entities;
+using CinemaConstructor.Database.Repositories;
 using CinemaConstructor.Models.RoleViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace CinemaConstructor.Controllers
 {
     [Authorize(Roles = "Administrators")]
     public class RoleController : Controller
     {
-        private RoleManager<IdentityRole> roleManager;
-        private UserManager<ApplicationUser> userManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
+        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly CompanyMemberRepository _companyMemberRepository;
+        private readonly CompanyRepository _companyRepository;
+        private readonly UserSessionRepository _userSessionRepository;
 
-        public RoleController(RoleManager<IdentityRole> roleMgr, UserManager<ApplicationUser> userMgr)
+        public RoleController(RoleManager<IdentityRole> roleMgr, UserManager<ApplicationUser> userMgr,
+            CompanyMemberRepository companyMemberRepository, CompanyRepository companyRepository,
+            UserSessionRepository userSessionRepository)
         {
-            roleManager = roleMgr;
-            userManager = userMgr;
+            _roleManager = roleMgr;
+            _userManager = userMgr;
+            _companyMemberRepository = companyMemberRepository;
+            _companyRepository = companyRepository;
+            _userSessionRepository = userSessionRepository;
         }
 
         public IActionResult Index()
         {
-            return View(roleManager.Roles);
+            return View(_roleManager.Roles);
         }
 
         private void AddErrors(IdentityResult result)
         {
-            foreach (IdentityError error in result.Errors)
+            foreach (var error in result.Errors)
             {
                 ModelState.AddModelError("", error.Description);
             }
@@ -46,7 +58,7 @@ namespace CinemaConstructor.Controllers
         {
             if (ModelState.IsValid)
             {
-                IdentityResult result = await roleManager.CreateAsync(new IdentityRole(name));
+                var result = await _roleManager.CreateAsync(new IdentityRole(name));
 
                 if (result.Succeeded)
                 {
@@ -61,15 +73,20 @@ namespace CinemaConstructor.Controllers
             return View(name);
         }
 
-        public async Task<IActionResult> Edit(string id)
+        public async Task<IActionResult> Edit(string id, CancellationToken token)
         {
-            IdentityRole role = await roleManager.FindByIdAsync(id);
-            List<ApplicationUser> members = new List<ApplicationUser>();
-            List<ApplicationUser> nonMember = new List<ApplicationUser>();
+            var role = await _roleManager.FindByIdAsync(id);
+            var members = new List<ApplicationUser>();
+            var nonMember = new List<ApplicationUser>();
 
-            foreach (ApplicationUser user in userManager.Users.ToArray())
+            var company = await GetCompany(token);
+            var allUsers = await _userManager.Users.ToArrayAsync(token);
+            var companyMembers = await _companyMemberRepository.FindByCompanyIdAsync(company.Id, token);
+
+            var users = companyMembers.Select(companyMember => allUsers.Single(p => p.Id == companyMember.UserId)).ToList();
+            foreach (var user in users)
             {
-                var list = await userManager.IsInRoleAsync(user, role.Name)
+                var list = await _userManager.IsInRoleAsync(user, role.Name)
                     ? members
                     : nonMember;
                 list.Add(user);
@@ -91,20 +108,12 @@ namespace CinemaConstructor.Controllers
 
             if (ModelState.IsValid)
             {
-                IdentityRole role = await roleManager.FindByIdAsync(modifyRole.RoleId);
-                role.Name = modifyRole.RoleName;
-                result = await roleManager.UpdateAsync(role);
-                if (!result.Succeeded)
+                foreach (var userId in modifyRole.IdsToAdd ?? new string[] { })
                 {
-                    AddErrors(result);
-                }
-
-                foreach (string userId in modifyRole.IdsToAdd ?? new string[] { })
-                {
-                    ApplicationUser user = await userManager.FindByIdAsync(userId);
+                    var user = await _userManager.FindByIdAsync(userId);
                     if (user != null)
                     {
-                        result = await userManager.AddToRoleAsync(user, modifyRole.RoleName);
+                        result = await _userManager.AddToRoleAsync(user, modifyRole.RoleName);
                         if (!result.Succeeded)
                         {
                             AddErrors(result);
@@ -112,12 +121,12 @@ namespace CinemaConstructor.Controllers
                     }
                 }
 
-                foreach (string userId in modifyRole.IdsToRemove ?? new string[] { })
+                foreach (var userId in modifyRole.IdsToRemove ?? new string[] { })
                 {
-                    ApplicationUser user = await userManager.FindByIdAsync(userId);
+                    var user = await _userManager.FindByIdAsync(userId);
                     if (user != null)
                     {
-                        result = await userManager.RemoveFromRoleAsync(user, modifyRole.RoleName);
+                        result = await _userManager.RemoveFromRoleAsync(user, modifyRole.RoleName);
                         if (!result.Succeeded)
                         {
                             AddErrors(result);
@@ -136,11 +145,11 @@ namespace CinemaConstructor.Controllers
 
         public async Task<IActionResult> Delete(string id)
         {
-            IdentityRole role = await roleManager.FindByIdAsync(id);
+            var role = await _roleManager.FindByIdAsync(id);
 
             if (role != null)
             {
-                IdentityResult result = await roleManager.DeleteAsync(role);
+                var result = await _roleManager.DeleteAsync(role);
                 if (result.Succeeded)
                 {
                     return RedirectToAction("Index");
@@ -155,7 +164,13 @@ namespace CinemaConstructor.Controllers
                 ModelState.AddModelError("", "No role found");
             }
 
-            return View("Index", roleManager.Roles);
+            return View("Index", _roleManager.Roles);
+        }
+        private async Task<Company> GetCompany(CancellationToken token)
+        {
+            var user = await _userManager.FindByIdAsync(_userManager.GetUserId(User)) as IdentityUser;
+            var userSession = await _userSessionRepository.FindByUserIdAsync(Guid.Parse(user.Id), token);
+            return await _companyRepository.FindByIdAsync(userSession.CurrentCompanyId, token);
         }
     }
 }

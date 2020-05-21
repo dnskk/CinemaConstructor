@@ -32,7 +32,15 @@ namespace CinemaConstructor.Database.Repositories
         public async Task<IEnumerable<CompanyMember>> FindByUserIdAsync(string userId, CancellationToken token)
         {
             return await _context.CompanyMembers
-                .Where(p => p.UserId== userId)
+                .Where(p => p.UserId == userId)
+                .Include(p => p.Company)
+                .ToListAsync(token);
+        }
+
+        public async Task<IEnumerable<CompanyMember>> FindByCompanyIdAsync(long companyId, CancellationToken token)
+        {
+            return await _context.CompanyMembers
+                .Where(p => p.Company.Id == companyId)
                 .Include(p => p.Company)
                 .ToListAsync(token);
         }

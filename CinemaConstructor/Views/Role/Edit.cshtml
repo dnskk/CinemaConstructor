@@ -10,13 +10,7 @@
 
 <form method="post" asp-controller="Role" asp-action="Edit" asp-antiforgery="true" class="form-horizontal">
     <input type="hidden" name="RoleId" value="@Model.Role.Id" />
-
-    <div class="form-group">
-        <label class="control-label col-sm-2" for="RoleName">Role Name:</label>
-        <div class="col-sm-2">
-            <input class="form-control" name="RoleName" value="@Model.Role.Name" />
-        </div>
-    </div>
+    <input type="hidden" name="RoleName" value="@Model.Role.Name" />
 
     <h5 class="bg-info panel-body">
         Add to @Model.Role.Name
