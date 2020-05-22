@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -13,6 +14,9 @@ namespace Cinema.Controllers
 {
     public class BookingController : Controller
     {
+        private const string AllowedChars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        private static Random _random = new Random();
+
         private readonly CompanyRepository _companyRepository;
         private readonly FilmSessionRepository _filmSessionRepository;
         private readonly BlobRepository _blobRepository;
@@ -68,11 +72,13 @@ namespace Cinema.Controllers
             var places = JsonConvert.DeserializeObject<long[][]>(model.Places);
 
             var bookingId = Guid.NewGuid();
+            var confirmationCode = GenerateCode();
             foreach (var place in places)
             {
                 var ticket = new Ticket
                 {
                     BookingId = bookingId,
+                    ConfirmationCode = confirmationCode,
                     Email = model.Email,
                     Phone = model.Phone,
                     Row = place[0],
@@ -103,7 +109,7 @@ namespace Cinema.Controllers
             var company = await _companyRepository.FindByIdAsync(long.Parse(companyId), token);
 
             Request.Query.TryGetValue("bookingId", out var bookingId);
-            var tickets = await _ticketRepository.FindByBookingIdAsync(Guid.Parse(bookingId), token);
+            var tickets = (await _ticketRepository.FindByBookingIdAsync(Guid.Parse(bookingId), token)).ToList();
             var currentFilmSession = await _filmSessionRepository.FindByIdAsync(tickets.First().FilmSession.Id, token);
             var poster = _blobRepository.Get(currentFilmSession.Film.Id);
 
@@ -113,9 +119,27 @@ namespace Cinema.Controllers
                 Film = currentFilmSession.Film,
                 FilmSession = currentFilmSession,
                 Poster = poster,
+                Tickets = tickets,
+                ConfirmationCode = tickets.First().ConfirmationCode
             };
 
             return View(viewModel);
+        }
+
+        private static string GenerateCode()
+        {
+            const int stringLength = 5;
+            var chars = new char[stringLength];
+            var setLength = AllowedChars.Length;
+
+            for (var i = 0; i < stringLength; ++i)
+            {
+                chars[i] = AllowedChars[_random.Next(setLength)];
+            }
+
+            var randomString = new string(chars, 0, stringLength);
+            
+            return randomString;
         }
     }
 }

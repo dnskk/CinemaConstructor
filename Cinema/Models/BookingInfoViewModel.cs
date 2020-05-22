@@ -1,4 +1,5 @@
-﻿using CinemaConstructor.Database.Entities;
+﻿using System.Collections.Generic;
+using CinemaConstructor.Database.Entities;
 
 namespace Cinema.Models
 {
@@ -11,5 +12,9 @@ namespace Cinema.Models
         public FilmSession FilmSession { get; set; }
 
         public string Poster { get; set; }
+
+        public List<Ticket> Tickets { get; set; }
+
+        public string ConfirmationCode { get; set; }
     }
 }
