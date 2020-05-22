@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -67,25 +66,56 @@ namespace Cinema.Controllers
         public async Task<IActionResult> Index(BookingViewModel model, CancellationToken token)
         {
             var places = JsonConvert.DeserializeObject<long[][]>(model.Places);
+
+            var bookingId = Guid.NewGuid();
             foreach (var place in places)
             {
                 var ticket = new Ticket
                 {
+                    BookingId = bookingId,
                     Email = model.Email,
                     Phone = model.Phone,
                     Row = place[0],
                     Column = place[1],
                     FilmSession = await _filmSessionRepository.FindByIdAsync(model.FilmSession.Id, token)
                 };
+
                 await _ticketRepository.AddAsync(ticket, token);
             }
 
             var routeValuesDictionary = new RouteValueDictionary
             {
-                {"companyId", model.Company.Id}, {"filmId", model.Film.Id}
+                {"companyId", model.Company.Id}, {"bookingId", bookingId}
             };
 
-            return RedirectToAction(nameof(FilmController.Index), "Film", routeValuesDictionary);
+            return RedirectToAction(nameof(Info), "Booking", routeValuesDictionary);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Info(CancellationToken token)
+        {
+            if (!Request.Query.ContainsKey("companyId") || !Request.Query.ContainsKey("bookingId"))
+            {
+                return NotFound();
+            }
+
+            Request.Query.TryGetValue("companyId", out var companyId);
+            var company = await _companyRepository.FindByIdAsync(long.Parse(companyId), token);
+
+            Request.Query.TryGetValue("bookingId", out var bookingId);
+            var tickets = await _ticketRepository.FindByBookingIdAsync(Guid.Parse(bookingId), token);
+            var currentFilmSession = await _filmSessionRepository.FindByIdAsync(tickets.First().FilmSession.Id, token);
+            var poster = _blobRepository.Get(currentFilmSession.Film.Id);
+
+            var viewModel = new BookingInfoViewModel
+            {
+                Company = company,
+                Film = currentFilmSession.Film,
+                FilmSession = currentFilmSession,
+                Poster = poster,
+            };
+
+            return View(viewModel);
         }
     }
 }

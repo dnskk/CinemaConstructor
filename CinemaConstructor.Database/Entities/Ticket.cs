@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace CinemaConstructor.Database.Entities
 {
@@ -6,6 +7,10 @@ namespace CinemaConstructor.Database.Entities
     {
         [Key]
         public long Id { get; set; }
+
+        public Guid BookingId { get; set; }
+
+        public string ConfirmationCode { get; set; }
 
         public string Email { get; set; }
 
