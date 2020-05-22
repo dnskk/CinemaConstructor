@@ -50,6 +50,8 @@ namespace CinemaConstructor
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
+            
+            services.Configure<WebApplicationOptions>(Configuration.GetSection(nameof(WebApplicationOptions)));
 
             services.Configure<BlobRepositoryOptions>(Configuration.GetSection(nameof(BlobRepositoryOptions)));
             services.AddScoped<BlobRepository>();

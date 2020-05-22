@@ -5,5 +5,7 @@ namespace CinemaConstructor.Models.CompanyViewModels
     public class InfoViewModel
     {
         public Company Company { get; set; }
+
+        public string LinkPrefix { get; set; }
     }
 }

@@ -10,6 +10,7 @@ using CinemaConstructor.Models;
 using CinemaConstructor.Models.CompanyViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 
 namespace CinemaConstructor.Controllers
 {
@@ -18,12 +19,16 @@ namespace CinemaConstructor.Controllers
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly CompanyRepository _companyRepository;
         private readonly UserSessionRepository _userSessionRepository;
+        private readonly WebApplicationOptions _webApplicationOptions;
 
-        public CompanyController(UserManager<ApplicationUser> userManager, CompanyRepository companyRepository, UserSessionRepository userSessionRepository)
+
+        public CompanyController(UserManager<ApplicationUser> userManager, CompanyRepository companyRepository,
+            UserSessionRepository userSessionRepository, IOptions<WebApplicationOptions> webApplicationOptions)
         {
             _userManager = userManager;
             _companyRepository = companyRepository;
             _userSessionRepository = userSessionRepository;
+            _webApplicationOptions = webApplicationOptions.Value;
         }
 
         [HttpGet]
@@ -34,7 +39,8 @@ namespace CinemaConstructor.Controllers
             var company = await GetCompany(token);
             var viewModel = new InfoViewModel
             {
-                Company = company
+                Company = company,
+                LinkPrefix = _webApplicationOptions.LinkPrefix
             };
 
             return View(viewModel);
@@ -79,7 +85,7 @@ namespace CinemaConstructor.Controllers
                 company.Email = model.Email;
                 company.InstagramLink = model.InstagramLink;
                 company.FacebookLink = model.FacebookLink;
-                
+
                 await _companyRepository.UpdateAsync(company, token);
 
                 return RedirectToAction(nameof(Index), "Company");
