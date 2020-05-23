@@ -78,6 +78,14 @@ Primary use:	FlixGo Template
     background: #737373;
 }
 
+.buy {
+    color: #ff55a5;
+}
+
+.buy:hover {
+    color: #ff5860;
+}
+
 .screen {
     border-radius: 3px;
     background-color: #d9d9d9;

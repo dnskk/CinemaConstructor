@@ -50,6 +50,12 @@
     .accordion__card .card-header button:hover span:first-child {
         color: @Model.Company.AccentColorFirst !important;
     }
+    .buy {
+        color: @Model.Company.AccentColorFirst !important;
+    }
+    .buy:hover {
+        color: @Model.Company.AccentColorSecond !important;
+    }
 </style>
 
 <section class="section details">
@@ -124,7 +130,7 @@
                                                 <td>@(session.Hall.Is3D ? "Yes" : "No")</td>
                                                 <td>@(session.Hall.IsImax ? "Yes" : "No")</td>
                                                 <td>@session.Price</td>
-                                                <td><a href="/Booking?companyId=@(Model.Company.Id)&filmSessionId=@(session.Id)">Buy</a></td>
+                                                <td><a href="/Booking?companyId=@(Model.Company.Id)&filmSessionId=@(session.Id)" class="buy">Buy</a></td>
                                             </tr>
                                             }
                                         </tbody>
