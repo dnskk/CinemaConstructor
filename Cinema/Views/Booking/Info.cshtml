@@ -1,4 +1,5 @@
-﻿@model BookingInfoViewModel
+﻿@using System.IO.Compression
+@model BookingInfoViewModel
 
 @{
     ViewData["Title"] = "Booking info";
@@ -55,7 +56,7 @@
     }
 </style>
 
-<section class="section details">
+<section class="section details" style="padding-bottom: 30px;">
     <div class="details__bg" data-bg="img/home/home__bg.jpg"></div>
     <div class="container">
         <div class="row">
@@ -88,9 +89,24 @@
                 </div>
             </div>
             <div class="col-12" style="margin-top: 20px; text-align: center;">
-                <h2 class="section__title section__title--no-margin" style="margin-bottom: 0;">Your confirmation code</h2>
+                <h2 class="section__title section__title--no-margin" style="margin-bottom: 0; font-size: 24px;">Your confirmation code</h2>
                 <h2 class="section__title section__title--no-margin">@Model.ConfirmationCode</h2>
             </div>
+            @if (!string.IsNullOrEmpty(Model.Company.YandexWallet))
+            {
+
+                <div class="col-12" style="text-align: center;">
+                    <h2 class="section__title section__title--no-margin" style="margin-bottom: 0; font-size: 24px;">Price, ₽: @Model.Money</h2>
+                    <form method="POST" action="https://money.yandex.ru/quickpay/confirm.xml">
+                        <input type="hidden" name="receiver" value="@Model.Company.YandexWallet">
+                        <input type="hidden" name="quickpay-form" value="shop">
+                        <input type="hidden" name="targets" value="Tickets @(Model.Tickets.First().BookingId)">
+                        <input type="hidden" name="sum" value="@Model.Money" data-type="number">
+                        <input type="hidden" name="paymentType" value="AC">
+                        <input class="section__btn" style="margin-top: 0; border-width: 0; cursor: pointer" type="submit" value="Pay">
+                    </form>
+                </div>
+            }
         </div>
     </div>
 </section>

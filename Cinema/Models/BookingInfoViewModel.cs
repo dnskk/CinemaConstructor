@@ -13,6 +13,8 @@ namespace Cinema.Models
 
         public string Poster { get; set; }
 
+        public long Money { get; set; }
+
         public List<Ticket> Tickets { get; set; }
 
         public string ConfirmationCode { get; set; }

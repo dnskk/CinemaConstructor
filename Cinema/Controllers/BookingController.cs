@@ -119,6 +119,7 @@ namespace Cinema.Controllers
                 Film = currentFilmSession.Film,
                 FilmSession = currentFilmSession,
                 Poster = poster,
+                Money = tickets.Count * currentFilmSession.Price,
                 Tickets = tickets,
                 ConfirmationCode = tickets.First().ConfirmationCode
             };
@@ -138,7 +139,7 @@ namespace Cinema.Controllers
             }
 
             var randomString = new string(chars, 0, stringLength);
-            
+
             return randomString;
         }
     }

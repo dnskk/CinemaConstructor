@@ -22,6 +22,8 @@ namespace CinemaConstructor.Database.Entities
 
         public string AccentColorSecond { get; set; }
 
+        public string YandexWallet { get; set; }
+
         public List<Cinema> Cinemas { get; set; }
 
         public List<Film> Films { get; set; }

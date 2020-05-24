@@ -65,7 +65,8 @@ namespace CinemaConstructor.Controllers
                 Phone = company.Phone,
                 Email = company.Email,
                 InstagramLink = company.InstagramLink,
-                FacebookLink = company.FacebookLink
+                FacebookLink = company.FacebookLink,
+                YandexWallet = company.YandexWallet
             };
 
             return View(viewModel);
@@ -85,6 +86,7 @@ namespace CinemaConstructor.Controllers
                 company.Email = model.Email;
                 company.InstagramLink = model.InstagramLink;
                 company.FacebookLink = model.FacebookLink;
+                company.YandexWallet = model.YandexWallet;
 
                 await _companyRepository.UpdateAsync(company, token);
 

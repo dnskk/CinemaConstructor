@@ -15,5 +15,8 @@ namespace CinemaConstructor.Models.CompanyViewModels
 
         [Display(Name = "Facebook link")]
         public string FacebookLink { get; set; }
+
+        [Display(Name = "Yandex wallet")]
+        public string YandexWallet { get; set; }
     }
 }
