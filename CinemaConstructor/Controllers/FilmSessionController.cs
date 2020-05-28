@@ -7,11 +7,13 @@ using System.Threading.Tasks;
 using CinemaConstructor.Database.Entities;
 using CinemaConstructor.Database.Repositories;
 using CinemaConstructor.Models.FilmSessionViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CinemaConstructor.Controllers
 {
+    [Authorize]
     public class FilmSessionController : BaseController
     {
         private readonly UserManager<ApplicationUser> _userManager;
@@ -56,6 +58,7 @@ namespace CinemaConstructor.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Administrators")]
         public async Task<IActionResult> Create(CancellationToken token)
         {
             AddBreadcrumb("Film session", "/FilmSession/All");

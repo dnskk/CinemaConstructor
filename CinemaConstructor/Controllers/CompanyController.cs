@@ -8,12 +8,14 @@ using CinemaConstructor.Database.Entities;
 using CinemaConstructor.Database.Repositories;
 using CinemaConstructor.Models;
 using CinemaConstructor.Models.CompanyViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 
 namespace CinemaConstructor.Controllers
 {
+    [Authorize]
     public class CompanyController : BaseController
     {
         private readonly UserManager<ApplicationUser> _userManager;
@@ -35,7 +37,6 @@ namespace CinemaConstructor.Controllers
         public async Task<IActionResult> Index(CancellationToken token)
         {
             AddBreadcrumb("Company", "/Company");
-
             var company = await GetCompany(token);
             var viewModel = new InfoViewModel
             {
@@ -54,6 +55,7 @@ namespace CinemaConstructor.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Administrators")]
         public async Task<IActionResult> Edit(CancellationToken token)
         {
             AddBreadcrumb("Company", "/Company");
@@ -97,6 +99,7 @@ namespace CinemaConstructor.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Administrators")]
         public async Task<IActionResult> Design(CancellationToken token)
         {
             AddBreadcrumb("Company", "/Company");

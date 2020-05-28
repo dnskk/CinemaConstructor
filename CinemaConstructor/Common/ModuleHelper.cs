@@ -60,7 +60,7 @@ namespace CinemaConstructor.Common
                     return new SidebarMenu
                     {
                         Type = SidebarMenuType.Link,
-                        Name = "Info",
+                        Name = name ?? "Info",
                         IconClassName = "fa fa-link",
                         URLPath = "/Company",
                         LinkCounter = counter,
@@ -69,7 +69,7 @@ namespace CinemaConstructor.Common
                     return new SidebarMenu
                     {
                         Type = SidebarMenuType.Link,
-                        Name = "Info editing",
+                        Name = name ?? "Info editing",
                         IconClassName = "fa fa-phone",
                         URLPath = "/Company/Edit",
                         LinkCounter = counter,
@@ -78,7 +78,7 @@ namespace CinemaConstructor.Common
                     return new SidebarMenu
                     {
                         Type = SidebarMenuType.Link,
-                        Name = "Design editing",
+                        Name = name ?? "Design editing",
                         IconClassName = "fa fa-phone",
                         URLPath = "/Company/Design",
                         LinkCounter = counter,
@@ -87,8 +87,8 @@ namespace CinemaConstructor.Common
                     return new SidebarMenu
                     {
                         Type = SidebarMenuType.Link,
-                        Name = "Manage",
-                        IconClassName = "fa fa-exclamation-triangle",
+                        Name = name ?? "Manage",
+                        IconClassName = "fa fa-link",
                         URLPath = "/Cinema/All",
                         LinkCounter = counter,
                     };
@@ -96,7 +96,7 @@ namespace CinemaConstructor.Common
                     return new SidebarMenu
                     {
                         Type = SidebarMenuType.Link,
-                        Name = "Create",
+                        Name = name ?? "Create",
                         IconClassName = "fa fa-exclamation-triangle",
                         URLPath = "/Cinema/Create",
                         LinkCounter = counter,
@@ -105,8 +105,8 @@ namespace CinemaConstructor.Common
                     return new SidebarMenu
                     {
                         Type = SidebarMenuType.Link,
-                        Name = "Manage",
-                        IconClassName = "fa fa-exclamation-triangle",
+                        Name = name ?? "Manage",
+                        IconClassName = "fa fa-link",
                         URLPath = "/Hall/All",
                         LinkCounter = counter,
                     };
@@ -114,7 +114,7 @@ namespace CinemaConstructor.Common
                     return new SidebarMenu
                     {
                         Type = SidebarMenuType.Link,
-                        Name = "Create",
+                        Name = name ?? "Create",
                         IconClassName = "fa fa-exclamation-triangle",
                         URLPath = "/Hall/Create",
                         LinkCounter = counter,
@@ -123,8 +123,8 @@ namespace CinemaConstructor.Common
                     return new SidebarMenu
                     {
                         Type = SidebarMenuType.Link,
-                        Name = "Manage",
-                        IconClassName = "fa fa-sign-in",
+                        Name = name ?? "Manage",
+                        IconClassName = "fa fa-link",
                         URLPath = "/Film/All",
                         LinkCounter = counter,
                     };
@@ -132,7 +132,7 @@ namespace CinemaConstructor.Common
                     return new SidebarMenu
                     {
                         Type = SidebarMenuType.Link,
-                        Name = "Create",
+                        Name = name ?? "Create",
                         IconClassName = "fa fa-sign-in",
                         URLPath = "/Film/Create",
                         LinkCounter = counter,
@@ -141,8 +141,8 @@ namespace CinemaConstructor.Common
                     return new SidebarMenu
                     {
                         Type = SidebarMenuType.Link,
-                        Name = "Manage",
-                        IconClassName = "fa fa-sign-in",
+                        Name = name ?? "Manage",
+                        IconClassName = "fa fa-link",
                         URLPath = "/FilmSession/All",
                         LinkCounter = counter,
                     };
@@ -150,7 +150,7 @@ namespace CinemaConstructor.Common
                     return new SidebarMenu
                     {
                         Type = SidebarMenuType.Link,
-                        Name = "Create",
+                        Name = name ?? "Create",
                         IconClassName = "fa fa-sign-in",
                         URLPath = "/FilmSession/Create",
                         LinkCounter = counter,
@@ -159,7 +159,7 @@ namespace CinemaConstructor.Common
                     return new SidebarMenu
                     {
                         Type = SidebarMenuType.Link,
-                        Name = "Register",
+                        Name = name ?? "Register",
                         IconClassName = "fa fa-user-plus",
                         URLPath = "/Account/Register",
                         LinkCounter = counter,
@@ -168,7 +168,7 @@ namespace CinemaConstructor.Common
                     return new SidebarMenu
                     {
                         Type = SidebarMenuType.Link,
-                        Name = "About",
+                        Name = name ?? "About",
                         IconClassName = "fa fa-users",
                         URLPath = "/Home/About",
                         LinkCounter = counter,
@@ -177,7 +177,7 @@ namespace CinemaConstructor.Common
                     return new SidebarMenu
                     {
                         Type = SidebarMenuType.Link,
-                        Name = "Users",
+                        Name = name ?? "Users",
                         IconClassName = "fa fa-link",
                         URLPath = "/SuperAdmin",
                         LinkCounter = counter,
@@ -186,7 +186,7 @@ namespace CinemaConstructor.Common
                     return new SidebarMenu
                     {
                         Type = SidebarMenuType.Link,
-                        Name = "Role",
+                        Name = name ?? "Role",
                         IconClassName = "fa fa-link",
                         URLPath = "/Role",
                         LinkCounter = counter,
@@ -195,7 +195,7 @@ namespace CinemaConstructor.Common
                     return new SidebarMenu
                     {
                         Type = SidebarMenuType.Link,
-                        Name = "UserLogs",
+                        Name = name ?? "UserLogs",
                         IconClassName = "fa fa-link",
                         URLPath = "/UserLogs",
                         LinkCounter = counter,

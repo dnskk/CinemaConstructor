@@ -32,7 +32,10 @@
                             <th>Genre</th>
                             <th>Trailer</th>
                             <th>Active</th>
-                            <th></th>
+                            @if (User.IsInRole("Administrators"))
+                            {
+                                <th></th>
+                            }
                         </tr>
                     </thead>
                     <tbody>
@@ -53,7 +56,10 @@
                                     <td><a href="@film.TrailerUrl" target="_blank">Link</a></td>
                                 }
                                 <td>@(film.IsActive ? "Yes" : "No")</td>
-                                <td><a href="/Film/SelectFilm?filmId=@film.Id">Edit</a></td>
+                                @if (User.IsInRole("Administrators"))
+                                {
+                                    <td><a href="/Film/SelectFilm?filmId=@film.Id">Edit</a></td>
+                                }
                             </tr>
                         }
                     </tbody>

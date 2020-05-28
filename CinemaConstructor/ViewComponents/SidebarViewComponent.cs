@@ -39,50 +39,59 @@ namespace CinemaConstructor.ViewComponents
             var userSession = await _userSessionRepository.FindByUserIdAsync(Guid.Parse(user.Id), CancellationToken.None);
             var company = await _companyRepository.FindByIdAsync(userSession.CurrentCompanyId, CancellationToken.None);
 
-            sidebars.Add(ModuleHelper.AddTree(company.Name));
-            sidebars.Last().TreeChild = new List<SidebarMenu>
-            {
-                ModuleHelper.AddModule(ModuleHelper.Module.Info),
-                ModuleHelper.AddModule(ModuleHelper.Module.EditInfo),
-                ModuleHelper.AddModule(ModuleHelper.Module.EditDesign)
-            };
 
-            sidebars.Add(ModuleHelper.AddTree("Cinemas"));
-            sidebars.Last().TreeChild = new List<SidebarMenu>
+            if (User.IsInRole("Administrators"))
             {
-                ModuleHelper.AddModule(ModuleHelper.Module.CinemasManagement),
-                ModuleHelper.AddModule(ModuleHelper.Module.CinemaCreate)
-            };
+                sidebars.Add(ModuleHelper.AddTree(company.Name));
+                sidebars.Last().TreeChild = new List<SidebarMenu>
+                {
+                    ModuleHelper.AddModule(ModuleHelper.Module.Info),
+                    ModuleHelper.AddModule(ModuleHelper.Module.EditInfo),
+                    ModuleHelper.AddModule(ModuleHelper.Module.EditDesign)
+                };
 
-            sidebars.Add(ModuleHelper.AddTree("Halls"));
-            sidebars.Last().TreeChild = new List<SidebarMenu>
-            {
-                ModuleHelper.AddModule(ModuleHelper.Module.HallsManagement),
-                ModuleHelper.AddModule(ModuleHelper.Module.HallCreate)
-            };
+                sidebars.Add(ModuleHelper.AddTree("Cinemas"));
+                sidebars.Last().TreeChild = new List<SidebarMenu>
+                {
+                    ModuleHelper.AddModule(ModuleHelper.Module.CinemasManagement),
+                    ModuleHelper.AddModule(ModuleHelper.Module.CinemaCreate)
+                };
 
-            sidebars.Add(ModuleHelper.AddTree("Films"));
-            sidebars.Last().TreeChild = new List<SidebarMenu>
-            {
-                ModuleHelper.AddModule(ModuleHelper.Module.FilmsManagement),
-                ModuleHelper.AddModule(ModuleHelper.Module.FilmCreate)
-            };
+                sidebars.Add(ModuleHelper.AddTree("Halls"));
+                sidebars.Last().TreeChild = new List<SidebarMenu>
+                {
+                    ModuleHelper.AddModule(ModuleHelper.Module.HallsManagement),
+                    ModuleHelper.AddModule(ModuleHelper.Module.HallCreate)
+                };
 
-            sidebars.Add(ModuleHelper.AddTree("Film sessions"));
-            sidebars.Last().TreeChild = new List<SidebarMenu>
-            {
-                ModuleHelper.AddModule(ModuleHelper.Module.FilmSessionsManagement),
-                ModuleHelper.AddModule(ModuleHelper.Module.FilmSessionCreate)
-            };
+                sidebars.Add(ModuleHelper.AddTree("Films"));
+                sidebars.Last().TreeChild = new List<SidebarMenu>
+                {
+                    ModuleHelper.AddModule(ModuleHelper.Module.FilmsManagement),
+                    ModuleHelper.AddModule(ModuleHelper.Module.FilmCreate)
+                };
 
-            if (User.IsInRole("Cashiers"))
-            {
+                sidebars.Add(ModuleHelper.AddTree("Film sessions"));
+                sidebars.Last().TreeChild = new List<SidebarMenu>
+                {
+                    ModuleHelper.AddModule(ModuleHelper.Module.FilmSessionsManagement),
+                    ModuleHelper.AddModule(ModuleHelper.Module.FilmSessionCreate)
+                };
+
                 sidebars.Add(ModuleHelper.AddTree("Users"));
                 sidebars.Last().TreeChild = new List<SidebarMenu>
                 {
                     ModuleHelper.AddModule(ModuleHelper.Module.SuperAdmin),
                     ModuleHelper.AddModule(ModuleHelper.Module.Role),
                 };
+            }
+            else
+            {
+                sidebars.Add(ModuleHelper.AddModule(ModuleHelper.Module.Info, null, company.Name));
+                sidebars.Add(ModuleHelper.AddModule(ModuleHelper.Module.CinemasManagement, null, "Cinemas"));
+                sidebars.Add(ModuleHelper.AddModule(ModuleHelper.Module.HallsManagement, null, "Halls"));
+                sidebars.Add(ModuleHelper.AddModule(ModuleHelper.Module.FilmsManagement, null, "Films"));
+                sidebars.Add(ModuleHelper.AddModule(ModuleHelper.Module.FilmSessionsManagement, null, "Film sessions"));
             }
 
             return View(sidebars);

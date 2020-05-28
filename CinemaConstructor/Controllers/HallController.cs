@@ -6,12 +6,14 @@ using System.Threading.Tasks;
 using CinemaConstructor.Database.Entities;
 using CinemaConstructor.Database.Repositories;
 using CinemaConstructor.Models.HallViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 
 namespace CinemaConstructor.Controllers
 {
+    [Authorize]
     public class HallController : BaseController
     {
         private readonly UserManager<ApplicationUser> _userManager;
@@ -49,6 +51,7 @@ namespace CinemaConstructor.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Administrators")]
         public async Task<IActionResult> Create(CancellationToken token)
         {
             AddBreadcrumb("Halls", "/Hall/All");

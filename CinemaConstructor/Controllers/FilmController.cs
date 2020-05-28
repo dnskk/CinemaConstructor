@@ -6,11 +6,13 @@ using System.Threading.Tasks;
 using CinemaConstructor.Database.Entities;
 using CinemaConstructor.Database.Repositories;
 using CinemaConstructor.Models.FilmViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CinemaConstructor.Controllers
 {
+    [Authorize]
     public class FilmController : BaseController
     {
         private readonly UserManager<ApplicationUser> _userManager;
@@ -45,6 +47,7 @@ namespace CinemaConstructor.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Administrators")]
         public async Task<IActionResult> Create(CancellationToken token)
         {
             AddBreadcrumb("Films", "/Film/All");
@@ -90,6 +93,7 @@ namespace CinemaConstructor.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Administrators")]
         public async Task<IActionResult> SelectFilm(CancellationToken token)
         {
             if (!Request.Query.ContainsKey("filmId"))
@@ -108,6 +112,7 @@ namespace CinemaConstructor.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Administrators")]
         public async Task<IActionResult> Edit(CancellationToken token)
         {
             AddBreadcrumb("Films", "/Film/All");
