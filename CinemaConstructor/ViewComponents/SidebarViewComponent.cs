@@ -39,7 +39,6 @@ namespace CinemaConstructor.ViewComponents
             var userSession = await _userSessionRepository.FindByUserIdAsync(Guid.Parse(user.Id), CancellationToken.None);
             var company = await _companyRepository.FindByIdAsync(userSession.CurrentCompanyId, CancellationToken.None);
 
-
             if (User.IsInRole("Administrators"))
             {
                 sidebars.Add(ModuleHelper.AddTree(company.Name, "fa fa-id-card"));
@@ -92,6 +91,11 @@ namespace CinemaConstructor.ViewComponents
                 sidebars.Add(ModuleHelper.AddModule(ModuleHelper.Module.HallsManagement, null, "Halls"));
                 sidebars.Add(ModuleHelper.AddModule(ModuleHelper.Module.FilmsManagement, null, "Films"));
                 sidebars.Add(ModuleHelper.AddModule(ModuleHelper.Module.FilmSessionsManagement, null, "Film sessions"));
+            }
+
+            if (User.IsInRole("TicketControllers"))
+            {
+                sidebars.Add(ModuleHelper.AddModule(ModuleHelper.Module.TicketControl));
             }
 
             return View(sidebars);

@@ -21,7 +21,7 @@ namespace CinemaConstructor.Common
             FilmCreate,
             FilmSessionsManagement,
             FilmSessionCreate,
-            About,
+            TicketControl,
             Register,
             SuperAdmin,
             Role,
@@ -164,15 +164,6 @@ namespace CinemaConstructor.Common
                         URLPath = "/Account/Register",
                         LinkCounter = counter,
                     };
-                case Module.About:
-                    return new SidebarMenu
-                    {
-                        Type = SidebarMenuType.Link,
-                        Name = name ?? "About",
-                        IconClassName = "fa fa-users",
-                        URLPath = "/Home/About",
-                        LinkCounter = counter,
-                    };
                 case Module.SuperAdmin:
                     return new SidebarMenu
                     {
@@ -189,6 +180,15 @@ namespace CinemaConstructor.Common
                         Name = name ?? "Role",
                         IconClassName = "fa fa-users",
                         URLPath = "/Role",
+                        LinkCounter = counter,
+                    };
+                case Module.TicketControl:
+                    return new SidebarMenu
+                    {
+                        Type = SidebarMenuType.Link,
+                        Name = name ?? "Ticket control",
+                        IconClassName = "fa fa-check-square",
+                        URLPath = "/TicketControl",
                         LinkCounter = counter,
                     };
                 case Module.UserLogs:
