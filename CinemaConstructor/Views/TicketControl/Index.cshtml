@@ -6,3 +6,88 @@
 
 <h2>@ViewData["Title"]</h2>
 <hr />
+
+<form asp-controller="TicketControl" asp-action="Index" asp-route-returnurl="@ViewData["ReturnUrl"]" method="post" class="form-horizontal">
+    <div class="form-group">
+        <label asp-for="ConfirmationCode" class="col-md-2 control-label"></label>
+        <div class="col-md-10">
+            <input asp-for="ConfirmationCode" class="form-control" />
+            <span asp-validation-for="ConfirmationCode" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <button type="submit" class="btn btn-primary">Check</button>
+        </div>
+    </div>
+</form>
+
+@if (Model.IsChecked)
+{
+    <hr />
+
+    @if (Model.FilmSession == null)
+    {
+
+        <span class="control-label col-md-10">No tickets for this confirmation code</span>
+    }
+    else
+    {
+        <div class="row">
+            <div class="col-6">
+                <div class="card">
+                    <div class="card-header" style="padding-bottom: 0;">
+                        <div class="row mb-2">
+                            <div class="col-6">
+                                <h3 class="card-title">
+                                    Film session info
+                                </h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h6 style="margin-bottom: 2px;">Title</h6>@Model.FilmSession.Film.Title
+                        <hr style="margin-bottom: 4px; margin-top: 4px;" />
+                        <h6 style="margin-bottom: 2px;">Cinema</h6>@Model.FilmSession.Hall.Cinema.Name
+                        <hr style="margin-bottom: 4px; margin-top: 4px;" />
+                        <h6 style="margin-bottom: 2px;">Hall</h6>@Model.FilmSession.Hall.Name
+                        <hr style="margin-bottom: 4px; margin-top: 4px;" />
+                        <h6 style="margin-bottom: 2px;">Start</h6>@Model.FilmSession.StartTime.ToString("MM\\/dd\\/yyyy HH\\:mm")
+                        <hr style="margin-bottom: 4px; margin-top: 4px;" />
+                        <h6 style="margin-bottom: 2px;">End</h6>@Model.FilmSession.EndTime.ToString("MM\\/dd\\/yyyy HH\\:mm")
+                    </div>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Tickets</h3>
+                    </div>
+                    <div class="card-body table-responsive p-0">
+
+                        <table class="table text-nowrap">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Row</th>
+                                    <th>Seat</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var ticket in Model.Tickets)
+                                {
+                                    <tr>
+                                        <td>@ticket.Id</td>
+                                        <td>@(ticket.Row + 1)</td>
+                                        <td>@(ticket.Column + 1)</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+}

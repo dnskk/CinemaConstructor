@@ -44,6 +44,14 @@ namespace CinemaConstructor.Database.Repositories
                 .ToListAsync(token);
         }
 
+        public async Task<IEnumerable<Ticket>> FindByConfirmationCodeAsync(string confirmationCode, CancellationToken token)
+        {
+            return await _context.Tickets
+                .Where(p => p.ConfirmationCode == confirmationCode)
+                .Include(p => p.FilmSession)
+                .ToListAsync(token);
+        }
+
         public async Task<Ticket> AddAsync(Ticket ticket, CancellationToken token)
         {
             ticket.Id = 0;

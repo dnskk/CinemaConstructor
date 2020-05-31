@@ -66,6 +66,7 @@ namespace CinemaConstructor
             services.AddScoped<FilmSessionRepository>();
             services.AddScoped<CompanyMemberRepository>();
             services.AddScoped<UserSessionRepository>();
+            services.AddScoped<TicketRepository>();
 
             var mvcBuilder = services.AddMvc(config =>
             {
