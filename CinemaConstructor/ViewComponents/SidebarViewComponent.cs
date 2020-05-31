@@ -42,7 +42,7 @@ namespace CinemaConstructor.ViewComponents
 
             if (User.IsInRole("Administrators"))
             {
-                sidebars.Add(ModuleHelper.AddTree(company.Name));
+                sidebars.Add(ModuleHelper.AddTree(company.Name, "fa fa-id-card"));
                 sidebars.Last().TreeChild = new List<SidebarMenu>
                 {
                     ModuleHelper.AddModule(ModuleHelper.Module.Info),
@@ -50,35 +50,35 @@ namespace CinemaConstructor.ViewComponents
                     ModuleHelper.AddModule(ModuleHelper.Module.EditDesign)
                 };
 
-                sidebars.Add(ModuleHelper.AddTree("Cinemas"));
+                sidebars.Add(ModuleHelper.AddTree("Cinemas", "fa fa-building"));
                 sidebars.Last().TreeChild = new List<SidebarMenu>
                 {
                     ModuleHelper.AddModule(ModuleHelper.Module.CinemasManagement),
                     ModuleHelper.AddModule(ModuleHelper.Module.CinemaCreate)
                 };
 
-                sidebars.Add(ModuleHelper.AddTree("Halls"));
+                sidebars.Add(ModuleHelper.AddTree("Halls", "fa fa-braille"));
                 sidebars.Last().TreeChild = new List<SidebarMenu>
                 {
                     ModuleHelper.AddModule(ModuleHelper.Module.HallsManagement),
                     ModuleHelper.AddModule(ModuleHelper.Module.HallCreate)
                 };
 
-                sidebars.Add(ModuleHelper.AddTree("Films"));
+                sidebars.Add(ModuleHelper.AddTree("Films", "fa fa-film"));
                 sidebars.Last().TreeChild = new List<SidebarMenu>
                 {
                     ModuleHelper.AddModule(ModuleHelper.Module.FilmsManagement),
                     ModuleHelper.AddModule(ModuleHelper.Module.FilmCreate)
                 };
 
-                sidebars.Add(ModuleHelper.AddTree("Film sessions"));
+                sidebars.Add(ModuleHelper.AddTree("Film sessions", "fa fa-calendar"));
                 sidebars.Last().TreeChild = new List<SidebarMenu>
                 {
                     ModuleHelper.AddModule(ModuleHelper.Module.FilmSessionsManagement),
                     ModuleHelper.AddModule(ModuleHelper.Module.FilmSessionCreate)
                 };
 
-                sidebars.Add(ModuleHelper.AddTree("Users"));
+                sidebars.Add(ModuleHelper.AddTree("Users", "fa fa-users"));
                 sidebars.Last().TreeChild = new List<SidebarMenu>
                 {
                     ModuleHelper.AddModule(ModuleHelper.Module.SuperAdmin),

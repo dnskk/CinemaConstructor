@@ -61,7 +61,7 @@ namespace CinemaConstructor.Common
                     {
                         Type = SidebarMenuType.Link,
                         Name = name ?? "Info",
-                        IconClassName = "fa fa-link",
+                        IconClassName = "fa fa-id-card",
                         URLPath = "/Company",
                         LinkCounter = counter,
                     };
@@ -70,7 +70,7 @@ namespace CinemaConstructor.Common
                     {
                         Type = SidebarMenuType.Link,
                         Name = name ?? "Info editing",
-                        IconClassName = "fa fa-phone",
+                        IconClassName = "fa fa-id-card",
                         URLPath = "/Company/Edit",
                         LinkCounter = counter,
                     };
@@ -79,7 +79,7 @@ namespace CinemaConstructor.Common
                     {
                         Type = SidebarMenuType.Link,
                         Name = name ?? "Design editing",
-                        IconClassName = "fa fa-phone",
+                        IconClassName = "fa fa-id-card",
                         URLPath = "/Company/Design",
                         LinkCounter = counter,
                     };
@@ -88,7 +88,7 @@ namespace CinemaConstructor.Common
                     {
                         Type = SidebarMenuType.Link,
                         Name = name ?? "Manage",
-                        IconClassName = "fa fa-link",
+                        IconClassName = "fa fa-building",
                         URLPath = "/Cinema/All",
                         LinkCounter = counter,
                     };
@@ -97,7 +97,7 @@ namespace CinemaConstructor.Common
                     {
                         Type = SidebarMenuType.Link,
                         Name = name ?? "Create",
-                        IconClassName = "fa fa-exclamation-triangle",
+                        IconClassName = "fa fa-building",
                         URLPath = "/Cinema/Create",
                         LinkCounter = counter,
                     };
@@ -106,7 +106,7 @@ namespace CinemaConstructor.Common
                     {
                         Type = SidebarMenuType.Link,
                         Name = name ?? "Manage",
-                        IconClassName = "fa fa-link",
+                        IconClassName = "fa fa-braille",
                         URLPath = "/Hall/All",
                         LinkCounter = counter,
                     };
@@ -115,7 +115,7 @@ namespace CinemaConstructor.Common
                     {
                         Type = SidebarMenuType.Link,
                         Name = name ?? "Create",
-                        IconClassName = "fa fa-exclamation-triangle",
+                        IconClassName = "fa fa-braille",
                         URLPath = "/Hall/Create",
                         LinkCounter = counter,
                     };
@@ -124,7 +124,7 @@ namespace CinemaConstructor.Common
                     {
                         Type = SidebarMenuType.Link,
                         Name = name ?? "Manage",
-                        IconClassName = "fa fa-link",
+                        IconClassName = "fa fa-film",
                         URLPath = "/Film/All",
                         LinkCounter = counter,
                     };
@@ -133,7 +133,7 @@ namespace CinemaConstructor.Common
                     {
                         Type = SidebarMenuType.Link,
                         Name = name ?? "Create",
-                        IconClassName = "fa fa-sign-in",
+                        IconClassName = "fa fa-film",
                         URLPath = "/Film/Create",
                         LinkCounter = counter,
                     };
@@ -142,7 +142,7 @@ namespace CinemaConstructor.Common
                     {
                         Type = SidebarMenuType.Link,
                         Name = name ?? "Manage",
-                        IconClassName = "fa fa-link",
+                        IconClassName = "fa fa-calendar",
                         URLPath = "/FilmSession/All",
                         LinkCounter = counter,
                     };
@@ -151,7 +151,7 @@ namespace CinemaConstructor.Common
                     {
                         Type = SidebarMenuType.Link,
                         Name = name ?? "Create",
-                        IconClassName = "fa fa-sign-in",
+                        IconClassName = "fa fa-calendar",
                         URLPath = "/FilmSession/Create",
                         LinkCounter = counter,
                     };
@@ -160,7 +160,7 @@ namespace CinemaConstructor.Common
                     {
                         Type = SidebarMenuType.Link,
                         Name = name ?? "Register",
-                        IconClassName = "fa fa-user-plus",
+                        IconClassName = "fa fa-users",
                         URLPath = "/Account/Register",
                         LinkCounter = counter,
                     };
@@ -178,7 +178,7 @@ namespace CinemaConstructor.Common
                     {
                         Type = SidebarMenuType.Link,
                         Name = name ?? "Users",
-                        IconClassName = "fa fa-link",
+                        IconClassName = "fa fa-users",
                         URLPath = "/SuperAdmin",
                         LinkCounter = counter,
                     };
@@ -187,7 +187,7 @@ namespace CinemaConstructor.Common
                     {
                         Type = SidebarMenuType.Link,
                         Name = name ?? "Role",
-                        IconClassName = "fa fa-link",
+                        IconClassName = "fa fa-users",
                         URLPath = "/Role",
                         LinkCounter = counter,
                     };
